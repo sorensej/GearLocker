@@ -7,4 +7,5 @@
     <string name="messages">Messages</string>
     <string name="gear_management">Gear Management</string>
     <string name="gear_inventory">Gear Inventory</string>
+    <string name="add_club">Add Club</string>
 </resources>

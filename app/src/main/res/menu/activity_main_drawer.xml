@@ -17,4 +17,5 @@
             android:icon="@drawable/ic_management"
             android:title="@string/gear_management" />
     </group>
+
 </menu>
