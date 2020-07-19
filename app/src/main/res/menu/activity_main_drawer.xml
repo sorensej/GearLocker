@@ -7,14 +7,14 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_gear"
-            android:title="Gear Inventory" />
+            android:title="@string/gear_inventory" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_messages"
-            android:title="Messages" />
+            android:title="@string/messages" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_management"
-            android:title="Gear Management" />
+            android:title="@string/gear_management" />
     </group>
 </menu>
