@@ -9,11 +9,17 @@
     android:background="#677F91"
     tools:openDrawer="start">
 
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:layout_marginTop="81dp"
         android:background="@color/colorPrimaryDark"
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer">
@@ -23,15 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="16dp">
 
-            <TextView
+            <Button
                 android:id="@+id/add_club"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_marginHorizontal="20dp"
                 android:text="@string/add_club" />
         </LinearLayout>
 

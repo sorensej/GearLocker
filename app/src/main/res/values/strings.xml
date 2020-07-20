@@ -8,4 +8,5 @@
     <string name="gear_management">Gear Management</string>
     <string name="gear_inventory">Gear Inventory</string>
     <string name="add_club">Add Club</string>
+    <string name="action_settings">Action Settings</string>
 </resources>
