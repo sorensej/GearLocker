@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="false"
-    android:background="#677F91">
+    android:background="@color/colorBlue">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/gear_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:backgroundTint="#C4C4C4"
+        android:backgroundTint="@color/colorGrey"
         app:cardCornerRadius="8dp"
         android:layout_margin="10dp">
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
-                android:background="#C4C4C4"
+                android:background="@color/colorGrey"
                 android:gravity="center"
                 android:text="@string/check_out_photo"
                 android:textSize="18sp" />
@@ -82,7 +82,7 @@
                 android:layout_columnWeight="0"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
-                android:background="#C4C4C4"
+                android:background="@color/colorGrey"
                 android:gravity="center"
                 android:text="@string/check_in_photo"
                 android:textSize="18sp" />
@@ -113,7 +113,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="#C4C4C4">
+        android:backgroundTint="@color/colorGrey">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#CF6A6C"
+        android:backgroundTint="@color/colorRed"
         android:text="@string/cancel_check_in"
         android:textAlignment="center" />
 
@@ -202,7 +202,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#53B144"
+        android:backgroundTint="@color/colorGreen"
         android:text="@string/complete_check_in"
         android:textAlignment="center" />
 

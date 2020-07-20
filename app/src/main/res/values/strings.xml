@@ -26,4 +26,9 @@
     <string name="check_out_photo">Check-Out Photo</string>
     <string name="rent_duration">Rented For:</string>
     <string name="check_out_condition">Check-Out Condition:</string>
+    <string name="demo_item_description">Designed for the climber looking for a single pair to do it all, the La Sportiva Tarantulace are jack-of-all-trades climbing shoes comfortable enough for all-day climbs or a trip to the rock gym.</string>
+    <string name="demo_stock_information">
+        Est. Value: $50.00
+        \nAvailable: 1 pair
+        \nTotal: 5 pairs</string>
 </resources>
