@@ -31,4 +31,7 @@
         Est. Value: $50.00
         \nAvailable: 1 pair
         \nTotal: 5 pairs</string>
+    <string name="delete_an_item">Delete an item</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="condition">Condition:</string>
 </resources>

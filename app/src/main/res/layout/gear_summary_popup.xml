@@ -45,7 +45,6 @@
         android:layout_height="150dp"
         android:layout_below="@id/divider"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="false"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/description_text_view"
         android:layout_alignStart="@id/description_text_view"
-        android:text="Condition:"
+        android:text="@string/condition"
         android:textSize="20sp" />
 
     <TextView
@@ -98,7 +97,7 @@
         android:layout_marginStart="40dp"
         android:layout_toRightOf="@id/current_condition_text_view"
         android:background="@color/colorRed"
-        android:text="Delete an item"
+        android:text="@string/delete_an_item"
         android:textSize="12sp" />
 
     <Button
@@ -122,6 +121,6 @@
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/cancel_button"
         android:background="@color/colorPrimaryDark"
-        android:text="Edit Item" />
+        android:text="@string/edit_item" />
 
 </RelativeLayout>

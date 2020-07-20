@@ -175,7 +175,8 @@
                 android:max="4"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:progress="3" />
+                android:progress="3"
+                android:progressTint="@color/colorDarkBlue" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
