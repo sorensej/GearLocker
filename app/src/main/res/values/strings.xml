@@ -14,4 +14,16 @@
     <string name="item_2">Item 2</string>
     <string name="item_3">Item 3</string>
     <string name="see_more">See More</string>
+    <string name="demo_check_in_title"><b>4 Person Tent #2</b></string>
+    <string name="complete_check_in">Complete Check-In</string>
+    <string name="cancel_check_in">Cancel Check-In</string>
+    <string name="condition_new">New</string>
+    <string name="condition_good">Good</string>
+    <string name="condition_average">Average</string>
+    <string name="condition_bad">Bad</string>
+    <string name="condition_replace">Replace</string>
+    <string name="check_in_photo">Check-In Photo</string>
+    <string name="check_out_photo">Check-Out Photo</string>
+    <string name="rent_duration">Rented For:</string>
+    <string name="check_out_condition">Check-Out Condition:</string>
 </resources>
