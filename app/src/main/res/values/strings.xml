@@ -5,8 +5,8 @@
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
     <string name="messages">Messages</string>
-    <string name="gear_management">Gear Management</string>
-    <string name="gear_inventory">Gear Inventory</string>
+    <string name="gear_management">Management</string>
+    <string name="gear_inventory">Inventory</string>
     <string name="add_club">Add Club</string>
     <string name="action_settings">Action Settings</string>
     <string name="item_type">Item type</string>
@@ -34,4 +34,5 @@
     <string name="delete_an_item">Delete an item</string>
     <string name="edit_item">Edit Item</string>
     <string name="condition">Condition:</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
