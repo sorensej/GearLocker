@@ -1,0 +1,32 @@
+package edu.rosehulman.gearlocker.dashboard
+
+import android.content.Context
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import edu.rosehulman.gearlocker.Constants
+import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Rental
+
+
+class DashboardAdapter(private val context: Context
+) : RecyclerView.Adapter<DashboardViewHolder>() {
+
+    private val rentals = arrayListOf<Rental>(Rental(), Rental(), Rental())
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
+        Log.d(Constants.TAG, "ViewHolder created")
+        val view = LayoutInflater.from(context).inflate(R.layout.dashboard_card_view, parent, false)
+        return DashboardViewHolder(view)
+    }
+
+    override fun getItemCount()= rentals.size
+
+    override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
+        Log.d(Constants.TAG, "onBind reached")
+        holder.bind(rentals[position])
+    }
+
+
+}

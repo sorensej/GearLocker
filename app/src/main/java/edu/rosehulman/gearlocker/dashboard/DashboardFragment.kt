@@ -6,19 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.inventory.InventoryAdapter
+import kotlinx.android.synthetic.main.fragment_inventory.view.*
 
 class DashboardFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private var adapter: DashboardAdapter? =null
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val recyclerView : RecyclerView =
+            inflater.inflate(R.layout.fragment_dashboard, container, false) as RecyclerView
+        adapter = DashboardAdapter(requireContext())
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        return recyclerView
     }
 }

@@ -35,4 +35,5 @@
     <string name="edit_item">Edit Item</string>
     <string name="condition">Condition:</string>
     <string name="dashboard">Dashboard</string>
+    <string name="rental_text">Rental text</string>
 </resources>
