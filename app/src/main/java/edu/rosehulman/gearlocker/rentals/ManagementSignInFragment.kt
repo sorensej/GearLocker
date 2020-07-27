@@ -6,14 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import edu.rosehulman.gearlocker.ManagementMainActivity
 import edu.rosehulman.gearlocker.R
-import kotlinx.android.synthetic.main.gear_management_sign_in.*
+import edu.rosehulman.gearlocker.dashboard.DashboardFragment
 import kotlinx.android.synthetic.main.gear_management_sign_in.view.*
 
 class ManagementSignInFragment: Fragment() {
+
+    var mainActivity: ManagementHomeFragment.FragmentSwitcher? = null
+
+    fun newInstance(mainActivity: ManagementHomeFragment.FragmentSwitcher?): ManagementSignInFragment {
+        val m = ManagementSignInFragment()
+        m.mainActivity = mainActivity
+        return m
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,6 +32,9 @@ class ManagementSignInFragment: Fragment() {
             inflater.inflate(R.layout.gear_management_sign_in, container, false) as RelativeLayout
         view.manage_gear_button.setOnClickListener {
             startActivity(Intent(this.context, ManagementMainActivity::class.java))
+        }
+        view.return_to_dash_button_login.setOnClickListener {
+            mainActivity?.switchToFragment(DashboardFragment())
         }
         return view
     }

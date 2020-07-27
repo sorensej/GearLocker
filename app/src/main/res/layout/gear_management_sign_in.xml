@@ -42,6 +42,7 @@
         android:text="@string/manage_gear" />
 
     <TextView
+        android:id="@+id/return_to_dash_button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
