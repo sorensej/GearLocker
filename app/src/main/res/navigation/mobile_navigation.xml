@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/navigation_inventory"
-        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
+        android:name="edu.rosehulman.gearlocker.inventory.InventoryFragment"
         android:label="Inventory"
         tools:layout="@layout/fragment_inventory" />
 
