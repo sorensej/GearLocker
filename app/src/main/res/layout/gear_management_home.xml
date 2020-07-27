@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBlue"
-    android:paddingBottom="75dp">
+    android:paddingBottom="75dp"
+    android:paddingTop="25dp">
 
     <Button
         android:id="@+id/rentals_button"
@@ -24,8 +25,7 @@
         android:textSize="16sp"
         android:text="@string/inventory"
         android:background="@drawable/round_button_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/messages_button" />
 
     <Button
         android:id="@+id/messages_button"
@@ -35,7 +35,9 @@
         android:textSize="16sp"
         android:text="@string/messages"
         android:background="@drawable/round_button_grey"
-        app:layout_constraintTop_toBottomOf="@+id/inventory_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         app:layout_constraintTop_toBottomOf="@id/messages_button"
