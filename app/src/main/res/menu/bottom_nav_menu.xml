@@ -3,15 +3,15 @@
 
         <item
             android:id="@+id/navigation_management"
-            android:icon="@drawable/management"
+            android:icon="@drawable/ic_management"
             android:title="@string/gear_management" />
         <item
             android:id="@+id/navigation_inventory"
-            android:icon="@drawable/inventory"
+            android:icon="@drawable/ic_gear"
             android:title="@string/gear_inventory" />
         <item
             android:id="@+id/navigation_messages"
-            android:icon="@drawable/messages"
+            android:icon="@drawable/ic_messages"
             android:title="@string/messages" />
 
         <item
