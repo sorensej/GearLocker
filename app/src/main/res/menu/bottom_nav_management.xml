@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/navigation_management_rentals"
+            android:icon="@drawable/ic_rentals"
+            android:title="@string/rentals" />
+        <item
+            android:id="@+id/navigation_management_inventory"
+            android:icon="@drawable/ic_gear"
+            android:title="@string/gear_inventory" />
+        <item
+            android:id="@+id/navigation_management_messages"
+            android:icon="@drawable/ic_messages"
+            android:title="@string/messages" />
+
+        <item
+            android:id="@+id/navigation_management_dashboard"
+            android:icon="@drawable/dashboard"
+            android:title="@string/dashboard" />
+
+</menu>

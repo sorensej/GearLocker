@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue"
+    android:id="@+id/gear_management_passcode"
+    android:paddingBottom="0dp">
+
+    <TextView
+        android:id="@+id/sign_in_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="@string/enter_manage_pass"
+        android:textColor="#DEDFDE"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/passcode_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_in_text_view"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
+        android:background="#9EA2A2"
+        android:padding="10dp"
+        android:hint="@string/passcode" />
+
+    <Button
+        android:id="@+id/manage_gear_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passcode_edit_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/colorAccent"
+        android:text="@string/manage_gear" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/manage_gear_button"
+        android:text="@string/return_to_dashboard"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/manage_gear_button"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_mountains" />
+
+</RelativeLayout>

@@ -37,6 +37,7 @@ class ManagementHomeFragment() : Fragment() {
 
         }
         view.getViewById(R.id.return_to_dash_button).setOnClickListener {
+            Log.d(Constants.TAG, "Should switch to the dashboard here from management")
             mainActivity?.switchToFragment(DashboardFragment())
         }
         return view

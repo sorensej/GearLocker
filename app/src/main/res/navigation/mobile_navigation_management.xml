@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation_management"
+    app:startDestination="@id/navigation_management_rentals">
 
 
     <fragment
-        android:id="@+id/navigation_management"
-        android:name="edu.rosehulman.gearlocker.rentals.ManagementSignInFragment"
-        android:label="Management"
-        tools:layout="@layout/gear_management_sign_in" />
+        android:id="@+id/navigation_management_rentals"
+        android:name="edu.rosehulman.gearlocker.rentals.ManagementHomeFragment"
+        android:label="Rentals"
+        tools:layout="@layout/fragment_management" />
 
     <fragment
-        android:id="@+id/navigation_inventory"
+        android:id="@+id/navigation_management_inventory"
         android:name="edu.rosehulman.gearlocker.inventory.InventoryFragment"
         android:label="Inventory"
         tools:layout="@layout/fragment_inventory" />
 
     <fragment
-        android:id="@+id/navigation_messages"
+        android:id="@+id/navigation_management_messages"
         android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="Messages"
         tools:layout="@layout/fragment_messages" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_management_dashboard"
         android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />

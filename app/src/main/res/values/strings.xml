@@ -39,4 +39,8 @@
     <string name="inventory">Inventory</string>
     <string name="rentals">Rentals</string>
     <string name="return_to_dashboard"><u>Return to dashboard</u></string>
+    <string name="enter_manage_pass">Please enter the gear management passcode</string>
+    <string name="passcode">Passcode</string>
+    <string name="manage_gear">Manage Gear</string>
+    <string name="title_activity_main_management">MainActivity</string>
 </resources>
