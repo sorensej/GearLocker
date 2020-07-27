@@ -5,17 +5,33 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Rental
-import java.time.Instant
-import java.util.*
-import kotlin.collections.ArrayList
+import edu.rosehulman.gearlocker.models.Item
 
 class InventoryAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<InventoryViewHolder>() {
 
-    private val currentRentals = arrayListOf<Rental>(
-        Rental(Date.from(Instant.EPOCH), Date.from(Instant.now()))
+    private val inventory = arrayListOf<Item>(
+        Item(
+            "Item #1",
+            10f,
+            4
+        ),
+        Item(
+            "Item #1",
+            10f,
+            4
+        ),
+        Item(
+            "Item #1",
+            10f,
+            4
+        ),
+        Item(
+            "Item #1",
+            10f,
+            4
+        )
     )
 
     init {
@@ -28,9 +44,9 @@ class InventoryAdapter(
         return InventoryViewHolder(view)
     }
 
-    override fun getItemCount() = currentRentals.size
+    override fun getItemCount() = inventory.size
 
     override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
-        holder.bind(currentRentals[position])
+        holder.bind(inventory[position])
     }
 }

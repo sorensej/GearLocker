@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import edu.rosehulman.gearlocker.dashboard.DashboardFragment
+import edu.rosehulman.gearlocker.inventory.InventoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.navigation_messages -> {
             }
             R.id.navigation_inventory -> {
+                switchTo = InventoryFragment()
             }
             R.id.navigation_management->{
 
