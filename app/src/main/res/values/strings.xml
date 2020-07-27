@@ -36,4 +36,7 @@
     <string name="condition">Condition:</string>
     <string name="dashboard">Dashboard</string>
     <string name="rental_text">Rental text</string>
+    <string name="inventory">Inventory</string>
+    <string name="rentals">Rentals</string>
+    <string name="return_to_dashboard"><u>Return to dashboard</u></string>
 </resources>

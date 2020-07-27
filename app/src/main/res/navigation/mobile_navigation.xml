@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_management"
-        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.ManagementHomeFragment"
         android:label="Management"
         tools:layout="@layout/fragment_management" />
 

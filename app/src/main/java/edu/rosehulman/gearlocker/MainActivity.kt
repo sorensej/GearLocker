@@ -11,10 +11,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import edu.rosehulman.gearlocker.dashboard.DashboardFragment
 import edu.rosehulman.gearlocker.inventory.InventoryFragment
+import edu.rosehulman.gearlocker.rentals.ManagementHomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, ManagementHomeFragment.FragmentSwitcher{
     private lateinit var appBarConfiguration: AppBarConfiguration
 
 
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 switchTo = InventoryFragment()
             }
             R.id.navigation_management->{
-
+                switchTo = ManagementHomeFragment().newInstance(this)
             }
         }
         switchTo?.let { setFragment(it) }
@@ -58,6 +59,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             supportFragmentManager.popBackStackImmediate()
         }
         ft.commit()
+    }
+
+    override fun switchToFragment(fragment: Fragment) {
+        setFragment(fragment)
     }
 
 
