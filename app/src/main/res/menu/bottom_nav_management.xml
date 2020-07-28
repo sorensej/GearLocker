@@ -7,11 +7,11 @@
             android:title="@string/rentals" />
         <item
             android:id="@+id/navigation_management_inventory"
-            android:icon="@drawable/ic_gear"
+            android:icon="@drawable/ic_inventory_manage"
             android:title="@string/gear_inventory" />
         <item
             android:id="@+id/navigation_management_messages"
-            android:icon="@drawable/ic_messages"
+            android:icon="@drawable/ic_messages_manage"
             android:title="@string/messages" />
 
         <item

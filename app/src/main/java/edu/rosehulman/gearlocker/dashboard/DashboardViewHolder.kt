@@ -28,5 +28,4 @@ class DashboardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         list.adapter = arrayAdapter
     }
 
-
 }
