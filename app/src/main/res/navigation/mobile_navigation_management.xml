@@ -3,12 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mobile_navigation_management"
-    app:startDestination="@id/navigation_management_rentals">
+    app:startDestination="@id/navigation_management_home">
+
+    <fragment
+        android:id="@+id/navigation_management_home"
+        android:name="edu.rosehulman.gearlocker.management.ManagementHomeFragment"
+        android:label="Rentals"
+        tools:layout="@layout/fragment_management" />
 
 
     <fragment
         android:id="@+id/navigation_management_rentals"
-        android:name="edu.rosehulman.gearlocker.rentals.ManagementHomeFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.RentalHomeFragment"
         android:label="Rentals"
         tools:layout="@layout/fragment_management" />
 
@@ -24,9 +30,9 @@
         android:label="Messages"
         tools:layout="@layout/fragment_messages" />
 
-    <fragment
+    <activity
         android:id="@+id/navigation_management_dashboard"
-        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
+        android:name="edu.rosehulman.gearlocker.MainActivity"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 

@@ -43,4 +43,9 @@
     <string name="passcode">Passcode</string>
     <string name="manage_gear">Manage Gear</string>
     <string name="title_activity_main_management">MainActivity</string>
+    <string name="overview">Overview</string>
+    <string name="forms">Forms</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="rental_title">Rental Title</string>
 </resources>
