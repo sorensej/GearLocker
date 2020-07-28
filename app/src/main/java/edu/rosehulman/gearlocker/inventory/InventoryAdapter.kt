@@ -40,8 +40,8 @@ class InventoryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.inventory_card_view, parent, false)
-        return InventoryViewHolder(view)
+        val view = LayoutInflater.from(context).inflate(R.layout.inventory_card_view_2, parent, false)
+        return InventoryViewHolder(context, view)
     }
 
     override fun getItemCount() = inventory.size
