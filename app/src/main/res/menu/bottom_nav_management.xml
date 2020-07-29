@@ -15,7 +15,7 @@
             android:title="@string/messages" />
 
         <item
-            android:id="@+id/navigation_management_dashboard"
+            android:id="@+id/return_to_dash_dialog"
             android:icon="@drawable/dashboard"
             android:title="@string/dashboard" />
 

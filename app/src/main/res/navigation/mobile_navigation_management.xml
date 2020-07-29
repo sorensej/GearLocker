@@ -20,8 +20,8 @@
             android:id="@+id/action_navigation_management_home_to_navigation_management_messages"
             app:destination="@id/navigation_management_messages" />
         <action
-            android:id="@+id/action_navigation_management_home_to_navigation_management_dashboard"
-            app:destination="@id/navigation_management_dashboard" />
+            android:id="@+id/action_navigation_management_home_to_return_to_dash_dialog"
+            app:destination="@id/return_to_dash_dialog" />
     </fragment>
 
     <fragment
@@ -47,5 +47,14 @@
         android:name="edu.rosehulman.gearlocker.MainActivity"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
+
+    <dialog
+        android:id="@+id/return_to_dash_dialog"
+        android:name="edu.rosehulman.gearlocker.managment.ReturnToDashAlertFragment"
+        android:label="ReturnDashDialog" >
+        <action
+            android:id="@+id/action_return_to_dash_dialog_to_navigation_management_dashboard"
+            app:destination="@id/navigation_management_dashboard" />
+    </dialog>
 
 </navigation>
