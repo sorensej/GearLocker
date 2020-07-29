@@ -28,6 +28,16 @@
         android:id="@+id/navigation_dashboard"
         android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_messages"
+            app:destination="@id/navigation_messages" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_inventory"
+            app:destination="@id/navigation_inventory" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_management"
+            app:destination="@id/navigation_management" />
+    </fragment>
 
 </navigation>
