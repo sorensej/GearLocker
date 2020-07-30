@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import edu.rosehulman.gearlocker.R
+import kotlinx.android.synthetic.main.management_activity_main.*
 
 
 class RentalHomeFragment : Fragment(){
@@ -31,6 +33,7 @@ class RentalHomeFragment : Fragment(){
         view.getViewById(R.id.forms_button).setOnClickListener {
 
         }
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_rentals
 
         return view
     }

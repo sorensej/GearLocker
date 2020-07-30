@@ -27,7 +27,7 @@ class ManagementSignInFragment: Fragment() {
         var bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView?.isVisible = false
         view.manage_gear_button.setOnClickListener {
-            startActivity(Intent(this.context, ManagementMainActivity::class.java))
+            findNavController().navigate(R.id.managementMainActivity)
         }
         view.return_to_dash_button_login.setOnClickListener {
             bottomNavigationView?.isVisible = true

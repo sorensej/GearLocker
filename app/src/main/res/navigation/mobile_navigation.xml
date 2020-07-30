@@ -10,7 +10,11 @@
         android:id="@+id/navigation_management"
         android:name="edu.rosehulman.gearlocker.managment.ManagementSignInFragment"
         android:label="Management"
-        tools:layout="@layout/gear_management_sign_in" />
+        tools:layout="@layout/gear_management_sign_in" >
+        <action
+            android:id="@+id/action_navigation_management_to_managementMainActivity"
+            app:destination="@id/managementMainActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory"
@@ -39,5 +43,10 @@
             android:id="@+id/action_navigation_dashboard_to_navigation_management"
             app:destination="@id/navigation_management" />
     </fragment>
+    <activity
+        android:id="@+id/managementMainActivity"
+        android:name="edu.rosehulman.gearlocker.ManagementMainActivity"
+        android:label="management_activity_main"
+        tools:layout="@layout/management_activity_main" />
 
 </navigation>
