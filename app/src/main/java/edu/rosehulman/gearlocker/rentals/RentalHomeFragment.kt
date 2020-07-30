@@ -20,13 +20,13 @@ class RentalHomeFragment : Fragment(){
         val view : ConstraintLayout =
             inflater.inflate(R.layout.rental_home_fragment, container, false) as ConstraintLayout
         view.getViewById(R.id.overview_button).setOnClickListener {
-            findNavController().navigate(R.id.rental_overview_layout)
+            findNavController().navigate(R.id.rentalsOverviewManagment)
         }
         view.getViewById(R.id.checkin_button).setOnClickListener {
-            findNavController().navigate(R.id.rental_checkin_layout)
+            findNavController().navigate(R.id.checkInFragment)
         }
         view.getViewById(R.id.checkout_button).setOnClickListener {
-            findNavController().navigate(R.id.rental_checkout_layout)
+            findNavController().navigate(R.id.checkOutFragment)
         }
         view.getViewById(R.id.forms_button).setOnClickListener {
 

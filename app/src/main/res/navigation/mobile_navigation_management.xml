@@ -28,7 +28,17 @@
         android:id="@+id/navigation_management_rentals"
         android:name="edu.rosehulman.gearlocker.rentals.RentalHomeFragment"
         android:label="Rentals"
-        tools:layout="@layout/rental_home_fragment" />
+        tools:layout="@layout/rental_home_fragment" >
+        <action
+            android:id="@+id/action_navigation_management_rentals_to_rentalsOverviewManagment"
+            app:destination="@id/rentalsOverviewManagment" />
+        <action
+            android:id="@+id/action_navigation_management_rentals_to_checkInFragment"
+            app:destination="@id/checkInFragment" />
+        <action
+            android:id="@+id/action_navigation_management_rentals_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_management_inventory"
@@ -56,5 +66,17 @@
             android:id="@+id/action_return_to_dash_dialog_to_navigation_management_dashboard"
             app:destination="@id/navigation_management_dashboard" />
     </dialog>
+    <fragment
+        android:id="@+id/rentalsOverviewManagment"
+        android:name="edu.rosehulman.gearlocker.rentals.RentalsOverviewManagment"
+        android:label="RentalsOverviewManagment" />
+    <fragment
+        android:id="@+id/checkInFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.CheckInFragment"
+        android:label="CheckInFragment" />
+    <fragment
+        android:id="@+id/checkOutFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.CheckOutFragment"
+        android:label="CheckOutFragment" />
 
 </navigation>
