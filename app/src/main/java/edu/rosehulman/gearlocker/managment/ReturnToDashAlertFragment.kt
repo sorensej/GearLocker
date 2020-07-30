@@ -17,7 +17,6 @@ class ReturnToDashAlertFragment: DialogFragment() {
         val title = "Log out of management to return to dash?"
         val alertDialogBuilder: AlertDialog.Builder = AlertDialog.Builder(activity)
         Log.d(Constants.TAG, "${activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination}")
-       // Log.d(Constants.TAG, "Activity: ${activity?.supportFragmentManager?.popBackStack()}")
         alertDialogBuilder.setTitle(title)
 
         alertDialogBuilder.setPositiveButton("OK"
@@ -26,7 +25,12 @@ class ReturnToDashAlertFragment: DialogFragment() {
         }
         alertDialogBuilder.setNegativeButton("Cancel"
         ) { dialog, _ ->
+            val int = activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination
             dialog?.dismiss()
+            findNavController().navigate(R.id.navigation_management_rentals)
+            if (int != null) {
+                findNavController().navigate(int)
+            }
         }
         return alertDialogBuilder.create()
     }

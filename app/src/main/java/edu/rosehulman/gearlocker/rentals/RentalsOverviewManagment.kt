@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.gearlocker.R
+import kotlinx.android.synthetic.main.management_activity_main.*
 
 class RentalsOverviewManagment: Fragment() {
     override fun onCreateView(
@@ -18,7 +19,7 @@ class RentalsOverviewManagment: Fragment() {
     ): View? {
         val recyclerView : RecyclerView =
             inflater.inflate(R.layout.fragment_rental_overview, container, false) as RecyclerView
-
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.rentalsOverviewManagment
         return recyclerView
     }
 }

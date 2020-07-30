@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import kotlinx.android.synthetic.main.check_in.view.*
+import kotlinx.android.synthetic.main.management_activity_main.*
 import kotlinx.android.synthetic.main.rental_home_fragment.view.*
 
 class CheckInFragment: Fragment() {
@@ -40,6 +41,7 @@ class CheckInFragment: Fragment() {
             }
             builder.create().show()
         }
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.checkInFragment
         return view
     }
 }
