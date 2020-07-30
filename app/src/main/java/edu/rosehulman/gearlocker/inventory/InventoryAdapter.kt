@@ -18,17 +18,17 @@ class InventoryAdapter(
             4
         ),
         Item(
-            "Item #1",
+            "Item #2",
             10f,
             4
         ),
         Item(
-            "Item #1",
+            "Item #3",
             10f,
             4
         ),
         Item(
-            "Item #1",
+            "Item #4",
             10f,
             4
         )

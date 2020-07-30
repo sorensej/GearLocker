@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "425118056616",
+    "firebase_url": "https://gearlocker-3a3d2.firebaseio.com",
+    "project_id": "gearlocker-3a3d2",
+    "storage_bucket": "gearlocker-3a3d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425118056616:android:492f8d50d060096dfb429d",
+        "android_client_info": {
+          "package_name": "edu.rosehulman.gearlocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425118056616-t4r8eba0mbdv1tbpr8dmtdkreg9iccte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kXI6rtLrh3dvxxIk1j69pd_SmjEsr50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425118056616-t4r8eba0mbdv1tbpr8dmtdkreg9iccte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
