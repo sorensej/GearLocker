@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_navigation_management_rentals_to_checkOutFragment"
             app:destination="@id/checkOutFragment" />
+        <action
+            android:id="@+id/action_navigation_management_rentals_to_formsOverviewFragment"
+            app:destination="@id/formsOverviewFragment"/>
     </fragment>
 
     <fragment
@@ -78,5 +81,10 @@
         android:id="@+id/checkOutFragment"
         android:name="edu.rosehulman.gearlocker.rentals.CheckOutFragment"
         android:label="CheckOutFragment" />
+
+    <fragment
+        android:id="@+id/formsOverviewFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.FormOverviewFragment"
+        android:label="FormsOverviewFragment"/>
 
 </navigation>

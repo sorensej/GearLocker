@@ -31,7 +31,7 @@ class RentalHomeFragment : Fragment(){
             findNavController().navigate(R.id.checkOutFragment)
         }
         view.getViewById(R.id.forms_button).setOnClickListener {
-
+            findNavController().navigate(R.id.formsOverviewFragment)
         }
         activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_rentals
 

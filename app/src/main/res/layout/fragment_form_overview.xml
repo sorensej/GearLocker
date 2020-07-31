@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue"
+    android:padding="25dp"
+    android:id="@+id/form_overview"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorDarkBlue"
+        android:padding="10dp"
+        android:text="Current Rentals"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textColor="@color/colorGrey"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/current_rental_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@color/colorDarkBlue"
+        android:padding="10dp"
+        android:text="Past Rentals"
+        android:textAlignment="center"
+        android:textColor="@color/colorGrey"
+        android:textSize="32sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/past_rental_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+</LinearLayout>
