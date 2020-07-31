@@ -3,6 +3,7 @@ package edu.rosehulman.gearlocker.managment
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
@@ -21,6 +22,7 @@ class ReturnToDashAlertFragment: DialogFragment() {
 
         alertDialogBuilder.setPositiveButton("OK"
         ) { _, _ ->
+            activity?.finish()
             findNavController().navigate(R.id.navigation_management_dashboard)
         }
         alertDialogBuilder.setNegativeButton("Cancel"

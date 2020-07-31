@@ -10,7 +10,11 @@ import kotlinx.android.synthetic.main.inventory_card_view.view.item_type_text
 import kotlinx.android.synthetic.main.inventory_card_view_2.view.*
 import kotlinx.android.synthetic.main.inventory_sub_item.view.*
 
-class InventoryViewHolder(val context: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
+class InventoryViewHolder(
+    val context: Context,
+    itemView: View,
+    val inventoryFragment: InventoryAdapter.ItemInterface
+) : RecyclerView.ViewHolder(itemView) {
 
     private val items = arrayListOf(
         Item(
@@ -26,6 +30,12 @@ class InventoryViewHolder(val context: Context, itemView: View) : RecyclerView.V
             "Sub Item #4"
         )
     )
+
+    init{
+        itemView.setOnClickListener {
+            inventoryFragment.onItemSelected(adapterPosition)
+        }
+    }
 
     private var expanded = false
 
@@ -52,5 +62,6 @@ class InventoryViewHolder(val context: Context, itemView: View) : RecyclerView.V
             child.sub_item_name.text = items[i].name
             itemView.content_container.addView(child)
         }
+
     }
 }

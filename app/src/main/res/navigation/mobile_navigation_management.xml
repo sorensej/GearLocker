@@ -47,7 +47,11 @@
         android:id="@+id/navigation_management_inventory"
         android:name="edu.rosehulman.gearlocker.inventory.InventoryFragment"
         android:label="Inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory" >
+        <action
+            android:id="@+id/action_navigation_management_inventory_to_popUpInventory"
+            app:destination="@id/popUpInventory" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_management_messages"
@@ -86,5 +90,13 @@
         android:id="@+id/formsOverviewFragment"
         android:name="edu.rosehulman.gearlocker.rentals.FormOverviewFragment"
         android:label="FormsOverviewFragment"/>
+    <dialog
+        android:id="@+id/popUpInventory"
+        android:name="edu.rosehulman.gearlocker.inventory.PopUpInventory"
+        android:label="PopUpInventory" >
+        <argument
+            android:name="item"
+            app:argType="edu.rosehulman.gearlocker.models.Item" />
+    </dialog>
 
 </navigation>
