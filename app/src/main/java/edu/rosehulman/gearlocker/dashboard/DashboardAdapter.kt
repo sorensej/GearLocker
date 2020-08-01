@@ -21,7 +21,7 @@ class DashboardAdapter(private val context: Context
         return DashboardViewHolder(view)
     }
 
-    override fun getItemCount()= rentals.size
+    override fun getItemCount() = rentals.size
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         Log.d(Constants.TAG, "onBind reached")

@@ -49,4 +49,9 @@
         android:label="management_activity_main"
         tools:layout="@layout/management_activity_main" />
 
+    <activity
+        android:id="@+id/rosefireLoginActivity"
+        android:name="edu.rosehulman.rosefire.WebLoginActivity"
+        android:label="rosefire_login_activity"/>
+
 </navigation>
