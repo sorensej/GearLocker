@@ -49,4 +49,7 @@
     <string name="forms">Forms</string>
     <string name="check_in">Check In</string>
     <string name="overview">Overview</string>
+    <string name="item_added_to_inventory">You added an item to the inventory</string>
+    <string name="view_inventory">View Inventory</string>
+    <string name="add_another_item">Add Another Item</string>
 </resources>
