@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,7 +21,6 @@ class ManagementMainActivity: AppCompatActivity() {
         setContentView(R.layout.management_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view_management)
         val navController = findNavController(R.id.nav_host_fragment_management)
-
         navView.setOnNavigationItemSelectedListener {
             Log.d(Constants.TAG, "navigation item selected")
             if (it.itemId == R.id.navigation_management_dashboard){

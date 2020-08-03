@@ -13,7 +13,7 @@ class PopUpInventory: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val item: Item = arguments?.get("item") as Item
         val builder = AlertDialog.Builder(context)
-        var layout = layoutInflater.inflate(
+        val layout = layoutInflater.inflate(
             R.layout.gear_summary_popup,
             null
         )
