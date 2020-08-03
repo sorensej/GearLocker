@@ -49,6 +49,15 @@
         android:label="management_activity_main"
         tools:layout="@layout/management_activity_main" />
 
+    <dialog
+        android:id="@+id/popUpInventory"
+        android:name="edu.rosehulman.gearlocker.inventory.PopUpInventory"
+        android:label="PopUpInventory" >
+        <argument
+            android:name="item"
+            app:argType="edu.rosehulman.gearlocker.models.Item" />
+    </dialog>
+
     <activity
         android:id="@+id/rosefireLoginActivity"
         android:name="edu.rosehulman.rosefire.WebLoginActivity"
