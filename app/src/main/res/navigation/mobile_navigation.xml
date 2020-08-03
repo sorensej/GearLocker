@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="edu.rosehulman.gearlocker.messages.MessagesFragment"
+        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="Messages"
         tools:layout="@layout/fragment_messages" />
 
