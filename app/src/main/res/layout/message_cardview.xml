@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/message_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorBlue"
+    app:cardUseCompatPadding="true">
+
+    <TextView
+        android:id="@+id/message_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_bubble_sender"
+        android:paddingVertical="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="40dp" />
+
+</androidx.cardview.widget.CardView>
