@@ -55,7 +55,7 @@
 
     <fragment
         android:id="@+id/navigation_management_messages"
-        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
+        android:name="edu.rosehulman.gearlocker.messages.MessagesFragment"
         android:label="Messages"
         tools:layout="@layout/fragment_messages" />
 
