@@ -152,10 +152,17 @@
         <argument
             android:name="item"
             app:argType="edu.rosehulman.gearlocker.models.Item" />
+        <action
+            android:id="@+id/action_popUpInventory_to_deleteFragment"
+            app:destination="@id/deleteFragment" />
     </dialog>
     <fragment
         android:id="@+id/addItem"
         android:name="edu.rosehulman.gearlocker.inventory.AddItem"
         android:label="AddItem" />
+    <fragment
+        android:id="@+id/deleteFragment"
+        android:name="edu.rosehulman.gearlocker.deleteitem.DeleteFragment"
+        android:label="DeleteFragment" />
 
 </navigation>

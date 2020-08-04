@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gear_summary_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/gear_summary_popup"
     android:background="@color/colorDarkBlue"
     android:backgroundTint="@color/colorDarkBlue">
 
@@ -32,12 +32,12 @@
         android:id="@+id/description_text_view"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:minLines="10"
         android:layout_below="@id/divider"
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="25dp"
+        android:minLines="10"
         android:text="@string/demo_item_description"
         android:textSize="18sp" />
 
@@ -85,8 +85,8 @@
         android:layout_marginEnd="0dp"
         android:layout_toEndOf="@id/condition_text_view"
         android:background="@color/colorGreen"
-        android:text="@string/condition_new"
         android:paddingHorizontal="5dp"
+        android:text="@string/condition_new"
         android:textSize="18sp" />
 
     <Button
@@ -104,28 +104,28 @@
         android:textSize="12sp" />
 
     <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/condition_text_view">
-
-    <Button
-        android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorAccent"
-        android:text="@android:string/cancel"
-        android:layout_marginBottom="10dp"/>
+        android:layout_below="@id/condition_text_view"
+        android:layout_centerHorizontal="true">
 
-    <Button
-        android:id="@+id/edit_item_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/edit_item"
-        android:layout_marginBottom="10dp"/>
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/edit_item_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/edit_item" />
     </LinearLayout>
 
 </RelativeLayout>
