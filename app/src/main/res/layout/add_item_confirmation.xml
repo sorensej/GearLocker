@@ -36,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/view_inventory"
+            android:padding="10dp"
             android:background="@color/colorAccent"
             android:layout_marginEnd="5dp"/>
 
@@ -43,6 +44,7 @@
             android:id="@+id/add_additional_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="@string/add_another_item"
             android:background="@color/colorPrimaryDark"
             android:layout_marginStart="5dp"/>
