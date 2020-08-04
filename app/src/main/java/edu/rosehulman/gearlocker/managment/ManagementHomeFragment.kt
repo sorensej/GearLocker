@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -28,6 +29,7 @@ class ManagementHomeFragment : Fragment() {
             inflater.inflate(R.layout.gear_management_home, container, false) as ConstraintLayout
         var bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view_management)
         bottomNavigationView?.isVisible = false
+        activity?.findNavController(R.id.nav_host_fragment_management)?.graph?.startDestination = R.id.navigation_management_home
         view.getViewById(R.id.inventory_button).setOnClickListener {
             Log.d(Constants.TAG, "Inventory clicked from management page")
             bottomNavigationView?.isVisible = true
@@ -39,6 +41,10 @@ class ManagementHomeFragment : Fragment() {
         view.getViewById(R.id.messages_button).setOnClickListener {
             bottomNavigationView?.isVisible = true
             findNavController().navigate(R.id.navigation_management_messages)
+        }
+        view.getViewById(R.id.return_to_dash_button).setOnClickListener {
+            bottomNavigationView?.isVisible = true
+            findNavController().navigate(R.id.return_to_dash_dialog)
         }
         return view
     }

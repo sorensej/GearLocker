@@ -35,6 +35,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
             activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_inventory
             Log.d(Constants.TAG, "Management detected.")
             view.fab.setImageResource(R.drawable.ic_add)
+            view.fab.setOnClickListener {
+                findNavController().navigate(R.id.addItem)
+            }
         }else{
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
             view.fab.setImageResource(R.drawable.ic_cart)
