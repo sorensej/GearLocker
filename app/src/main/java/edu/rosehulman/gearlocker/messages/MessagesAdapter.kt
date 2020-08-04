@@ -12,7 +12,7 @@ import edu.rosehulman.gearlocker.models.Message
 
 
 class MessagesAdapter(private val context: Context) : RecyclerView.Adapter<MessagesViewHolder>() {
-    private var messages = arrayListOf(Message("Sender", "This is a message"), Message("Sender", "This is another message and it is a bit longer to see what it will look like."))
+    private var messages = arrayListOf(Message("Sender", "This is a message"), Message("Sender", "This is another message and it is a bit longer to see what it will look like."), Message("Renter", "This should be on the other side."))
 
     @SuppressLint("ResourceType")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder {

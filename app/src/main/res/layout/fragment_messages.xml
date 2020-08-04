@@ -4,17 +4,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="10dp"
     android:background="@color/colorBlue">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_messages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorBlue"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/background" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingHorizontal="15dp"
+        android:background="@color/colorBlue" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/background"
@@ -22,7 +21,8 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="55dp"/>
     <RelativeLayout
         android:id="@+id/send_layout"
         android:layout_width="match_parent"
@@ -31,8 +31,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_marginBottom="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
         <ImageButton
             android:id="@+id/send_button"

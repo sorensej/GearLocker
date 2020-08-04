@@ -1,5 +1,6 @@
 package edu.rosehulman.gearlocker.inventory
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,22 +29,23 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("GearLocker", "test")
         val view = inflater.inflate(R.layout.fragment_inventory, container, false)
-        val manager = LinearLayoutManager(context)
         val safeArgs: InventoryFragmentArgs by navArgs()
         if(safeArgs.isManagement){
             activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_inventory
             Log.d(Constants.TAG, "Management detected.")
+            view.fab.setImageResource(R.drawable.ic_add)
         }else{
+            activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
+            view.fab.setImageResource(R.drawable.ic_cart)
             Log.d(Constants.TAG, "Not management activity.")
         }
-        Log.d(Constants.TAG, "Fragment: Inventory")
+        val manager = LinearLayoutManager(context)
         _adapter = InventoryAdapter(
             requireContext(), this
         )
-        view.inventory_recycler_view.adapter = _adapter
-        view.inventory_recycler_view.layoutManager = manager
+        view?.inventory_recycler_view?.adapter = _adapter
+        view?.inventory_recycler_view?.layoutManager = manager
 
         return view
     }

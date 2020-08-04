@@ -27,10 +27,6 @@ class ManagementMainActivity: AppCompatActivity() {
             R.id.navigation_management_rentals, R.id.navigation_management_inventory, R.id.navigation_management_messages, R.id.navigation_management_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        var navArg = NavArgument.Builder().setDefaultValue(true).build()
-        navController.graph.addArgument("isManagement", navArg)
-        Log.d(Constants.TAG, "In management: ${navArg.defaultValue}")
     }
 
 

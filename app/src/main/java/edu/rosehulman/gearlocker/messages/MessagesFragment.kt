@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,15 +27,17 @@ class MessagesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_messages, container, false)
         val manager = LinearLayoutManager(context)
+        val safeArgs: MessagesFragmentArgs by navArgs()
+        if(safeArgs.isManagement){
+            activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_messages
+        }else{
+            activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_messages
+        }
 
-        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_messages
-        var bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomNavigationView?.isVisible = false
         Log.d(Constants.TAG, "Fragment: Messages")
         adapter = MessagesAdapter(requireContext())
         view.list_of_messages.adapter = adapter
         view.list_of_messages.layoutManager = manager
-        val safeArgs: MessagesFragmentArgs by navArgs()
         Log.d(Constants.TAG, "${safeArgs.isManagement}")
         return view
     }

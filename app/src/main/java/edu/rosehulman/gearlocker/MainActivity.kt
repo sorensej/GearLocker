@@ -28,17 +28,11 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.renter_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-
         navView.isVisible = true
-
-
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_management, R.id.navigation_inventory, R.id.navigation_messages, R.id.navigation_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        var navArg = NavArgument.Builder().setDefaultValue(false).build()
-        navController.graph.addArgument("isManagement", navArg)
 
         //initializeListeners()
     }
