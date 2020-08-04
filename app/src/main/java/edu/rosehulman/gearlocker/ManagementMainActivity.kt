@@ -28,6 +28,10 @@ class ManagementMainActivity: AppCompatActivity() {
             R.id.navigation_management_rentals, R.id.navigation_management_inventory, R.id.navigation_management_messages, R.id.navigation_management_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            navView.isVisible = true
+        }
     }
 
 

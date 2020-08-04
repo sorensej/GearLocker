@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
         setActionBar(toolbar)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            navView.isVisible = true
+        }
 
         //initializeListeners()
     }
