@@ -19,6 +19,7 @@ class ManagementMainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.management_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view_management)
         val navController = findNavController(R.id.nav_host_fragment_management)

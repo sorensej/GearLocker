@@ -7,7 +7,6 @@
     <string name="messages">Messages</string>
     <string name="gear_management">Management</string>
     <string name="gear_inventory">Inventory</string>
-    <string name="add_club">Add Club</string>
     <string name="action_settings">Action Settings</string>
     <string name="item_type">Item type</string>
     <string name="item_1">Item 1</string>
@@ -52,4 +51,5 @@
     <string name="item_added_to_inventory">You added an item to the inventory</string>
     <string name="view_inventory">View Inventory</string>
     <string name="add_another_item">Add Another Item</string>
+    <string name="add_club">Add Club</string>
 </resources>

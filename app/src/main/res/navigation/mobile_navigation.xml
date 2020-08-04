@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_management"
             app:destination="@id/navigation_management" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_placeholder"
+            app:destination="@id/placeholder" />
     </fragment>
     <activity
         android:id="@+id/managementMainActivity"
@@ -91,5 +94,11 @@
         android:name="edu.rosehulman.rosefire.WebLoginActivity"
         android:label="rosefire_login_activity">
     </activity>
+    <fragment
+        android:id="@+id/placeholder"
+        android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
+        android:label="AddClub"
+        tools:layout="@layout/fragment_dashboard"/>
+
 
 </navigation>

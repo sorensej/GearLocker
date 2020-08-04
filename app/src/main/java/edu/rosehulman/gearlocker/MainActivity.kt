@@ -2,9 +2,14 @@ package edu.rosehulman.gearlocker
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.view.Menu
+import android.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
@@ -15,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import edu.rosehulman.rosefire.Rosefire
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private val auth = FirebaseAuth.getInstance()
@@ -24,15 +29,31 @@ class MainActivity : AppCompatActivity(){
     private val RC_ROSEFIRE_LOGIN = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.renter_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         navView.isVisible = true
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_management, R.id.navigation_inventory, R.id.navigation_messages, R.id.navigation_dashboard))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_management,
+                R.id.navigation_inventory,
+                R.id.navigation_messages,
+                R.id.navigation_dashboard
+            )
+        )
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.inflateMenu(R.menu.app_bar_menu)
+        toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.add_club) {
+                navController.navigate(R.id.placeholder)
+            }
+            true
+        }
+        setActionBar(toolbar)
 
         //initializeListeners()
     }
@@ -58,7 +79,8 @@ class MainActivity : AppCompatActivity(){
                 val uid = user.uid
                 findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_dashboard)
             } else {
-                val rosefireIntent = Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
+                val rosefireIntent =
+                    Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
                 startActivityForResult(rosefireIntent, RC_ROSEFIRE_LOGIN)
             }
         }
