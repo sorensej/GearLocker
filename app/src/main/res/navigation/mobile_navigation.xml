@@ -14,25 +14,44 @@
         <action
             android:id="@+id/action_navigation_management_to_managementMainActivity"
             app:destination="@id/managementMainActivity" />
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory"
         android:name="edu.rosehulman.gearlocker.inventory.InventoryFragment"
         android:label="Inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory"
+        >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_messages"
         android:name="edu.rosehulman.gearlocker.messages.MessagesFragment"
         android:label="Messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_messages" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_messages"
             app:destination="@id/navigation_messages" />
@@ -47,7 +66,12 @@
         android:id="@+id/managementMainActivity"
         android:name="edu.rosehulman.gearlocker.ManagementMainActivity"
         android:label="management_activity_main"
-        tools:layout="@layout/management_activity_main" />
+        tools:layout="@layout/renter_activity_main" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </activity>
 
     <dialog
         android:id="@+id/popUpInventory"
@@ -56,11 +80,16 @@
         <argument
             android:name="item"
             app:argType="edu.rosehulman.gearlocker.models.Item" />
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="false"/>
     </dialog>
 
     <activity
         android:id="@+id/rosefireLoginActivity"
         android:name="edu.rosehulman.rosefire.WebLoginActivity"
-        android:label="rosefire_login_activity"/>
+        android:label="rosefire_login_activity">
+    </activity>
 
 </navigation>

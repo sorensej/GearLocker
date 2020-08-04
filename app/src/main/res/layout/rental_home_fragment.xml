@@ -14,20 +14,20 @@
         android:background="@drawable/round_button_grey"
         android:text="@string/overview"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkin_button" />
+        app:layout_constraintBottom_toTopOf="@+id/inventory_button" />
 
     <Button
-        android:id="@+id/checkin_button"
+        android:id="@+id/inventory_button"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_margin="5dp"
         android:background="@drawable/round_button_grey"
         android:text="@string/check_in"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/checkout_button" />
+        app:layout_constraintBottom_toTopOf="@id/messages_button" />
 
     <Button
-        android:id="@+id/checkout_button"
+        android:id="@+id/messages_button"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_margin="5dp"
@@ -45,7 +45,7 @@
         android:background="@drawable/round_button_grey"
         android:text="@string/forms"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/checkout_button" />
+        app:layout_constraintTop_toBottomOf="@id/messages_button" />
 
     <ImageView
         android:layout_marginTop="20dp"

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import edu.rosehulman.gearlocker.Constants
@@ -33,7 +34,8 @@ class MessagesFragment : Fragment() {
         adapter = MessagesAdapter(requireContext())
         view.list_of_messages.adapter = adapter
         view.list_of_messages.layoutManager = manager
-
+        val safeArgs: MessagesFragmentArgs by navArgs()
+        Log.d(Constants.TAG, "${safeArgs.isManagement}")
         return view
     }
 }

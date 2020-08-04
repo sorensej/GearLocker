@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,18 +22,15 @@ class ManagementMainActivity: AppCompatActivity() {
         setContentView(R.layout.management_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view_management)
         val navController = findNavController(R.id.nav_host_fragment_management)
-        navView.setOnNavigationItemSelectedListener {
-            Log.d(Constants.TAG, "navigation item selected")
-            if (it.itemId == R.id.navigation_management_dashboard){
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-            true
-        }
         Log.d(Constants.TAG, "On create for management fragment")
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_management_rentals, R.id.navigation_management_inventory, R.id.navigation_management_messages, R.id.navigation_management_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        var navArg = NavArgument.Builder().setDefaultValue(true).build()
+        navController.graph.addArgument("isManagement", navArg)
+        Log.d(Constants.TAG, "In management: ${navArg.defaultValue}")
     }
 
 

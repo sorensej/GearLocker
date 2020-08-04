@@ -16,7 +16,6 @@ class DashboardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
     @SuppressLint("SetTextI18n")
     fun bind(rental: Rental){
-        Log.d(Constants.TAG, "binding item")
         val newList = arrayListOf<String>("Item 1, Item 2, Item 3")
 
         for (item in rental.itemList){

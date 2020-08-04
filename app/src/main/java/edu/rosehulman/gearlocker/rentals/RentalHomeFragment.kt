@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import edu.rosehulman.gearlocker.R
 import kotlinx.android.synthetic.main.management_activity_main.*
@@ -24,10 +23,10 @@ class RentalHomeFragment : Fragment(){
         view.getViewById(R.id.overview_button).setOnClickListener {
             findNavController().navigate(R.id.rentalsOverviewManagment)
         }
-        view.getViewById(R.id.checkin_button).setOnClickListener {
+        view.getViewById(R.id.inventory_button).setOnClickListener {
             findNavController().navigate(R.id.checkInFragment)
         }
-        view.getViewById(R.id.checkout_button).setOnClickListener {
+        view.getViewById(R.id.messages_button).setOnClickListener {
             findNavController().navigate(R.id.checkOutFragment)
         }
         view.getViewById(R.id.forms_button).setOnClickListener {

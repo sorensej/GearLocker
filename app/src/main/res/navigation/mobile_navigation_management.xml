@@ -22,6 +22,10 @@
         <action
             android:id="@+id/action_navigation_management_home_to_return_to_dash_dialog"
             app:destination="@id/return_to_dash_dialog" />
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
     </fragment>
 
     <fragment
@@ -41,6 +45,11 @@
         <action
             android:id="@+id/action_navigation_management_rentals_to_formsOverviewFragment"
             app:destination="@id/formsOverviewFragment"/>
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"
+            />
     </fragment>
 
     <fragment
@@ -48,6 +57,10 @@
         android:name="edu.rosehulman.gearlocker.inventory.InventoryFragment"
         android:label="Inventory"
         tools:layout="@layout/fragment_inventory" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
         <action
             android:id="@+id/action_navigation_management_inventory_to_popUpInventory"
             app:destination="@id/popUpInventory" />
@@ -57,18 +70,32 @@
         android:id="@+id/navigation_management_messages"
         android:name="edu.rosehulman.gearlocker.messages.MessagesFragment"
         android:label="Messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_messages" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </fragment>
 
     <activity
         android:id="@+id/navigation_management_dashboard"
         android:name="edu.rosehulman.gearlocker.MainActivity"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </activity>
 
     <dialog
         android:id="@+id/return_to_dash_dialog"
         android:name="edu.rosehulman.gearlocker.managment.ReturnToDashAlertFragment"
         android:label="ReturnDashDialog" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
         <action
             android:id="@+id/action_return_to_dash_dialog_to_navigation_management_dashboard"
             app:destination="@id/navigation_management_dashboard" />
@@ -76,24 +103,49 @@
     <fragment
         android:id="@+id/rentalsOverviewManagment"
         android:name="edu.rosehulman.gearlocker.rentals.RentalsOverviewManagment"
-        android:label="RentalsOverviewManagment" />
+        android:label="RentalsOverviewManagment" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </fragment>
     <fragment
         android:id="@+id/checkInFragment"
         android:name="edu.rosehulman.gearlocker.rentals.CheckInFragment"
-        android:label="CheckInFragment" />
+        android:label="CheckInFragment">
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </fragment>
+
     <fragment
         android:id="@+id/checkOutFragment"
         android:name="edu.rosehulman.gearlocker.rentals.CheckOutFragment"
-        android:label="CheckOutFragment" />
+        android:label="CheckOutFragment" >
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"
+            android:defaultValue="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/formsOverviewFragment"
         android:name="edu.rosehulman.gearlocker.rentals.FormOverviewFragment"
-        android:label="FormsOverviewFragment"/>
+        android:label="FormsOverviewFragment">
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"  android:defaultValue="true"
+            />
+    </fragment>
     <dialog
         android:id="@+id/popUpInventory"
         android:name="edu.rosehulman.gearlocker.inventory.PopUpInventory"
-        android:label="PopUpInventory" >
+        android:label="PopUpInventory">
+        <argument
+            android:name="isManagement"
+            app:argType="boolean"  android:defaultValue="true"
+            />
         <argument
             android:name="item"
             app:argType="edu.rosehulman.gearlocker.models.Item" />
