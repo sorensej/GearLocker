@@ -2,10 +2,7 @@ package edu.rosehulman.gearlocker
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import edu.rosehulman.gearlocker.models.Club
-import edu.rosehulman.gearlocker.models.Item
-import edu.rosehulman.gearlocker.models.Rental
-import edu.rosehulman.gearlocker.models.Renter
+import edu.rosehulman.gearlocker.models.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,7 +18,24 @@ object DemoData {
         Item("La Sportiva Tarantulaces", 95.0f, 5, ""),
         Item("La Sportiva Tarantulaces", 55.0f, 3, ""),
         Item("La Sportiva Tarantulaces", 20.0f, 2, ""),
-        Item("La Sportiva Tarantulaces", 95.0f, 5, "")
+        Item("La Sportiva Tarantulaces", 95.0f, 5, ""),
+        Item("Petzl Corax", 40.0f, 5, ""),
+        Item("Rock & Lock", 20.0f, 1, "")
+    )
+
+    val ITEM_CATEGORIES = arrayListOf<ItemCategory>(
+        ItemCategory("Shoes", arrayListOf<Item>(
+            ITEMS[0],
+            ITEMS[1],
+            ITEMS[2],
+            ITEMS[3],
+            ITEMS[4],
+            ITEMS[5]
+        )),
+        ItemCategory("Harnesses", arrayListOf<Item>(
+            ITEMS[6],
+            ITEMS[7]
+        ))
     )
 
     private val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH)
@@ -66,6 +80,18 @@ object DemoData {
         for (rental in RENTALS) {
             Log.d(Constants.TAG, rental.startDate.toString())
             currentRentalsRef.add(rental);
+        }
+    }
+
+    fun createItemCategories() {
+        Log.d(Constants.TAG, "Adding Item Categories")
+        val itemCategoriesRef = FirebaseFirestore
+            .getInstance()
+            .collection(Constants.FB_ITEMS)
+
+        for (itemCategory in ITEM_CATEGORIES) {
+            Log.d(Constants.TAG, itemCategory.name)
+            itemCategoriesRef.add(itemCategory)
         }
     }
 }

@@ -1,19 +1,15 @@
 package edu.rosehulman.gearlocker.inventory
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.rosehulman.gearlocker.Constants
+import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.fragment_inventory.view.*
@@ -50,7 +46,23 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
         view?.inventory_recycler_view?.adapter = _adapter
         view?.inventory_recycler_view?.layoutManager = manager
 
+        setHasOptionsMenu(true)
+
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_bar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_demo_data -> {
+                DemoData.createItemCategories()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onItemSelected(position: Int) {

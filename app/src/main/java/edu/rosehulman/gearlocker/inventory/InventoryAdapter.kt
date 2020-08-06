@@ -1,43 +1,62 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Item
+import edu.rosehulman.gearlocker.models.ItemCategory
 
 class InventoryAdapter(
     private val context: Context,
     val inventoryFragment: ItemInterface
 ) : RecyclerView.Adapter<InventoryViewHolder>(){
 
-    private val inventory = arrayListOf<Item>(
-        Item(
-            "Item #1",
-            10f,
-            4
-        ),
-        Item(
-            "Item #2",
-            10f,
-            4
-        ),
-        Item(
-            "Item #3",
-            10f,
-            4
-        ),
-        Item(
-            "Item #4",
-            10f,
-            4
-        )
-    )
+    private val itemCategories = ArrayList<ItemCategory>()
+
+    private val inventoryRef = FirebaseFirestore
+        .getInstance()
+        .collection(Constants.FB_ITEMS)
 
     init {
-        //currentRentals.add()
+        inventoryRef.addSnapshotListener { snapshot, exception ->
+            handleSnapshotEvent(snapshot, exception)
+        }
         notifyDataSetChanged()
+    }
+
+    private fun handleSnapshotEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+        if (exception != null) {
+            Log.e(Constants.TAG, "Inventory Listen Error: $exception")
+            return
+        }
+
+        for (change in snapshot!!.documentChanges) {
+            val itemCategory = ItemCategory.fromSnapshot(change.document)
+
+            when (change.type) {
+                DocumentChange.Type.ADDED -> {
+                    itemCategories.add(itemCategory)
+                    notifyItemInserted(0)
+                }
+                DocumentChange.Type.REMOVED -> {
+                    val position = itemCategories.indexOfFirst { it.id == itemCategory.id }
+                    itemCategories.removeAt(position)
+                    notifyItemRemoved(position)
+                }
+                DocumentChange.Type.MODIFIED -> {
+                    val position = itemCategories.indexOfFirst { it.id == itemCategory.id }
+                    itemCategories[position] = itemCategory
+                    notifyItemChanged(position)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
@@ -45,17 +64,17 @@ class InventoryAdapter(
         return InventoryViewHolder(context, view, inventoryFragment)
     }
 
-    override fun getItemCount() = inventory.size
+    override fun getItemCount() = itemCategories.size
 
     override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
-        holder.bind(inventory[position])
+        holder.bind(itemCategories[position])
     }
 
-    fun selectItem(position: Int): Item{
-        return inventory[position]
+    fun selectItem(position: Int): ItemCategory {
+        return itemCategories[position]
     }
 
-    interface ItemInterface{
+    interface ItemInterface {
         fun onItemSelected(position: Int)
     }
 }
