@@ -2,20 +2,14 @@ package edu.rosehulman.gearlocker
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Toolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
-import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import edu.rosehulman.rosefire.Rosefire
 

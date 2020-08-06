@@ -5,6 +5,12 @@
         android:id="@+id/add_club"
         android:icon="@drawable/ic_addclub"
         android:title="@string/add_club"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:orderInCategory="50"/>
+
+    <item
+        android:id="@+id/add_demo_data"
+        android:title="Add Demo Data"
+        android:orderInCategory="100"/>
 
 </menu>

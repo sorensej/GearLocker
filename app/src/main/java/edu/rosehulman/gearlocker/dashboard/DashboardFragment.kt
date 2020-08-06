@@ -1,18 +1,14 @@
 package edu.rosehulman.gearlocker.dashboard
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import edu.rosehulman.gearlocker.Constants
+import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.inventory.InventoryAdapter
-import kotlinx.android.synthetic.main.fragment_inventory.view.*
-import kotlinx.android.synthetic.main.renter_activity_main.view.*
 
 class DashboardFragment : Fragment() {
 
@@ -28,6 +24,23 @@ class DashboardFragment : Fragment() {
         adapter = DashboardAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+        setHasOptionsMenu(true)
+
         return recyclerView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_bar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_demo_data -> {
+                Log.d(Constants.TAG, "test2")
+                DemoData.createRentals()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

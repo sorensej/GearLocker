@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.*
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Rental
@@ -14,7 +15,46 @@ import edu.rosehulman.gearlocker.models.Rental
 class DashboardAdapter(private val context: Context
 ) : RecyclerView.Adapter<DashboardViewHolder>() {
 
-    private val rentals = arrayListOf<Rental>(Rental(), Rental(), Rental())
+    //private val rentals = arrayListOf<Rental>(Rental(), Rental(), Rental())
+    private val rentals = ArrayList<Rental>()
+
+    private val currentRentalsRef = FirebaseFirestore
+        .getInstance()
+        .collection(Constants.FB_RENTALS)
+
+    init {
+        currentRentalsRef.addSnapshotListener { snapshot, exception ->
+            handleSnapshotEvent(snapshot, exception)
+        }
+    }
+
+    private fun handleSnapshotEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+        if (exception != null) {
+            Log.e(Constants.TAG, "Dashboard Listen Error: $exception")
+            return
+        }
+
+        for (change in snapshot!!.documentChanges) {
+            val rental = Rental.fromSnapshot(change.document)
+
+            when (change.type) {
+                DocumentChange.Type.ADDED -> {
+                    rentals.add(0, rental)
+                    notifyItemInserted(0)
+                }
+                DocumentChange.Type.REMOVED -> {
+                    val position = rentals.indexOfFirst { it.id == rental.id }
+                    rentals.removeAt(position)
+                    notifyItemRemoved(position)
+                }
+                DocumentChange.Type.MODIFIED -> {
+                    val position = rentals.indexOfFirst { it.id == rental.id }
+                    rentals[position] = rental
+                    notifyItemChanged(position)
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
         val view: CardView=
