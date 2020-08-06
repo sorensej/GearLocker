@@ -15,6 +15,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        android:textColor="@color/colorGrey"
         android:layout_marginBottom="15dp"
         android:text="La Sportiva Tarantulaces"
         android:textAlignment="center"
@@ -33,6 +34,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/divider"
+        android:textColor="@color/colorGrey"
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
@@ -63,6 +65,7 @@
         android:layout_below="@id/item_photo"
         android:layout_alignStart="@id/item_photo"
         android:layout_alignEnd="@id/item_photo"
+        android:textColor="@color/colorGrey"
         android:text="@string/demo_stock_information"
         android:textAlignment="center" />
 
@@ -72,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/description_text_view"
         android:layout_alignStart="@id/description_text_view"
+        android:textColor="@color/colorGrey"
         android:text="@string/condition"
         android:textSize="20sp" />
 
@@ -82,7 +86,6 @@
         android:layout_below="@id/description_text_view"
         android:layout_alignEnd="@id/description_text_view"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="0dp"
         android:layout_toEndOf="@id/condition_text_view"
         android:background="@color/colorGreen"
         android:paddingHorizontal="5dp"
@@ -95,26 +98,32 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/description_text_view"
         android:layout_alignTop="@id/current_condition_text_view"
-        android:layout_alignEnd="@id/stock_text_view"
         android:layout_alignBottom="@id/current_condition_text_view"
-        android:layout_marginStart="40dp"
+        android:layout_alignEnd="@id/stock_text_view"
+        android:layout_marginStart="20dp"
+        android:paddingHorizontal="20dp"
         android:layout_toEndOf="@id/current_condition_text_view"
-        android:background="@color/colorRed"
+        android:background="@drawable/round_button_red"
         android:text="@string/delete_an_item"
         android:textSize="12sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/condition_text_view"
+        android:paddingHorizontal="40dp"
+        android:layout_marginBottom="10dp"
+        android:weightSum="2"
         android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
+            android:paddingHorizontal="10dp"
+            android:layout_weight="1"
             android:background="@color/colorAccent"
             android:text="@android:string/cancel" />
 
@@ -122,7 +131,9 @@
             android:id="@+id/edit_item_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:paddingHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/edit_item" />

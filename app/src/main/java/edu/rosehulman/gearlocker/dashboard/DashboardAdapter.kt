@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
@@ -16,7 +17,8 @@ class DashboardAdapter(private val context: Context
     private val rentals = arrayListOf<Rental>(Rental(), Rental(), Rental())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.dashboard_card_view, parent, false)
+        val view: CardView=
+            LayoutInflater.from(context).inflate(R.layout.dashboard_card_view, parent, false) as CardView
         return DashboardViewHolder(view)
     }
 

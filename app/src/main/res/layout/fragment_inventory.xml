@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="25dp"
+        android:padding="5dp"
         android:background="@color/colorBlue"
         android:id="@+id/inventory_recycler_view"/>
 

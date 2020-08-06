@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/darker_gray"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="10dp"
@@ -12,23 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:paddingHorizontal="20dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/dashboard_title_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:text="@string/rental_text"
             android:textSize="18sp" />
 
-        <ListView
+        <TextView
             android:id="@+id/item_list"
+            android:divider="@color/colorGrey"
             android:layout_width="match_parent"
-            android:divider="@android:color/transparent"
-            android:footerDividersEnabled="true"
-            android:headerDividersEnabled="true"
-            android:dividerHeight="15dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
