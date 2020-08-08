@@ -3,6 +3,10 @@ package edu.rosehulman.gearlocker
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -41,12 +45,6 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.inflateMenu(R.menu.app_bar_menu)
-        toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.add_club) {
-                navController.navigate(R.id.placeholder)
-            }
-            true
-        }
         setActionBar(toolbar)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             navView.isVisible = true

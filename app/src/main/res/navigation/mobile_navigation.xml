@@ -99,6 +99,10 @@
         android:name="edu.rosehulman.gearlocker.dashboard.DashboardFragment"
         android:label="AddClub"
         tools:layout="@layout/fragment_dashboard"/>
+    <fragment
+        android:id="@+id/clubsFragment"
+        android:name="edu.rosehulman.gearlocker.clubs.ClubsFragment"
+        android:label="ClubsFragment" />
 
 
 </navigation>

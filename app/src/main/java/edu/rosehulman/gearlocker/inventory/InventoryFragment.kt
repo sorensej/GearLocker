@@ -61,6 +61,10 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
                 DemoData.createItemCategories()
                 true
             }
+            R.id.add_club->{
+                findNavController().navigate(R.id.clubsFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.rosehulman.gearlocker.Constants
@@ -38,6 +39,10 @@ class DashboardFragment : Fragment() {
             R.id.add_demo_data -> {
                 Log.d(Constants.TAG, "test2")
                 DemoData.createRentals()
+                true
+            }
+            R.id.add_club->{
+                findNavController().navigate(R.id.clubsFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

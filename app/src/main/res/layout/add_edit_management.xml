@@ -211,7 +211,7 @@ helpful to the renter(s)."
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/price_textview"
             android:text="Estimated cost of gear:"/>
-        <TextView
+        <EditText
             android:id="@+id/price_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -223,7 +223,7 @@ helpful to the renter(s)."
             android:padding="8dp"
             android:background="@color/colorDarkBlue"
             android:textColor="@color/colorGrey"
-            android:text="$55.00"/>
+            android:hint="$55.00"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
