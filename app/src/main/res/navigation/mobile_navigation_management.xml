@@ -140,6 +140,9 @@
             android:name="isManagement"
             app:argType="boolean"  android:defaultValue="true"
             />
+        <action
+            android:id="@+id/action_formsOverviewFragment_to_formUploadFragment"
+            app:destination="@id/formUploadFragment" />
     </fragment>
     <dialog
         android:id="@+id/popUpInventory"
@@ -164,5 +167,9 @@
         android:id="@+id/deleteFragment"
         android:name="edu.rosehulman.gearlocker.deleteitem.DeleteFragment"
         android:label="DeleteFragment" />
+    <fragment
+        android:id="@+id/formUploadFragment"
+        android:name="edu.rosehulman.gearlocker.rentals.FormUploadFragment"
+        android:label="FormUploadFragment" />
 
 </navigation>

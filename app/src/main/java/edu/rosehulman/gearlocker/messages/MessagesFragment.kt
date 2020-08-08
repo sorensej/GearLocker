@@ -33,7 +33,6 @@ class MessagesFragment : Fragment() {
         }else{
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_messages
         }
-
         Log.d(Constants.TAG, "Fragment: Messages")
         adapter = MessagesAdapter(requireContext())
         view.list_of_messages.adapter = adapter

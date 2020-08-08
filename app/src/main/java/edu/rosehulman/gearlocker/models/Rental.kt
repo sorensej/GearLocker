@@ -9,7 +9,8 @@ import kotlin.collections.ArrayList
 data class Rental (
     var startDate: Date = Date.from(Instant.EPOCH),
     var endDate: Date = Date.from(Instant.EPOCH),
-    var itemList: ArrayList<Item> = ArrayList()
+    var itemList: ArrayList<Item> = ArrayList(),
+    var uid: String = ""
 ) {
     @get:Exclude var id: String = ""
 
