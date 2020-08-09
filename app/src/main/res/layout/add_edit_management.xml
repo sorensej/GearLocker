@@ -43,6 +43,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/quantity_textvieww"
                 android:text="Description of Gear:"/>
             <EditText
+                android:id="@+id/name_of_gear_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -69,12 +70,13 @@
                 app:layout_constraintEnd_toEndOf="@+id/price_textview"
                 android:text="Quantity:"/>
             <EditText
+                android:id="@+id/quantity_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:inputType="number"
                 android:hint="Quantity"
                 android:textColorHint="@color/colorGrey"
-
                 android:textColor="@color/colorGrey"
                 android:background="@color/colorDarkBlue"/>
         </LinearLayout>
@@ -181,6 +183,7 @@
         app:layout_constraintEnd_toEndOf="@+id/price_textview"
         android:text="Description of Gear:"/>
     <EditText
+        android:id="@+id/description_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -215,6 +218,7 @@ helpful to the renter(s)."
             android:id="@+id/price_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginRight="20dp"

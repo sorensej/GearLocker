@@ -1,6 +1,7 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.content.Context
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,10 +14,11 @@ import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
+import kotlinx.android.parcel.Parcelize
 
 class InventoryAdapter(
     private val context: Context,
-    val inventoryFragment: ItemInterface
+    private val inventoryFragment: ItemInterface
 ) : RecyclerView.Adapter<InventoryViewHolder>(){
 
     private val itemCategories = ArrayList<ItemCategory>()
@@ -60,6 +62,11 @@ class InventoryAdapter(
         }
     }
 
+    fun add(item:Item){
+        Log.d(Constants.TAG, "$item")
+        inventoryRef.add(item)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.inventory_card_view_2, parent, false)
         return InventoryViewHolder(context, view, inventoryFragment)
@@ -71,7 +78,8 @@ class InventoryAdapter(
         holder.bind(itemCategories[position])
     }
 
-    interface ItemInterface {
+    interface ItemInterface : Parcelable {
         fun onItemSelected(item: Item)
+        fun onItemAdded(item: Item)
     }
 }

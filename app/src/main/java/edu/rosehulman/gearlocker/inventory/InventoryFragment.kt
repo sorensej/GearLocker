@@ -1,6 +1,7 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,11 +13,12 @@ import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
+import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_inventory.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
 
-
-class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
+@Parcelize
+class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable {
 
     private lateinit var _adapter: InventoryAdapter
 
@@ -31,8 +33,10 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
             activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_inventory
             Log.d(Constants.TAG, "Management detected.")
             view.fab.setImageResource(R.drawable.ic_add)
+            val bundle = Bundle()
+            bundle.putParcelable("inventoryFragment", this as InventoryAdapter.ItemInterface)
             view.fab.setOnClickListener {
-                findNavController().navigate(R.id.addItem)
+                findNavController().navigate(R.id.addItem, bundle)
             }
         }else{
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
@@ -73,5 +77,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
         val bundle = Bundle()
         bundle.putParcelable("item", item)
         findNavController().navigate(R.id.popUpInventory, bundle)
+    }
+
+    override fun onItemAdded(item: Item) {
+        _adapter.add(item)
     }
 }
