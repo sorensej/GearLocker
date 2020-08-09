@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
 
 class InventoryAdapter(
@@ -70,11 +71,7 @@ class InventoryAdapter(
         holder.bind(itemCategories[position])
     }
 
-    fun selectItem(position: Int): ItemCategory {
-        return itemCategories[position]
-    }
-
     interface ItemInterface {
-        fun onItemSelected(position: Int)
+        fun onItemSelected(item: Item)
     }
 }

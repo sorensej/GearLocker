@@ -1,9 +1,11 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
@@ -18,12 +20,6 @@ class InventoryViewHolder(
 ) : RecyclerView.ViewHolder(itemView) {
 
     private var items = arrayListOf<Item>()
-
-    init{
-        itemView.setOnClickListener {
-            inventoryFragment.onItemSelected(adapterPosition)
-        }
-    }
 
     private var expanded = false
 
@@ -54,6 +50,9 @@ class InventoryViewHolder(
             }
             val child = inflater.inflate(R.layout.inventory_sub_item, null, false)
             child.sub_item_name.text = items[i].name
+            child.setOnClickListener {
+                inventoryFragment.onItemSelected(items[i])
+            }
             itemView.content_container.addView(child)
         }
 

@@ -69,11 +69,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface {
         }
     }
 
-    override fun onItemSelected(position: Int) {
-        val item = Item("Name", 20f, 3, "description")
-        var bundle = Bundle()
+    override fun onItemSelected(item: Item) {
+        val bundle = Bundle()
         bundle.putParcelable("item", item)
         findNavController().navigate(R.id.popUpInventory, bundle)
-
     }
 }
