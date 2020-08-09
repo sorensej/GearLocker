@@ -25,6 +25,22 @@ class ClubsFragment : Fragment() {
         adapter = ClubsAdapter(requireContext())
         constraintLayout.findViewById<RecyclerView>(R.id.listView).adapter = adapter
         constraintLayout.findViewById<RecyclerView>(R.id.listView).layoutManager = LinearLayoutManager(context)
+
+        setHasOptionsMenu(true)
         return constraintLayout
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_bar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_demo_data -> {
+                DemoData.createClubs()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

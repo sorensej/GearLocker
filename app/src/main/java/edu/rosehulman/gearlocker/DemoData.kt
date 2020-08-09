@@ -94,4 +94,16 @@ object DemoData {
             itemCategoriesRef.add(itemCategory)
         }
     }
+
+    fun createClubs() {
+        Log.d(Constants.TAG, "Adding clubs")
+        val clubsRef = FirebaseFirestore
+            .getInstance()
+            .collection(Constants.FB_CLUBS)
+
+        for (club in CLUBS) {
+            Log.d(Constants.TAG, club.name)
+            clubsRef.add(club)
+        }
+    }
 }

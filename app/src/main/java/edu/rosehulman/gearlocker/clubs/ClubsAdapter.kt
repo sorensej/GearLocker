@@ -22,6 +22,40 @@ class ClubsAdapter(private val context: Context
         .getInstance()
         .collection(Constants.FB_CLUBS)
 
+    init {
+        currentClubsRef.addSnapshotListener { snapshot, exception ->
+            handleSnapshotEvent(snapshot, exception)
+        }
+    }
+
+    private fun handleSnapshotEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+        if (exception != null) {
+            Log.e(Constants.TAG, "Club Listen Error: $exception")
+            return
+        }
+
+        for (change in snapshot!!.documentChanges) {
+            val club = Club.fromSnapshot(change.document)
+
+            when (change.type) {
+                DocumentChange.Type.ADDED -> {
+                    clubs.add(0, club)
+                    notifyItemInserted(0)
+                }
+                DocumentChange.Type.REMOVED -> {
+                    val position = clubs.indexOfFirst { it.id == club.id }
+                    clubs.removeAt(position)
+                    notifyItemRemoved(position)
+                }
+                DocumentChange.Type.MODIFIED -> {
+                    val position= clubs.indexOfFirst { it.id == club.id }
+                    clubs[position] = club
+                    notifyItemChanged(position)
+                }
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClubsViewHolder {
         val view: CardView=
             LayoutInflater.from(context).inflate(R.layout.club_cardview, parent, false) as CardView

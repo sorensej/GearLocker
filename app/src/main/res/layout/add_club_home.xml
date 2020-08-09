@@ -15,11 +15,12 @@
         android:background="@color/colorGrey"
         android:focusedByDefault="false"
         android:iconifiedByDefault="false"
+        android:queryBackground="@color/colorGrey"
         android:queryHint="Club Name"
         android:theme="@style/AppTheme"
-        android:queryBackground="@color/colorGrey"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="3dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"

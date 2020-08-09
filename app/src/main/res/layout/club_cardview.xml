@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
     android:background="@color/colorGrey"
     android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/colorGrey"
+        android:orientation="horizontal"
         android:weightSum="8">
+
         <TextView
-            android:layout_margin="5dp"
-            android:layout_weight="7"
-            android:textSize="20dp"
             android:id="@+id/club_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Club Name"/>
+            android:layout_margin="5dp"
+            android:layout_weight="7"
+            android:text="Club Name"
+            android:textSize="20dp" />
+
         <TextView
 
             android:id="@+id/add_club_textbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_gravity="center"
-            android:text="Add Club"
-            android:background="@drawable/round_button"/>
+            android:background="@drawable/round_button"
+            android:padding="5dp"
+            android:text="Add Club" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
