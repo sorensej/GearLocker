@@ -16,7 +16,7 @@ class AddItemCategoryFragment : Fragment() {
 
     private val inventoryCategoryRef = FirebaseFirestore
         .getInstance()
-        .collection(Constants.FB_ITEMS)
+        .collection(Constants.FB_ITEM_CATEGORIES)
 
     override fun onCreateView(
         inflater: LayoutInflater,

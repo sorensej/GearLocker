@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
@@ -17,7 +19,11 @@ class InventoryViewHolder(
     val inventoryFragment: InventoryAdapter.ItemInterface
 ) : RecyclerView.ViewHolder(itemView) {
 
-    private var items = arrayListOf<Item>()
+    private var items = arrayListOf<String>()
+
+    private val itemsRef = FirebaseFirestore
+        .getInstance()
+        .collection(Constants.FB_ITEMS)
 
     private var expanded = false
 
@@ -47,10 +53,15 @@ class InventoryViewHolder(
                 break
             }
             val child = inflater.inflate(R.layout.inventory_sub_item, null, false)
-            child.sub_item_name.text = items[i].name
-            child.setOnClickListener {
-                inventoryFragment.onItemSelected(items[i])
+
+            itemsRef.document(items[i]).get().addOnSuccessListener { snapshot ->
+                val item = Item.fromSnapshot(snapshot)
+                child.sub_item_name.text = item.name
+                child.setOnClickListener {
+                    inventoryFragment.onItemSelected(item)
+                }
             }
+
             itemView.content_container.addView(child)
         }
 

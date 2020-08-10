@@ -24,17 +24,17 @@ object DemoData {
     )
 
     val ITEM_CATEGORIES = arrayListOf<ItemCategory>(
-        ItemCategory("Shoes", arrayListOf<Item>(
-            ITEMS[0],
-            ITEMS[1],
-            ITEMS[2],
-            ITEMS[3],
-            ITEMS[4],
-            ITEMS[5]
+        ItemCategory("Shoes", arrayListOf<String>(
+            ITEMS[0].id,
+            ITEMS[1].id,
+            ITEMS[2].id,
+            ITEMS[3].id,
+            ITEMS[4].id,
+            ITEMS[5].id
         )),
-        ItemCategory("Harnesses", arrayListOf<Item>(
-            ITEMS[6],
-            ITEMS[7]
+        ItemCategory("Harnesses", arrayListOf<String>(
+            ITEMS[6].id,
+            ITEMS[7].id
         ))
     )
 

@@ -23,7 +23,7 @@ class AddItem: Fragment() {
 
     private val itemCategoriesRef = FirebaseFirestore
         .getInstance()
-        .collection(Constants.FB_ITEMS)
+        .collection(Constants.FB_ITEM_CATEGORIES)
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -43,6 +43,7 @@ class AddItem: Fragment() {
             item.estimatedCost = view.quantity_edittext.text.toString().toFloat()
             item.condition = view.seekBar.progress
             item.description = view.description_edittext.text.toString()
+            item.category = view.category_spinner.selectedItem.toString()
             (args.inventoryFragment as InventoryAdapter.ItemInterface).onItemAdded(item)
             Log.d(Constants.TAG, "In AddItem submitted")
             var alertView = LayoutInflater.from(activity).inflate(R.layout.add_item_confirmation, null)
@@ -58,7 +59,7 @@ class AddItem: Fragment() {
             }
             builderCreated.setView(alertView)
             builderCreated.show()
-             }
+        }
 
         itemCategoriesRef.get().addOnSuccessListener { snapshot ->
             val categories = snapshot.documents.map { it.get("name") as String }.sorted()

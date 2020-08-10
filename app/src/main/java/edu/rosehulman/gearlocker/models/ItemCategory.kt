@@ -5,7 +5,7 @@ import com.google.firebase.firestore.Exclude
 
 data class ItemCategory (
     var name: String = "",
-    var items: ArrayList<Item> = arrayListOf<Item>()
+    var items: ArrayList<String> = arrayListOf<String>()
 ) {
     @get:Exclude var id: String = ""
 

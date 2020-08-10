@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
@@ -22,12 +19,16 @@ class InventoryAdapter(
 
     private val itemCategories = ArrayList<ItemCategory>()
 
-    private val inventoryRef = FirebaseFirestore
+    private val itemCategoriesRef = FirebaseFirestore
+        .getInstance()
+        .collection(Constants.FB_ITEM_CATEGORIES)
+
+    private val itemsRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_ITEMS)
 
     init {
-        inventoryRef.addSnapshotListener { snapshot, exception ->
+        itemCategoriesRef.addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
         notifyDataSetChanged()
@@ -63,7 +64,13 @@ class InventoryAdapter(
 
     fun add(item:Item){
         Log.d(Constants.TAG, "$item")
-        inventoryRef.add(item)
+        itemsRef.add(item).addOnSuccessListener { documentRef ->
+            itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
+                val doc = querySnapshot.documents.first {it.getString("name") == item.category}
+                itemCategoriesRef.document(doc.id).update("items", FieldValue.arrayUnion(documentRef.id))
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
