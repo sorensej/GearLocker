@@ -17,11 +17,15 @@ import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import edu.rosehulman.gearlocker.models.Cart
+import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.rosefire.Rosefire
 
 
 class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    var cart: Cart = Cart()
 
     private val auth = FirebaseAuth.getInstance()
     private val signIn = 1
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedLis
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.inflateMenu(R.menu.app_bar_menu)
         setActionBar(toolbar)
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, _, _ ->
             navView.isVisible = true
         }
         initializeListeners()
@@ -78,10 +82,6 @@ class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedLis
             } else {
                 findViewById<BottomNavigationView>(R.id.nav_view).isVisible = false
                 findNavController(R.id.nav_host_fragment).navigate(R.id.splashFragment)
-//                val rosefireIntent =
-//                    Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
-//                startActivityForResult(rosefireIntent, RC_ROSEFIRE_LOGIN)
-//                initializeListeners()
             }
         }
     }
@@ -141,6 +141,10 @@ class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedLis
     override fun onRoseLoginPressed() {
         val signInIntent = Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
         startActivityForResult(signInIntent, RC_ROSEFIRE_LOGIN)
+    }
+
+    override fun onCartItemAdded(item: Item) {
+        cart.arrayList.add(item)
     }
 
 

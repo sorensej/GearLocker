@@ -29,7 +29,7 @@ class ManagementMainActivity: AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, _, _ ->
             navView.isVisible = true
         }
     }

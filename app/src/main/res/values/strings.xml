@@ -69,4 +69,6 @@
     <string name="login_with_email">Login with Email</string>
     <string name="mountains">Mountains</string>
     <string name="login_with_rosefire">Login with RoseFire</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="edit">Edit</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.splash_fragment.view.*
 
 class SplashFragment : Fragment() {
@@ -46,5 +47,6 @@ class SplashFragment : Fragment() {
     interface OnLoginButtonPressedListener {
         fun onLoginButtonPressed()
         fun onRoseLoginPressed()
+        fun onCartItemAdded(item: Item)
     }
 }
