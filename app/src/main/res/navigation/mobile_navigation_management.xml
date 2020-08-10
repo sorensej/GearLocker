@@ -177,6 +177,10 @@
             android:defaultValue="@null" />
     </fragment>
     <fragment
+        android:id="@+id/addItemCategory"
+        android:name="edu.rosehulman.gearlocker.inventory.AddItemCategoryFragment"
+        android:label="AddItemCategory"/>
+    <fragment
         android:id="@+id/deleteFragment"
         android:name="edu.rosehulman.gearlocker.deleteitem.DeleteFragment"
         android:label="DeleteFragment" />

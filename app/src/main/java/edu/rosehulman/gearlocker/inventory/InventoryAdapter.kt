@@ -14,7 +14,6 @@ import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
-import kotlinx.android.parcel.Parcelize
 
 class InventoryAdapter(
     private val context: Context,

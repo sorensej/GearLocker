@@ -1,5 +1,6 @@
 package edu.rosehulman.gearlocker.inventory
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -14,6 +15,7 @@ import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.synthetic.main.dialog_add_option.view.*
 import kotlinx.android.synthetic.main.fragment_inventory.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
 
@@ -33,10 +35,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
             activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_inventory
             Log.d(Constants.TAG, "Management detected.")
             view.fab.setImageResource(R.drawable.ic_add)
-            val bundle = Bundle()
-            bundle.putParcelable("inventoryFragment", this as InventoryAdapter.ItemInterface)
+
             view.fab.setOnClickListener {
-                findNavController().navigate(R.id.addItem, bundle)
+                showAddOption()
             }
         }else{
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
@@ -77,6 +78,29 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         val bundle = Bundle()
         bundle.putParcelable("item", item)
         findNavController().navigate(R.id.popUpInventory, bundle)
+    }
+
+    private fun showAddOption() {
+        val builder = AlertDialog.Builder(context)
+
+        val view = LayoutInflater.from(activity).inflate(R.layout.dialog_add_option, null)
+
+        builder.setView(view)
+
+        val dialog = builder.create()
+
+        view.cancel_button.setOnClickListener { dialog.dismiss() }
+        view.add_item_button.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("inventoryFragment", this as InventoryAdapter.ItemInterface)
+            findNavController().navigate(R.id.addItem, bundle)
+            dialog.dismiss()
+        }
+        view.add_category_button.setOnClickListener {
+            dialog.dismiss()
+            findNavController().navigate(R.id.addItemCategory)
+        }
+        dialog.show()
     }
 
     override fun onItemAdded(item: Item) {

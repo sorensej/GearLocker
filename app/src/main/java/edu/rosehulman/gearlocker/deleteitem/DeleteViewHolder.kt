@@ -1,14 +1,8 @@
 package edu.rosehulman.gearlocker.deleteitem
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
-import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.models.Item
-import edu.rosehulman.gearlocker.models.Rental
-import kotlinx.android.synthetic.main.dashboard_card_view.view.*
 import kotlinx.android.synthetic.main.delete_card_view.view.*
 
 
