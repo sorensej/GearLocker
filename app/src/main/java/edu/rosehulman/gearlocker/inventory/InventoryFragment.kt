@@ -42,6 +42,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         }else{
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
             view.fab.setImageResource(R.drawable.ic_cart)
+            view.fab.setOnClickListener {
+                findNavController().navigate(R.id.cartFragment)
+            }
             Log.d(Constants.TAG, "Not management activity.")
         }
         val manager = LinearLayoutManager(context)

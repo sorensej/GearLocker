@@ -103,6 +103,10 @@
         android:id="@+id/clubsFragment"
         android:name="edu.rosehulman.gearlocker.clubs.ClubsFragment"
         android:label="ClubsFragment" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="edu.rosehulman.gearlocker.cart.CartFragment"
+        android:label="CartFragment" />
 
 
 </navigation>
