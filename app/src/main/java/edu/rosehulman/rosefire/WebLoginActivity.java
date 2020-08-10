@@ -1,5 +1,6 @@
 package edu.rosehulman.rosefire;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,10 @@ import android.webkit.WebView;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
+import edu.rosehulman.gearlocker.R;
+
+import static edu.rosehulman.gearlocker.R.color.colorBlue;
 
 public final class WebLoginActivity extends Activity {
 
@@ -26,6 +31,8 @@ public final class WebLoginActivity extends Activity {
             "document.getElementById(\"password\").style.backgroundColor=\"#C4C4C4\";\n" +
             "document.getElementById(\"username\").style.backgroundColor=\"#C4C4C4\";";
 
+
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
