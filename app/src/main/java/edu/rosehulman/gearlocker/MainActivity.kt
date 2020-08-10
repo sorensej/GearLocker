@@ -11,17 +11,20 @@ import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import edu.rosehulman.rosefire.Rosefire
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private val auth = FirebaseAuth.getInstance()
+    private val signIn = 1
     private var authListener: FirebaseAuth.AuthStateListener? = null
 
     private val RC_ROSEFIRE_LOGIN = 1
@@ -49,8 +52,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             navView.isVisible = true
         }
-
-        //initializeListeners()
+        initializeListeners()
     }
 
     override fun onStart() {
@@ -67,16 +69,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initializeListeners() {
+    private fun initializeListeners() {
         authListener = FirebaseAuth.AuthStateListener {
             val user = auth.currentUser
             if (user != null) {
                 val uid = user.uid
                 findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_dashboard)
             } else {
-                val rosefireIntent =
-                    Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
-                startActivityForResult(rosefireIntent, RC_ROSEFIRE_LOGIN)
+                findViewById<BottomNavigationView>(R.id.nav_view).isVisible = false
+                findNavController(R.id.nav_host_fragment).navigate(R.id.splashFragment)
+//                val rosefireIntent =
+//                    Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
+//                startActivityForResult(rosefireIntent, RC_ROSEFIRE_LOGIN)
+//                initializeListeners()
             }
         }
     }
@@ -94,6 +99,48 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.add_demo_data -> {
+                Log.d(Constants.TAG, "test2")
+                DemoData.createRentals()
+                true
+            }
+            R.id.add_club->{
+                findNavController(R.id.nav_host_fragment).navigate(R.id.clubsFragment)
+                true
+            }
+            R.id.log_out->{
+                auth.signOut()
+                initializeListeners()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onLoginButtonPressed() {
+        launchLoginUI()
+    }
+
+    private fun launchLoginUI() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build())
+        val loginIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+        startActivityForResult(
+            loginIntent,
+            signIn
+        )
+    }
+
+    override fun onRoseLoginPressed() {
+        val signInIntent = Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
+        startActivityForResult(signInIntent, RC_ROSEFIRE_LOGIN)
     }
 
 

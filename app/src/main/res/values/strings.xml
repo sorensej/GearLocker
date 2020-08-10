@@ -64,4 +64,7 @@
     <string name="quantity">Quantity</string>
     <string name="cost">Cost</string>
     <string name="rental_item">Rental Item</string>
+    <string name="add_demo_data">Add Demo Data</string>
+    <string name="log_out">Log Out</string>
+    <string name="login_with_email">Login with Email</string>
 </resources>

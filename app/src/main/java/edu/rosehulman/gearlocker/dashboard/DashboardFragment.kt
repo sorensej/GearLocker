@@ -45,6 +45,10 @@ class DashboardFragment : Fragment() {
                 findNavController().navigate(R.id.clubsFragment)
                 true
             }
+            R.id.log_out->{
+
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

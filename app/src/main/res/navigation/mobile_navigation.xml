@@ -107,6 +107,10 @@
         android:id="@+id/cartFragment"
         android:name="edu.rosehulman.gearlocker.cart.CartFragment"
         android:label="CartFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="edu.rosehulman.gearlocker.SplashFragment"
+        android:label="SplashFragment" />
 
 
 </navigation>
