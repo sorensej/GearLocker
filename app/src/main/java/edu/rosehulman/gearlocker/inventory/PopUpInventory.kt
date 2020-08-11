@@ -69,19 +69,4 @@ class PopUpInventory: DialogFragment() {
 
         return builder.create()
     }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is SplashFragment.OnLoginButtonPressedListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnLoginButtonPressedListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
 }
