@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.SplashFragment
 import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.dialog_add_option.view.*
@@ -31,19 +32,24 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
     ): View? {
         val view = inflater.inflate(R.layout.fragment_inventory, container, false)
         val safeArgs: InventoryFragmentArgs by navArgs()
-        if(safeArgs.isManagement){
-            activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_inventory
+        if (safeArgs.isManagement) {
+            activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination =
+                R.id.navigation_management_inventory
             Log.d(Constants.TAG, "Management detected.")
             view.fab.setImageResource(R.drawable.ic_add)
-
             view.fab.setOnClickListener {
                 showAddOption()
             }
-        }else{
-            activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_inventory
+        } else {
+            activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination =
+                R.id.navigation_inventory
             view.fab.setImageResource(R.drawable.ic_cart)
             view.fab.setOnClickListener {
-                findNavController().navigate(R.id.cartFragment)
+                val bundle = Bundle()
+                bundle.putParcelable(
+                    "cart",
+                    (activity as SplashFragment.ApplicationNavigationListener).onGetCart())
+                findNavController().navigate(R.id.cartFragment, bundle)
             }
             Log.d(Constants.TAG, "Not management activity.")
         }
@@ -53,9 +59,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         )
         view?.inventory_recycler_view?.adapter = _adapter
         view?.inventory_recycler_view?.layoutManager = manager
-
         setHasOptionsMenu(true)
-
         return view
     }
 
@@ -69,7 +73,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
                 DemoData.createItemCategories()
                 true
             }
-            R.id.add_club->{
+            R.id.add_club -> {
                 findNavController().navigate(R.id.clubsFragment)
                 true
             }

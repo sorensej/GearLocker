@@ -1,9 +1,12 @@
 package edu.rosehulman.gearlocker.models
 
+import android.os.Parcelable
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Exclude
+import kotlinx.android.parcel.Parcelize
 
-class Cart(var arrayList: ArrayList<Item> = ArrayList()) {
+@Parcelize
+class Cart(var arrayList: ArrayList<Item> = ArrayList()) : Parcelable {
 
     @get:Exclude
     var id: String = ""

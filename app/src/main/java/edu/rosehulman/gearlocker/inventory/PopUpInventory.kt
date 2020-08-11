@@ -1,13 +1,12 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import edu.rosehulman.gearlocker.R
@@ -16,13 +15,17 @@ import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.gear_summary_popup.view.*
 
 class PopUpInventory: DialogFragment() {
-    private var listener: SplashFragment.OnLoginButtonPressedListener? = null
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    private var listener: SplashFragment.ApplicationNavigationListener? = null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val item: Item = arguments?.get("item") as Item
         val safeArgs: PopUpInventoryArgs by navArgs()
         val builder = AlertDialog.Builder(context)
-        val layout = layoutInflater.inflate(
+        listener = activity as SplashFragment.ApplicationNavigationListener
+        val layout = inflater.inflate(
             R.layout.gear_summary_popup,
             null
         )
@@ -35,7 +38,9 @@ class PopUpInventory: DialogFragment() {
                 val builder2 = AlertDialog.Builder(context)
                 builder2.setTitle("${item.name} added to cart.")
                 builder2.setPositiveButton("View Cart"){_,_ ->
-                    findNavController().navigate(R.id.cartFragment)
+                    val bundle = Bundle()
+                    bundle.putParcelable("cart", listener?.onGetCart())
+                    listener?.onGetNavController()?.navigate(R.id.cartFragment, bundle)
                     dialog?.dismiss()
                 }
                 builder2.setNegativeButton("Return to Inventory"){_, _ ->
@@ -67,6 +72,6 @@ class PopUpInventory: DialogFragment() {
         layout.description_text_view.text = item.description
         builder.setView(layout)
 
-        return builder.create()
+        return layout
     }
 }

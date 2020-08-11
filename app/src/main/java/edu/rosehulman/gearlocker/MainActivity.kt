@@ -4,14 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
@@ -22,10 +20,10 @@ import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.rosefire.Rosefire
 
 
-class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedListener {
+class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    var cart: Cart = Cart()
+    private var cart: Cart = Cart()
 
     private val auth = FirebaseAuth.getInstance()
     private val signIn = 1
@@ -48,7 +46,6 @@ class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedLis
                 R.id.navigation_dashboard
             )
         )
-        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.inflateMenu(R.menu.app_bar_menu)
@@ -145,6 +142,14 @@ class MainActivity : AppCompatActivity(), SplashFragment.OnLoginButtonPressedLis
 
     override fun onCartItemAdded(item: Item) {
         cart.arrayList.add(item)
+    }
+
+    override fun onGetCart() : Cart{
+        return cart
+    }
+
+    override fun onGetNavController(): NavController {
+        return findNavController(R.id.nav_host_fragment)
     }
 
 

@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import edu.rosehulman.gearlocker.models.Cart
 import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.splash_fragment.view.*
 
 class SplashFragment : Fragment() {
-    private var listener: OnLoginButtonPressedListener? = null
+    private var listener: ApplicationNavigationListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +34,7 @@ class SplashFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnLoginButtonPressedListener) {
+        if (context is ApplicationNavigationListener) {
             listener = context
         } else {
             throw RuntimeException("$context must implement OnLoginButtonPressedListener")
@@ -44,9 +46,11 @@ class SplashFragment : Fragment() {
         listener = null
     }
 
-    interface OnLoginButtonPressedListener {
+    interface ApplicationNavigationListener {
         fun onLoginButtonPressed()
         fun onRoseLoginPressed()
         fun onCartItemAdded(item: Item)
+        fun onGetCart(): Cart
+        fun onGetNavController(): NavController
     }
 }

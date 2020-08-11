@@ -33,17 +33,12 @@ class AddItem: Fragment() {
     ): View? {
         val view =
             inflater.inflate(R.layout.add_edit_management, container, false)
-        Log.d(Constants.TAG, "View created")
         activity?.findNavController(R.id.nav_host_fragment_management)?.graph?.startDestination = R.id.addItem
-        Log.d(Constants.TAG, "Set fragment")
         val args: AddItemArgs by navArgs()
         view.submit_button.setOnClickListener {
-            var item = Item()
-                        item.name = view.name_of_gear_edittext.text.toString()
-            item.estimatedCost = view.quantity_edittext.text.toString().toFloat()
-            item.condition = view.seekBar.progress
-            item.description = view.description_edittext.text.toString()
-            item.category = view.category_spinner.selectedItem.toString()
+            var item = Item(view.name_of_gear_edittext.text.toString(),
+            view.quantity_edittext.text.toString().toFloat(),
+            view.seekBar.progress,view.description_edittext.text.toString(),view.category_spinner.selectedItem.toString())
             (args.inventoryFragment as InventoryAdapter.ItemInterface).onItemAdded(item)
             Log.d(Constants.TAG, "In AddItem submitted")
             var alertView = LayoutInflater.from(activity).inflate(R.layout.add_item_confirmation, null)
