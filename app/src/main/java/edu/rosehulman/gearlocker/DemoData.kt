@@ -44,24 +44,24 @@ object DemoData {
         Rental(
             dateFormat.parse("07/07/2020")!!,
             dateFormat.parse("07/14/2020")!!,
-            arrayListOf(ITEMS[0])
+            arrayListOf(ITEMS[0].id)
         ),
         Rental(dateFormat.parse("07/15/2020")!!,
             dateFormat.parse("07/17/2020")!!,
-            arrayListOf(ITEMS[0])
+            arrayListOf(ITEMS[0].id)
         ),
         Rental(
             dateFormat.parse("07/07/2020")!!,
             dateFormat.parse("07/17/2020")!!,
-            arrayListOf(ITEMS[1])
+            arrayListOf(ITEMS[1].id)
         ),
         Rental(
             dateFormat.parse("06/23/2020")!!,
             dateFormat.parse("06/26/2020")!!,
             arrayListOf(
-                ITEMS[2],
-                ITEMS[5],
-                ITEMS[3]
+                ITEMS[2].id,
+                ITEMS[5].id,
+                ITEMS[3].id
             )
         )
     )
