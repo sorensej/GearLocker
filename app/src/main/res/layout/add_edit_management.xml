@@ -251,6 +251,16 @@ helpful to the renter(s)."
                 android:hint="$55.00"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ImageView
+            android:id="@+id/gear_image"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="5dp"
+            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

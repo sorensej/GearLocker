@@ -12,7 +12,8 @@ data class Item (
     var estimatedCost: Float = 0.0f,
     var condition: Int = 0,
     var description: String = "",
-    var category: String = ""
+    var category: String = "",
+    var curPhotoPath: String = ""
 ) : Parcelable {
     @IgnoredOnParcel
     @get:Exclude var id: String = ""
