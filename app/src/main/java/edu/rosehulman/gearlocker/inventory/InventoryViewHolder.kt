@@ -9,7 +9,6 @@ import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.ItemCategory
-import kotlinx.android.synthetic.main.inventory_card_view.view.item_type_text
 import kotlinx.android.synthetic.main.inventory_card_view_2.view.*
 import kotlinx.android.synthetic.main.inventory_sub_item.view.*
 

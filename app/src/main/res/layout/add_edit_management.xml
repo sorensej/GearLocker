@@ -254,7 +254,7 @@ helpful to the renter(s)."
         <ImageView
             android:id="@+id/gear_image"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="5dp"
             android:maxHeight="100dp"
