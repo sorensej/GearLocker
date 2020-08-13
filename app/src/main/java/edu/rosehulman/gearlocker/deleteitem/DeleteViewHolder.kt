@@ -1,11 +1,10 @@
 package edu.rosehulman.gearlocker.deleteitem
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.Color.*
+import android.util.Log
+
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.collection.LLRBNode
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
@@ -28,8 +27,24 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         itemsRef.document(itemString).get().addOnSuccessListener { snapshot ->
             val item = Item.fromSnapshot(snapshot)
             title.text = item.name
-
             condition.text = item.condition.toString()
+            condition.background.clearColorFilter()
+            condition.background.setTint(when (item.condition){
+                1 -> R.color.colorRed
+                2-> R.color.colorAccentTwo
+                3-> {
+                    R.color.colorAccent
+                    Log.d(Constants.TAG, "Condition is 3")
+                }
+                4->R.color.colorPrimary
+                5-> R.color.colorPrimaryDark
+                else -> android.R.color.white
+            }
+            )
+
+
+            Log.d(Constants.TAG, "${item.condition.toString()}")
+
             cost.text = item.estimatedCost.toString()
         }
     }
