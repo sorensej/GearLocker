@@ -1,8 +1,10 @@
 package edu.rosehulman.gearlocker.inventory
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
@@ -26,7 +28,16 @@ class InventoryViewHolder(
 
     private var expanded = false
 
-    fun bind(itemCategory: ItemCategory) {
+    fun bind(itemCategory: ItemCategory, isManagment: Boolean) {
+
+        if (isManagment){
+            itemView.delete_btn.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putParcelable("itemCatagory", itemCategory)
+                inventoryFragment.onNavControllerRequest().navigate(R.id.deleteFragment, bundle)
+            }
+        }
+        itemView.delete_btn.isVisible = isManagment
         itemView.item_type_text.text = itemCategory.name
 
         items.clear()

@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.gear_summary_popup.view.*
 
 class PopUpInventory: DialogFragment() {
     private var listener: SplashFragment.ApplicationNavigationListener? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,14 +27,12 @@ class PopUpInventory: DialogFragment() {
     ): View? {
         val item: Item = arguments?.get("item") as Item
         val safeArgs: PopUpInventoryArgs by navArgs()
-        val builder = AlertDialog.Builder(context)
-        listener = activity as SplashFragment.ApplicationNavigationListener
-        val layout = inflater.inflate(
-            R.layout.gear_summary_popup,
-            null
-        )
+        val layout = inflater.inflate(R.layout.gear_summary_popup, container, true)
+        if (item.curPhotoPath!= ""){
+            layout.item_photo.setImageURI(item.curPhotoPath.toUri())
+        }
         if (!safeArgs.isManagement){
-            layout.delete_item_button.isVisible = false
+            listener = activity as SplashFragment.ApplicationNavigationListener
             layout.edit_item_button.text = getString(R.string.add_to_cart)
             layout.edit_item_button.setOnClickListener {
                 listener?.onCartItemAdded(item)
@@ -55,10 +57,6 @@ class PopUpInventory: DialogFragment() {
             }
         } else {
             layout.edit_item_button.text = getString(R.string.edit)
-            layout.delete_item_button.setOnClickListener {
-                findNavController().navigate(R.id.deleteFragment)
-                dialog?.dismiss()
-            }
             layout.edit_item_button.setOnClickListener {
                 findNavController().navigate(R.id.addItem)
                 dialog?.dismiss()
@@ -70,7 +68,6 @@ class PopUpInventory: DialogFragment() {
         }
         layout.title_text_view.text = item.name
         layout.description_text_view.text = item.description
-        builder.setView(layout)
 
         return layout
     }

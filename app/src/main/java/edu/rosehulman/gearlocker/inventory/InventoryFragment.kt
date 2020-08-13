@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -55,7 +56,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         }
         val manager = LinearLayoutManager(context)
         _adapter = InventoryAdapter(
-            requireContext(), this
+            requireContext(), this, safeArgs.isManagement
         )
         view?.inventory_recycler_view?.adapter = _adapter
         view?.inventory_recycler_view?.layoutManager = manager
@@ -112,5 +113,9 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
 
     override fun onItemAdded(item: Item) {
         _adapter.add(item)
+    }
+
+    override fun onNavControllerRequest(): NavController {
+        return findNavController()
     }
 }

@@ -4,4 +4,5 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlue"
     android:padding="10dp"
+    android:layout_marginBottom="55dp"
     android:outlineAmbientShadowColor="@color/fui_transparent"/>

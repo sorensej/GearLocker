@@ -1,16 +1,10 @@
 package edu.rosehulman.gearlocker
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.AlertDialog
+
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContentProviderCompat.requireContext
-
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import java.io.File

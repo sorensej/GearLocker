@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.*
 import edu.rosehulman.gearlocker.Constants
@@ -14,7 +15,7 @@ import edu.rosehulman.gearlocker.models.ItemCategory
 
 class InventoryAdapter(
     private val context: Context,
-    private val inventoryFragment: ItemInterface
+    private val inventoryFragment: ItemInterface, private val isManagement: Boolean
 ) : RecyclerView.Adapter<InventoryViewHolder>(){
 
     private val itemCategories = ArrayList<ItemCategory>()
@@ -81,11 +82,12 @@ class InventoryAdapter(
     override fun getItemCount() = itemCategories.size
 
     override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
-        holder.bind(itemCategories[position])
+        holder.bind(itemCategories[position], isManagement)
     }
 
     interface ItemInterface : Parcelable {
         fun onItemSelected(item: Item)
         fun onItemAdded(item: Item)
+        fun onNavControllerRequest(): NavController
     }
 }
