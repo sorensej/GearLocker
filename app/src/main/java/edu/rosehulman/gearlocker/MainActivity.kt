@@ -20,7 +20,7 @@ import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.rosefire.Rosefire
 
 
-class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationListener {
+class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationListener, AuthProvider {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var cart: Cart = Cart()
@@ -28,12 +28,14 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
     private val auth = FirebaseAuth.getInstance()
     private val signIn = 1
     private var authListener: FirebaseAuth.AuthStateListener? = null
+    private lateinit var uid: String
 
     private val RC_ROSEFIRE_LOGIN = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.renter_activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
         navController.addOnDestinationChangedListener { _, _, _ ->
             navView.isVisible = true
         }
+
         initializeListeners()
     }
 
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
         authListener = FirebaseAuth.AuthStateListener {
             val user = auth.currentUser
             if (user != null) {
-                val uid = user.uid
+                uid = user.uid
                 findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_dashboard)
             } else {
                 findViewById<BottomNavigationView>(R.id.nav_view).isVisible = false
@@ -152,5 +155,8 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
         return findNavController(R.id.nav_host_fragment)
     }
 
+    override fun getUID(): String {
+        return uid
+    }
 
 }

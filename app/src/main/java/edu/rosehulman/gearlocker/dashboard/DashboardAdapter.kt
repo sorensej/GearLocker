@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.*
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Rental
@@ -15,7 +18,6 @@ import edu.rosehulman.gearlocker.models.Rental
 class DashboardAdapter(private val context: Context
 ) : RecyclerView.Adapter<DashboardViewHolder>() {
 
-    //private val rentals = arrayListOf<Rental>(Rental(), Rental(), Rental())
     private val rentals = ArrayList<Rental>()
 
     private val currentRentalsRef = FirebaseFirestore
@@ -34,8 +36,14 @@ class DashboardAdapter(private val context: Context
             return
         }
 
+        val uid = (context as edu.rosehulman.gearlocker.AuthProvider).getUID()
+
         for (change in snapshot!!.documentChanges) {
             val rental = Rental.fromSnapshot(change.document)
+
+            if (rental.uid != uid) {
+                continue
+            }
 
             when (change.type) {
                 DocumentChange.Type.ADDED -> {

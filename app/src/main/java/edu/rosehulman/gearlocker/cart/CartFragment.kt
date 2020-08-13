@@ -2,6 +2,7 @@ package edu.rosehulman.gearlocker.cart
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import edu.rosehulman.gearlocker.AuthProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Cart
@@ -80,8 +82,10 @@ class CartFragment : Fragment() {
         }
 
         constraintView.fab.setOnClickListener {
-            rentalsRef.add(cart.toRental("renter-uid", cart.currentStartDate!!, cart.currentEndDate!!))
+            rentalsRef.add(cart.toRental((requireContext() as AuthProvider).getUID(), cart.currentStartDate!!, cart.currentEndDate!!))
         }
+
+        Log.d(Constants.TAG, (requireContext() as AuthProvider).getUID())
         return constraintView
     }
 }
