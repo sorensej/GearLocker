@@ -38,7 +38,7 @@ class DashboardFragment : Fragment() {
         return when (item.itemId) {
             R.id.add_demo_data -> {
                 Log.d(Constants.TAG, "test2")
-                DemoData.createRentals()
+                //DemoData.createRentals()
                 true
             }
             R.id.add_club->{
