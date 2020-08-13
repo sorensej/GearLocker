@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
-import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -68,6 +65,7 @@ class PopUpInventory: DialogFragment() {
         }
         layout.title_text_view.text = item.name
         layout.description_text_view.text = item.description
+        layout.cost_text_view.text = String.format("Est. Value: $%.2f", item.estimatedCost)
 
         return layout
     }

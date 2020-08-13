@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="4"
+        android:weightSum="3"
         android:padding="10dp"
         android:background="@color/colorDarkBlue"
         android:orientation="horizontal">
@@ -24,20 +24,13 @@
 
         <TextView
             android:layout_weight="1"
-            android:id="@+id/quantity_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="@string/quantity"/>
-
-        <TextView
-            android:layout_weight="1"
             android:id="@+id/cost_text"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="@string/cost"/>
+            android:text="@string/cost"
+            android:paddingEnd="10dp"/>
 
     </LinearLayout>
 

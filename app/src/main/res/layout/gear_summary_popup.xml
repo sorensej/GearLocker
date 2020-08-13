@@ -56,21 +56,22 @@
         android:scaleType="centerInside"
         app:layout_constraintStart_toEndOf="@id/description_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/stock_text_view"
+        app:layout_constraintBottom_toTopOf="@id/cost_text_view"
         android:layout_margin="15dp"
         app:srcCompat="@drawable/ic_gear"
         android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/stock_text_view"
+        android:id="@+id/cost_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/item_photo"
-        app:layout_constraintStart_toStartOf="@id/item_photo"
-        android:textColor="@color/colorGrey"
+        android:layout_margin="5dp"
+        android:maxLines="3"
         android:text="@string/demo_stock_information"
         android:textAlignment="center"
-        android:maxLines="3"/>
+        android:textColor="@color/colorGrey"
+        app:layout_constraintStart_toStartOf="@id/item_photo"
+        app:layout_constraintTop_toBottomOf="@id/item_photo" />
 
     <TextView
         android:id="@+id/condition_text_view"

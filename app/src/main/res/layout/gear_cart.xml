@@ -11,44 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:weightSum="3"
+        android:weightSum="2"
         android:background="@color/colorDarkBlue"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/white"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/rental_items"/>
+            android:padding="10dp"
+            android:text="@string/rental_items"
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:textColor="@color/colorGrey"
             android:background="@color/colorGrey"/>
+
         <TextView
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/quantity"/>
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorGrey"/>
-        <TextView
             android:layout_weight="1"
-            android:padding="10dp"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cost"/>
+            android:padding="10dp"
+            android:text="@string/cost"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -68,59 +56,77 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorGrey"
         android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <TextView
-            android:id="@+id/rental_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rental_end"
-            android:text="@string/rental_start_date"/>
-        <TextView
-            android:layout_marginHorizontal="10dp"
-            android:id="@+id/rental_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/rental_start"
-            app:layout_constraintBottom_toTopOf="@id/rental_end"
-            android:text="Date here"/>
-        <TextView
-            android:id="@+id/rental_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/rental_total"
-            android:text="@string/rental_end_date"/>
-        <TextView
-            android:layout_marginHorizontal="10dp"
-            android:id="@+id/rental_end_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/rental_end"
-            app:layout_constraintBottom_toTopOf="@id/rental_total"
-            android:text="Date here"/>
-        <TextView
-            android:id="@+id/rental_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/total"/>
-        <TextView
-            android:layout_marginHorizontal="10dp"
-            android:id="@+id/rental_total_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/rental_total"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Total Here"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/rental_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rental_start_date"
+                android:textSize="20sp"/>
+
+            <Button
+                android:id="@+id/start_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rental_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rental_end_date"
+                android:textSize="20sp" />
+            <Button
+                android:id="@+id/end_date_button"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rental_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/rental_total_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Total Here"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rental_total" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

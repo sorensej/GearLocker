@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +54,7 @@ class AddItem : Fragment() {
         view.submit_button.setOnClickListener {
             val item = Item(
                 view.name_of_gear_edittext.text.toString(),
-                view.quantity_edittext.text.toString().toFloat(),
+                view.price_textview.text.toString().toFloat(),
                 view.seekBar.progress,
                 view.description_edittext.text.toString(),
                 view.category_spinner.selectedItem.toString(),
