@@ -52,7 +52,10 @@ class DeleteAdapter(
         snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                 super.onDismissed(transientBottomBar, event)
-                (inventoryFragment as InventoryAdapter.ItemInterface).onGetAdapter().delete(item)
+                if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
+                    (inventoryFragment as InventoryAdapter.ItemInterface).onGetAdapter()
+                        .delete(item)
+                }
             }
         })
 
