@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Rental
+import java.text.SimpleDateFormat
 
 
 class DashboardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -18,6 +19,8 @@ class DashboardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
     private val title = itemView.findViewById<TextView>(R.id.dashboard_title_item_text)
     private val list = itemView.findViewById<TextView>(R.id.item_list)
+
+    private val dateFormat = SimpleDateFormat("MM/dd/yyyy")
 
     @SuppressLint("SetTextI18n")
     fun bind(rental: Rental){
@@ -31,7 +34,7 @@ class DashboardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             }
         }
 
-        title.text = "Rental from ${rental.startDate} to ${rental.endDate}:"
+        title.text = "Rental from ${dateFormat.format(rental.startDate)} to ${dateFormat.format(rental.endDate)}:"
         list.text = stringBuilder.toString()
     }
 
