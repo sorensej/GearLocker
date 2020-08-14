@@ -11,7 +11,7 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 
 
-class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var title: TextView? = null
     private var condition: TextView? = null
     private var cost: TextView? = null
@@ -21,7 +21,7 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         .getInstance()
         .collection(Constants.FB_ITEMS)
 
-    init{
+    init {
         condition = itemView.findViewById(R.id.condition_text)
         title = itemView.findViewById(R.id.delete_item_title)
         cost = itemView.findViewById(R.id.price_text)
@@ -33,7 +33,7 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun bind(
         itemString: String,
         deleteAdapter: DeleteAdapter
-    ){
+    ) {
         itemsRef.document(itemString).get().addOnSuccessListener { snapshot ->
             val item = Item.fromSnapshot(snapshot)
             title?.text = item.name
@@ -42,6 +42,7 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             delete?.setOnClickListener {
                 deleteAdapter.removeAt(adapterPosition, item)
             }
+
 //            condition?.setBackgroundResource(when (item.condition){
 //                1 -> context.getColor(R.color.colorRed)
 //                2-> context.getColor(R.color.colorAccentTwo)

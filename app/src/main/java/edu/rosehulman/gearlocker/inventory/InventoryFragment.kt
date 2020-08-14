@@ -49,7 +49,8 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
                 val bundle = Bundle()
                 bundle.putParcelable(
                     "cart",
-                    (activity as SplashFragment.ApplicationNavigationListener).onGetCart())
+                    (activity as SplashFragment.ApplicationNavigationListener).onGetCart()
+                )
                 findNavController().navigate(R.id.cartFragment, bundle)
             }
             Log.d(Constants.TAG, "Not management activity.")
@@ -74,11 +75,11 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
                 DemoData.createItemCategories()
                 true
             }
-            R.id.add_club -> {
+            R.id.add_club      -> {
                 findNavController().navigate(R.id.clubsFragment)
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else               -> super.onOptionsItemSelected(item)
         }
     }
 

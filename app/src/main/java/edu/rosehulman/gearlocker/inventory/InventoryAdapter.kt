@@ -78,7 +78,7 @@ class InventoryAdapter(
 
     }
 
-    fun delete(item: Item){
+    fun delete(item: Item) {
         itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
             val doc = querySnapshot.documents.first { it.getString("name") == item.category }
             itemCategoriesRef.document(doc.id).update("items", FieldValue.arrayRemove(item.id))

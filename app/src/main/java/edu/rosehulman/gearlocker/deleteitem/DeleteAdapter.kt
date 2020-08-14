@@ -18,14 +18,14 @@ import edu.rosehulman.gearlocker.models.Item
 class DeleteAdapter(
     private val context: Context,
     private val items: ArrayList<String>,
-   private val inventoryFragment: InventoryAdapter.ItemInterface?,
+    private val inventoryFragment: InventoryAdapter.ItemInterface?,
     private val view: View
 ) : RecyclerView.Adapter<DeleteViewHolder>() {
 
     private var itemList = ArrayList<String>()
     private val itemDeletedRef = FirebaseFirestore.getInstance().collection(Constants.FB_DELETED)
 
-    init{
+    init {
         itemList = items
     }
 
@@ -38,7 +38,7 @@ class DeleteAdapter(
     override fun getItemCount() = itemList.size
 
     override fun onBindViewHolder(holder: DeleteViewHolder, position: Int) {
-        holder.bind(itemList[position],  this)
+        holder.bind(itemList[position], this)
     }
 
     fun removeAt(adapterPosition: Int, item: Item) {

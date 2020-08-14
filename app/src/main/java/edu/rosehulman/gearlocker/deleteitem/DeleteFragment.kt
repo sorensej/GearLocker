@@ -12,7 +12,7 @@ import edu.rosehulman.gearlocker.R
 
 class DeleteFragment : Fragment() {
 
-    private var adapter: DeleteAdapter? =null
+    private var adapter: DeleteAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,9 +20,14 @@ class DeleteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val safeArgs: DeleteFragmentArgs by navArgs()
-        val recyclerView : RecyclerView =
+        val recyclerView: RecyclerView =
             inflater.inflate(R.layout.management_delete_items, container, false) as RecyclerView
-        adapter = DeleteAdapter(requireContext(), safeArgs.itemCatagory!!.items, safeArgs.inventoryFragment, recyclerView)
+        adapter = DeleteAdapter(
+            requireContext(),
+            safeArgs.itemCatagory!!.items,
+            safeArgs.inventoryFragment,
+            recyclerView
+        )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         return recyclerView

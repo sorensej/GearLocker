@@ -30,7 +30,7 @@ class InventoryViewHolder(
 
     fun bind(itemCategory: ItemCategory, isManagment: Boolean) {
 
-        if (isManagment){
+        if (isManagment) {
             itemView.delete_btn.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putParcelable("itemCatagory", itemCategory)
@@ -46,7 +46,13 @@ class InventoryViewHolder(
 
         itemView.see_more_btn.setOnClickListener {
             expanded = !expanded
-            itemView.see_more_btn.text = context.getString(if (expanded) { R.string.see_less } else { R.string.see_more })
+            itemView.see_more_btn.text = context.getString(
+                if (expanded) {
+                    R.string.see_less
+                } else {
+                    R.string.see_more
+                }
+            )
             addItems()
         }
 
@@ -59,7 +65,11 @@ class InventoryViewHolder(
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        for (i in 0 until if (expanded) { items.size } else { 3 }) {
+        for (i in 0 until if (expanded) {
+            items.size
+        } else {
+            3
+        }) {
             if (i >= items.size) {
                 break
             }
