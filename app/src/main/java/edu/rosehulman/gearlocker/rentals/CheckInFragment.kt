@@ -9,17 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.ImageProducer
 import edu.rosehulman.gearlocker.R
-import kotlinx.android.synthetic.main.add_edit_management.view.*
 import kotlinx.android.synthetic.main.check_in.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
-import kotlinx.android.synthetic.main.rental_home_fragment.view.*
 
 class CheckInFragment: Fragment() {
 
@@ -33,11 +31,14 @@ class CheckInFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val args : CheckInFragmentArgs by navArgs()
         val view : RelativeLayout =
             inflater.inflate(R.layout.check_in, container, false) as RelativeLayout
         view.cancel_check_in_button.setOnClickListener {
             findNavController().navigate(R.id.navigation_management_rentals)
         }
+        view.check_out_photo.setImageURI(args.item?.curPhotoPath?.toUri())
+        view.gear_name_text_view.text = args.item?.name
         view.upload_photo.setOnClickListener {
             imageProducer.launchChooseIntent()
         }
@@ -47,9 +48,10 @@ class CheckInFragment: Fragment() {
         view.complete_check_in_button.setOnClickListener {
             var builder = AlertDialog.Builder(this.context)
             builder.setTitle("Check-In Complete")
-            Log.d(Constants.TAG, "Item checked in")
+            Log.d(Constants.TAG, "${args.item?.name} checked in")
             builder.setPositiveButton("Return to Rentals"){ _, _ ->
                 Log.d(Constants.TAG, "Checkin complete")
+                //TODO: remove from rental here
                 findNavController().navigate(R.id.navigation_management_rentals)
             }
             builder.setNeutralButton("Return to Managment Home"){ _, _ ->

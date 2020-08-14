@@ -23,12 +23,6 @@ class RentalHomeFragment : Fragment(){
         view.getViewById(R.id.overview_button).setOnClickListener {
             findNavController().navigate(R.id.rentalsOverviewManagment)
         }
-        view.getViewById(R.id.inventory_button).setOnClickListener {
-            findNavController().navigate(R.id.checkInFragment)
-        }
-        view.getViewById(R.id.messages_button).setOnClickListener {
-            findNavController().navigate(R.id.checkOutFragment)
-        }
         view.getViewById(R.id.forms_button).setOnClickListener {
             findNavController().navigate(R.id.formsOverviewFragment)
         }

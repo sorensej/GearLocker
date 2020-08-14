@@ -14,28 +14,8 @@
         android:background="@drawable/round_button_grey"
         android:text="@string/overview"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/inventory_button" />
+        app:layout_constraintBottom_toTopOf="@+id/forms_button" />
 
-    <Button
-        android:id="@+id/inventory_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/round_button_grey"
-        android:text="@string/check_in"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/messages_button" />
-
-    <Button
-        android:id="@+id/messages_button"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/round_button_grey"
-        android:text="@string/check_out"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/forms_button"
@@ -45,7 +25,8 @@
         android:background="@drawable/round_button_grey"
         android:text="@string/forms"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/messages_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:layout_marginTop="20dp"
