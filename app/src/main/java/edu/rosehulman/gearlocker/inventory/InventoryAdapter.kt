@@ -20,8 +20,6 @@ class InventoryAdapter(
 
     private val itemCategories = ArrayList<ItemCategory>()
 
-    private val itemDeletedRef = FirebaseFirestore.getInstance().collection(Constants.FB_DELETED)
-
     private val itemCategoriesRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_ITEM_CATEGORIES)
@@ -80,6 +78,13 @@ class InventoryAdapter(
 
     }
 
+    fun delete(item: Item){
+        itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
+            val doc = querySnapshot.documents.first { it.getString("name") == item.category }
+            itemCategoriesRef.document(doc.id).update("items", FieldValue.arrayRemove(item.id))
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.inventory_card_view_2, parent, false)
@@ -92,25 +97,10 @@ class InventoryAdapter(
         holder.bind(itemCategories[position], isManagement)
     }
 
-    fun delete(item: Item): Item {
-        itemDeletedRef.add(item)
-        itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
-            val doc = querySnapshot.documents.first { it.getString("name") == item.category }
-            itemCategoriesRef.document(doc.id).delete()
-            itemsRef.document(doc.id).delete()
-        }
-        return item
-    }
-    fun deleteUndo(item: Item){
-        itemDeletedRef.document(item.id).delete()
-        add(item)
-    }
-
     interface ItemInterface : Parcelable {
         fun onItemSelected(item: Item)
         fun onItemAdded(item: Item)
         fun onNavControllerRequest(): NavController
-        fun onItemDeleted(item: Item): Item
-        fun onDeleteUndo(item: Item)
+        fun onGetAdapter(): InventoryAdapter
     }
 }

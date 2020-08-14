@@ -1,17 +1,13 @@
 package edu.rosehulman.gearlocker.deleteitem
 
 import android.annotation.SuppressLint
-import android.content.Context
-
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.inventory.InventoryAdapter
 import edu.rosehulman.gearlocker.models.Item
 
 
@@ -36,7 +32,6 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     @SuppressLint("ResourceAsColor")
     fun bind(
         itemString: String,
-        inventoryFragment: InventoryAdapter.ItemInterface,
         deleteAdapter: DeleteAdapter
     ){
         itemsRef.document(itemString).get().addOnSuccessListener { snapshot ->
@@ -45,15 +40,7 @@ class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             condition?.text = item.condition.toString()
             cost?.text = item.estimatedCost.toString()
             delete?.setOnClickListener {
-               inventoryFragment.onItemDeleted(item)
-                val snackbar: Snackbar = Snackbar.make(itemView, "${item.name} Deleted", Snackbar.LENGTH_LONG).setAction("UNDO"){
-                    inventoryFragment.onDeleteUndo(item)
-                    this.bind(itemString, inventoryFragment, deleteAdapter)
-                    deleteAdapter.notifyItemInserted(adapterPosition)
-                }
-                snackbar.show()
-                deleteAdapter.notifyItemRemoved(adapterPosition)
-
+                deleteAdapter.removeAt(adapterPosition, item)
             }
 //            condition?.setBackgroundResource(when (item.condition){
 //                1 -> context.getColor(R.color.colorRed)
