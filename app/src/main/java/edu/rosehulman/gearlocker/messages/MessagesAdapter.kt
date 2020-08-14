@@ -26,7 +26,7 @@ class MessagesAdapter(private val context: Context) : RecyclerView.Adapter<Messa
 
     init {
         messagesRef
-            .orderBy(Message.SENT_TIMESTAMP_KEY, Query.Direction.DESCENDING)
+            .orderBy(Message.SENT_TIMESTAMP_KEY, Query.Direction.ASCENDING)
             .addSnapshotListener { snaphot, exception ->
                 handleSnapshotEvent(snaphot, exception)
         }

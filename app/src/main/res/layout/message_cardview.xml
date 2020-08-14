@@ -10,11 +10,28 @@
     app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 
-    <TextView
-        android:id="@+id/message_textview"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/text_bubble_sender"
-        android:paddingVertical="10dp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:textSize="16sp"
+            android:text="Test Message"
+            android:background="@drawable/text_bubble_sender"/>
+
+        <TextView
+            android:id="@+id/timestamp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="08/14/2020 12:22 pm"/>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

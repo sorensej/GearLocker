@@ -10,12 +10,16 @@ import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Message
 import kotlinx.android.synthetic.main.message_cardview.view.*
+import java.text.SimpleDateFormat
 
 
 class MessagesViewHolder(itemView: View, private val authProvider: AuthProvider) : RecyclerView.ViewHolder(itemView) {
 
+    private val dateFormat = SimpleDateFormat("MM/dd/yyy hh:mm a")
+
     @SuppressLint("ResourceType")
     fun bind(message: Message){
+        itemView.timestamp_textview.text = dateFormat.format(message.sentTimestamp!!.toDate())
         itemView.message_textview.text = message.message
 
         val uid = authProvider.getUID()
