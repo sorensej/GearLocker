@@ -118,4 +118,12 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
     override fun onNavControllerRequest(): NavController {
         return findNavController()
     }
+
+    override fun onItemDeleted(item: Item): Item {
+        return _adapter.delete(item)
+    }
+
+    override fun onDeleteUndo(item: Item) {
+        _adapter.deleteUndo(item)
+    }
 }

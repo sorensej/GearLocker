@@ -34,6 +34,7 @@ class InventoryViewHolder(
             itemView.delete_btn.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putParcelable("itemCatagory", itemCategory)
+                bundle.putParcelable("inventoryFragment", inventoryFragment)
                 inventoryFragment.onNavControllerRequest().navigate(R.id.deleteFragment, bundle)
             }
         }

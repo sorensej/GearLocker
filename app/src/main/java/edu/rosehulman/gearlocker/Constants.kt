@@ -9,4 +9,5 @@ object Constants {
     const val FB_RENTERS = "renters"
     const val FB_CLUBS = "clubs"
     const val FB_ITEM_CATEGORIES = "item_categories"
+    const val FB_DELETED = "deleted"
 }

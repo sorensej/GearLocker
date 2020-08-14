@@ -22,7 +22,7 @@ class DeleteFragment : Fragment() {
         val safeArgs: DeleteFragmentArgs by navArgs()
         val recyclerView : RecyclerView =
             inflater.inflate(R.layout.management_delete_items, container, false) as RecyclerView
-        adapter = DeleteAdapter(requireContext(), safeArgs.itemCatagory!!.items)
+        adapter = DeleteAdapter(requireContext(), safeArgs.itemCatagory!!.items, safeArgs.inventoryFragment)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         return recyclerView

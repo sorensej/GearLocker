@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
     private val auth = FirebaseAuth.getInstance()
     private val signIn = 1
     private var authListener: FirebaseAuth.AuthStateListener? = null
-    private lateinit var uid: String
+    private var uid: String = ""
 
     private val RC_ROSEFIRE_LOGIN = 1
 

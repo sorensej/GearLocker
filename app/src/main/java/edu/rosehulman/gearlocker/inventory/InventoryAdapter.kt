@@ -16,9 +16,11 @@ import edu.rosehulman.gearlocker.models.ItemCategory
 class InventoryAdapter(
     private val context: Context,
     private val inventoryFragment: ItemInterface, private val isManagement: Boolean
-) : RecyclerView.Adapter<InventoryViewHolder>(){
+) : RecyclerView.Adapter<InventoryViewHolder>() {
 
     private val itemCategories = ArrayList<ItemCategory>()
+
+    private val itemDeletedRef = FirebaseFirestore.getInstance().collection(Constants.FB_DELETED)
 
     private val itemCategoriesRef = FirebaseFirestore
         .getInstance()
@@ -35,7 +37,10 @@ class InventoryAdapter(
         notifyDataSetChanged()
     }
 
-    private fun handleSnapshotEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+    private fun handleSnapshotEvent(
+        snapshot: QuerySnapshot?,
+        exception: FirebaseFirestoreException?
+    ) {
         if (exception != null) {
             Log.e(Constants.TAG, "Inventory Listen Error: $exception")
             return
@@ -45,11 +50,11 @@ class InventoryAdapter(
             val itemCategory = ItemCategory.fromSnapshot(change.document)
 
             when (change.type) {
-                DocumentChange.Type.ADDED -> {
+                DocumentChange.Type.ADDED    -> {
                     itemCategories.add(itemCategory)
                     notifyItemInserted(0)
                 }
-                DocumentChange.Type.REMOVED -> {
+                DocumentChange.Type.REMOVED  -> {
                     val position = itemCategories.indexOfFirst { it.id == itemCategory.id }
                     itemCategories.removeAt(position)
                     notifyItemRemoved(position)
@@ -63,19 +68,21 @@ class InventoryAdapter(
         }
     }
 
-    fun add(item:Item){
+    fun add(item: Item) {
         Log.d(Constants.TAG, "$item")
         itemsRef.add(item).addOnSuccessListener { documentRef ->
             itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
-                val doc = querySnapshot.documents.first {it.getString("name") == item.category}
-                itemCategoriesRef.document(doc.id).update("items", FieldValue.arrayUnion(documentRef.id))
+                val doc = querySnapshot.documents.first { it.getString("name") == item.category }
+                itemCategoriesRef.document(doc.id)
+                    .update("items", FieldValue.arrayUnion(documentRef.id))
             }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.inventory_card_view_2, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.inventory_card_view_2, parent, false)
         return InventoryViewHolder(context, view, inventoryFragment)
     }
 
@@ -85,9 +92,25 @@ class InventoryAdapter(
         holder.bind(itemCategories[position], isManagement)
     }
 
+    fun delete(item: Item): Item {
+        itemDeletedRef.add(item)
+        itemCategoriesRef.get().addOnSuccessListener { querySnapshot ->
+            val doc = querySnapshot.documents.first { it.getString("name") == item.category }
+            itemCategoriesRef.document(doc.id).delete()
+            itemsRef.document(doc.id).delete()
+        }
+        return item
+    }
+    fun deleteUndo(item: Item){
+        itemDeletedRef.document(item.id).delete()
+        add(item)
+    }
+
     interface ItemInterface : Parcelable {
         fun onItemSelected(item: Item)
         fun onItemAdded(item: Item)
         fun onNavControllerRequest(): NavController
+        fun onItemDeleted(item: Item): Item
+        fun onDeleteUndo(item: Item)
     }
 }

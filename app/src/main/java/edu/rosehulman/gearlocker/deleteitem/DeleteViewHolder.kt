@@ -1,51 +1,72 @@
 package edu.rosehulman.gearlocker.deleteitem
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.content.Context
 
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.inventory.InventoryAdapter
 import edu.rosehulman.gearlocker.models.Item
-import kotlinx.android.synthetic.main.delete_card_view.view.*
 
 
 class DeleteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-    private val title = itemView.delete_item_title
-    private val condition = itemView.condition_text
-    private val cost = itemView.price_text
-    private val status = itemView.status_text
+    private var title: TextView? = null
+    private var condition: TextView? = null
+    private var cost: TextView? = null
+    private var delete: Button? = null
 
     private val itemsRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_ITEMS)
 
+    init{
+        condition = itemView.findViewById(R.id.condition_text)
+        title = itemView.findViewById(R.id.delete_item_title)
+        cost = itemView.findViewById(R.id.price_text)
+        delete = itemView.findViewById(R.id.delete_button)
+    }
+
+
     @SuppressLint("ResourceAsColor")
-    fun bind(itemString: String){
+    fun bind(
+        itemString: String,
+        inventoryFragment: InventoryAdapter.ItemInterface,
+        deleteAdapter: DeleteAdapter
+    ){
         itemsRef.document(itemString).get().addOnSuccessListener { snapshot ->
             val item = Item.fromSnapshot(snapshot)
-            title.text = item.name
-            condition.text = item.condition.toString()
-            condition.background.clearColorFilter()
-            condition.background.setTint(when (item.condition){
-                1 -> R.color.colorRed
-                2-> R.color.colorAccentTwo
-                3-> {
-                    R.color.colorAccent
-                    Log.d(Constants.TAG, "Condition is 3")
+            title?.text = item.name
+            condition?.text = item.condition.toString()
+            cost?.text = item.estimatedCost.toString()
+            delete?.setOnClickListener {
+               inventoryFragment.onItemDeleted(item)
+                val snackbar: Snackbar = Snackbar.make(itemView, "${item.name} Deleted", Snackbar.LENGTH_LONG).setAction("UNDO"){
+                    inventoryFragment.onDeleteUndo(item)
+                    this.bind(itemString, inventoryFragment, deleteAdapter)
+                    deleteAdapter.notifyItemInserted(adapterPosition)
                 }
-                4->R.color.colorPrimary
-                5-> R.color.colorPrimaryDark
-                else -> android.R.color.white
+                snackbar.show()
+                deleteAdapter.notifyItemRemoved(adapterPosition)
+
             }
-            )
-
-
-            Log.d(Constants.TAG, "${item.condition.toString()}")
-
-            cost.text = item.estimatedCost.toString()
+//            condition?.setBackgroundResource(when (item.condition){
+//                1 -> context.getColor(R.color.colorRed)
+//                2-> context.getColor(R.color.colorAccentTwo)
+//                3-> {
+//                    context.getColor(R.color.colorAccent)
+//                    Log.d(Constants.TAG, "Condition is 3")
+//                }
+//                4-> context.getColor(R.color.colorPrimary)
+//                5-> context.getColor(R.color.colorPrimaryDark)
+//                else -> android.R.color.white
+//            }
+//            )
         }
     }
 
