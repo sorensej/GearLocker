@@ -22,15 +22,13 @@
             android:layout_height="wrap_content"
             android:paddingVertical="10dp"
             android:textSize="16sp"
-            android:text="Test Message"
             android:background="@drawable/text_bubble_sender"/>
 
         <TextView
             android:id="@+id/timestamp_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="08/14/2020 12:22 pm"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
