@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.SplashFragment
 import edu.rosehulman.gearlocker.models.Item
@@ -26,7 +26,10 @@ class PopUpInventory: DialogFragment() {
         val safeArgs: PopUpInventoryArgs by navArgs()
         val layout = inflater.inflate(R.layout.gear_summary_popup, container, true)
         if (item.curPhotoPath!= ""){
-            layout.item_photo.setImageURI(item.curPhotoPath.toUri())
+            Picasso.get()
+                .load(item.curPhotoPath)
+                .into(layout.item_photo)
+            
         }
         if (!safeArgs.isManagement){
             listener = activity as SplashFragment.ApplicationNavigationListener

@@ -95,6 +95,7 @@
                 android:id="@+id/check_out_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_gear"
                 android:contentDescription="photo_from_check_out" />
 
@@ -102,7 +103,7 @@
                 android:id="@+id/check_in_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_gear"
                 android:contentDescription="photo_from_check_in">
 

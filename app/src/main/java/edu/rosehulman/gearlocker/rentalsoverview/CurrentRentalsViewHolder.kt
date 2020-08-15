@@ -14,11 +14,16 @@ class CurrentRentalsViewHolder(
 ) : RecyclerView.ViewHolder(itemView) {
     val rentalName: TextView = itemView.sub_item_name
 
-    fun bind(rental: Rental, findNavController: NavController){
-        rentalName.text = "${rental.id}: ${rental.startDate} to ${rental.endDate}"
+    fun bind(
+        rental: Rental,
+        findNavController: NavController,
+        rentalHandler: RentalRequestViewHolder.RentalHandler
+    ){
+        rentalName.text = "${rental.uid}: ${rental.startDate} to ${rental.endDate}"
         rentalName.setOnClickListener {
             var bundle: Bundle = Bundle()
             bundle.putParcelable("rental", rental)
+            bundle.putParcelable("rentalHandler", rentalHandler)
             findNavController.navigate(R.id.rentalView, bundle)
         }
     }

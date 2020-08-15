@@ -18,7 +18,7 @@ class CheckOutFragment : Fragment() {
     ): View? {
         val view : ConstraintLayout =
             inflater.inflate(R.layout.check_out_view, container, false) as ConstraintLayout
-        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.checkOutFragment
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.checkInFragment
         return view
     }
 }

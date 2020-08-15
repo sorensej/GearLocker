@@ -9,9 +9,10 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Rental
 
 class RentalViewAdapter(
-    rental: Rental,
+    val rental: Rental,
     val context: Context?,
-    val findNavController: NavController
+    val findNavController: NavController,
+    val rentalHandler: RentalRequestViewHolder.RentalHandler?
 ) : RecyclerView.Adapter<RentalViewViewHolder>() {
 
     var items = ArrayList<String>()
@@ -32,7 +33,7 @@ class RentalViewAdapter(
     override fun getItemCount()=items.size
 
     override fun onBindViewHolder(holder: RentalViewViewHolder, position: Int) {
-        holder.bind(items[position], findNavController)
+        holder.bind(items[position], findNavController, rentalHandler, rental)
     }
 
 }

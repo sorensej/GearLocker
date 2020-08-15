@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -47,9 +46,11 @@ class AddItem : Fragment() {
             R.id.addItem
         view.upload_from_device.setOnClickListener {
             imageProducer.launchChooseIntent()
+            addAndShowImage(view, imageProducer)
         }
         view.upload_from_camera.setOnClickListener {
             imageProducer.launchCameraIntent()
+            addAndShowImage(view, imageProducer)
         }
         view.submit_button.setOnClickListener {
             val item = Item(
@@ -87,6 +88,11 @@ class AddItem : Fragment() {
         return view
     }
 
+    private fun addAndShowImage(view: View, imageProducer: ImageProducer){
+        imageProducer.add(imageProducer.currentPhotoPath)
+        Picasso.get().load(imageProducer.downloadUri).into(view.gear_image)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
@@ -97,7 +103,6 @@ class AddItem : Fragment() {
                     imageProducer.sendGalleryPhotoToAdapter(data)
                 }
             }
-            view?.gear_image?.setImageURI(imageProducer.currentPhotoPath.toUri())
         }
     }
 }

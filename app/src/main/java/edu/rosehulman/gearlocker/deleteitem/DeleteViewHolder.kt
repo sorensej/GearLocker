@@ -3,9 +3,11 @@ package edu.rosehulman.gearlocker.deleteitem
 import android.annotation.SuppressLint
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
@@ -16,6 +18,7 @@ class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private var condition: TextView? = null
     private var cost: TextView? = null
     private var delete: Button? = null
+    private var image: ImageView? = null
 
     private val itemsRef = FirebaseFirestore
         .getInstance()
@@ -36,6 +39,7 @@ class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     ) {
         itemsRef.document(itemString).get().addOnSuccessListener { snapshot ->
             val item = Item.fromSnapshot(snapshot)
+            Picasso.get().load(item.curPhotoPath).into(image)
             title?.text = item.name
             condition?.text = item.condition.toString()
             cost?.text = item.estimatedCost.toString()

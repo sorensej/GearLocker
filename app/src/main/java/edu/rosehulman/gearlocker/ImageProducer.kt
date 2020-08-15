@@ -1,16 +1,22 @@
 package edu.rosehulman.gearlocker
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
+import kotlin.random.Random
 
 //catch and kit below
 class ImageProducer(val fragment: Fragment) {
@@ -18,7 +24,11 @@ class ImageProducer(val fragment: Fragment) {
     private val RC_TAKE_PICTURE = 1
     private val RC_CHOOSE_PICTURE = 2
 
+    private val storageRef = FirebaseStorage.getInstance().reference.child("images")
+
     var currentPhotoPath = ""
+
+    var downloadUri: Uri? = null
 
     fun launchCameraIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -86,12 +96,57 @@ class ImageProducer(val fragment: Fragment) {
         }
     }
 
-    // Works Not working on phone
     private fun addPhotoToGallery() {
         Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).also { mediaScanIntent ->
             val f = File(currentPhotoPath)
             mediaScanIntent.data = Uri.fromFile(f)
             fragment.requireActivity().sendBroadcast(mediaScanIntent)
+        }
+    }
+
+    fun add(localPath: String) {
+        ImageRescaleTask(localPath).execute()
+    }
+
+    inner class ImageRescaleTask(val localPath: String) : AsyncTask<Void, Void, Bitmap>() {
+        override fun doInBackground(vararg p0: Void?): Bitmap? {
+            // Reduces length and width by a factor (currently 2).
+            val ratio = 2
+            return fragment.context?.let { BitmapUtils.rotateAndScaleByRatio(it, localPath, ratio) }
+        }
+
+        override fun onPostExecute(bitmap: Bitmap?) {
+            // https://firebase.google.com/docs/storage/android/upload-files
+            storageAdd(localPath, bitmap)
+        }
+    }
+
+    private fun storageAdd(localPath: String, bitmap: Bitmap?) {
+        val baos = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val id = abs(Random.nextLong()).toString()
+        val uploadTask = storageRef.child(id).putBytes(data)
+        uploadTask.addOnFailureListener {
+            Log.d(Constants.TAG, "Image upload failed: $localPath $id")
+        }.addOnSuccessListener {
+            Log.d(Constants.TAG, "Image upload succeeded: $localPath $id")
+        }
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            storageRef.child(id).downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                downloadUri = task.result
+                Log.d(Constants.TAG, "Image download succeeded")
+
+            } else {
+                Log.d(Constants.TAG, "Image download failed")
+            }
         }
     }
 }

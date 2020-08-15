@@ -1,6 +1,8 @@
 package edu.rosehulman.gearlocker.rentalsoverview
 
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +10,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
+import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_rental_overview.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
-
-class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandler{
+@Parcelize
+class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandler, Parcelable {
 
     var curRentalsAdapter: CurrentRentalsAdapter? = null
     var rentalRequestAdapter: RentalRequestsAdapter? = null
@@ -27,7 +32,7 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
         val constraintView =
             inflater.inflate(R.layout.fragment_rental_overview, container, false) as ConstraintLayout
         activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.rentalsOverviewManagment
-        curRentalsAdapter = CurrentRentalsAdapter(context, findNavController())
+        curRentalsAdapter = CurrentRentalsAdapter(context, findNavController(), this as RentalRequestViewHolder.RentalHandler)
         rentalRequestAdapter =
             RentalRequestsAdapter(context, this as RentalRequestViewHolder.RentalHandler)
         constraintView.cur_rentals_recyclerview.adapter = curRentalsAdapter
@@ -37,9 +42,21 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
         return constraintView
     }
 
-    override fun confirmRental(rental: Rental, position: Int) {
+    override fun confirmRental(rental: Rental, position: Int, int: Int) {
         curRentalsAdapter?.add(rental)
         rentalRequestAdapter?.remove(rental)
+    }
+
+    override fun removeItemFromRental(rental: Rental, item: Item) {
+        Log.d(Constants.TAG, "removing item: ${item.id}")
+        if (rental.itemList.size != 1) {
+            Log.d(Constants.TAG, "size is 1")
+            curRentalsAdapter!!.checkIn(item, rental)
+        }else{
+            Log.d(Constants.TAG, "remove entire rental")
+            curRentalsAdapter!!.remove(rental)
+            rentalRequestAdapter!!.remove(rental)
+        }
     }
 
 }

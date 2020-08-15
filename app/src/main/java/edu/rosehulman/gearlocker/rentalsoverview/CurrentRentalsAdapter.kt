@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
 import java.util.*
 
@@ -19,7 +17,8 @@ import java.util.*
 
 class CurrentRentalsAdapter(
     val context: Context?,
-    val findNavController: NavController
+    val findNavController: NavController,
+    val rentalHandler: RentalRequestViewHolder.RentalHandler
 ) : RecyclerView.Adapter<CurrentRentalsViewHolder>() {
 
     var currentRentals = ArrayList<Rental>()
@@ -32,6 +31,7 @@ class CurrentRentalsAdapter(
         currentRentalsRef.addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
+        notifyDataSetChanged()
     }
 
     private fun handleSnapshotEvent(
@@ -73,12 +73,19 @@ class CurrentRentalsAdapter(
         currentRentalsRef.add(rental)
     }
 
+    fun checkIn(item: Item, rental: Rental){
+        currentRentalsRef.document(rental.id).update("itemList", FieldValue.arrayRemove(item.id))
+    }
+
+    fun remove(rental: Rental) {
+        currentRentalsRef.document(rental.id).delete()
+    }
 
     override fun getItemCount(): Int = currentRentals.size
 
 
     override fun onBindViewHolder(holder: CurrentRentalsViewHolder, position: Int) {
-        holder.bind(currentRentals[position], findNavController)
+        holder.bind(currentRentals[position], findNavController, rentalHandler)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentRentalsViewHolder {

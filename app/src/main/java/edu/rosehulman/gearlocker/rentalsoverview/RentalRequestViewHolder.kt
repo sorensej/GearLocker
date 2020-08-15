@@ -3,12 +3,14 @@ package edu.rosehulman.gearlocker.rentalsoverview
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
+import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
 import kotlinx.android.synthetic.main.inventory_sub_item.view.*
 
@@ -42,7 +44,7 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
 
 
             builder.setPositiveButton("Confirm Rental") { dialogInterface: DialogInterface, i: Int ->
-                rentalHandler.confirmRental(rental, adapterPosition)
+                rentalHandler.confirmRental(rental, adapterPosition, 1)
             }
 
             builder.setNegativeButton("Cancel") { dialog: DialogInterface?, _: Int ->
@@ -52,7 +54,8 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
         }
     }
 
-    interface RentalHandler {
-        fun confirmRental(rental: Rental, position: Int)
+    interface RentalHandler : Parcelable {
+        fun confirmRental(rental: Rental, position: Int, int: Int)
+        fun removeItemFromRental(rental: Rental, item: Item)
     }
 }

@@ -37,12 +37,6 @@
             android:id="@+id/action_navigation_management_rentals_to_rentalsOverviewManagment"
             app:destination="@id/rentalsOverviewManagment" />
         <action
-            android:id="@+id/action_navigation_management_rentals_to_checkInFragment"
-            app:destination="@id/checkInFragment" />
-        <action
-            android:id="@+id/action_navigation_management_rentals_to_checkOutFragment"
-            app:destination="@id/checkOutFragment" />
-        <action
             android:id="@+id/action_navigation_management_rentals_to_formsOverviewFragment"
             app:destination="@id/formsOverviewFragment"/>
         <argument
@@ -121,6 +115,9 @@
             android:name="isManagement"
             app:argType="boolean"
             android:defaultValue="true"/>
+        <action
+            android:id="@+id/action_rentalsOverviewManagment_to_rentalView"
+            app:destination="@id/rentalView" />
     </fragment>
     <fragment
         android:id="@+id/checkInFragment"
@@ -135,19 +132,14 @@
             app:argType="edu.rosehulman.gearlocker.models.Item"
             app:nullable="true"
             android:defaultValue="@null" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/checkOutFragment"
-        android:name="edu.rosehulman.gearlocker.rentals.CheckOutFragment"
-        android:label="CheckOutFragment" >
         <argument
-            android:name="isManagement"
-            app:argType="boolean"
-            android:defaultValue="true"/>
+            android:name="rental"
+            app:argType="edu.rosehulman.gearlocker.models.Rental"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
-            android:name="item"
-            app:argType="edu.rosehulman.gearlocker.models.Item"
+            android:name="rentalHandler"
+            app:argType="edu.rosehulman.gearlocker.rentalsoverview.RentalRequestViewHolder$RentalHandler"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
@@ -216,6 +208,14 @@
         <argument
             android:name="rental"
             app:argType="edu.rosehulman.gearlocker.models.Rental"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_rentalView_to_checkInFragment"
+            app:destination="@id/checkInFragment" />
+        <argument
+            android:name="rentalHandler"
+            app:argType="edu.rosehulman.gearlocker.rentalsoverview.RentalRequestViewHolder$RentalHandler"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
