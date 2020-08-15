@@ -2,8 +2,8 @@ package edu.rosehulman.gearlocker
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
@@ -105,23 +105,23 @@ class ImageProducer(val fragment: Fragment) {
     }
 
     fun add(localPath: String) {
-        ImageRescaleTask(localPath).execute()
-    }
-
-    inner class ImageRescaleTask(val localPath: String) : AsyncTask<Void, Void, Bitmap>() {
-        override fun doInBackground(vararg p0: Void?): Bitmap? {
-            // Reduces length and width by a factor (currently 2).
-            val ratio = 2
-            return fragment.context?.let { BitmapUtils.rotateAndScaleByRatio(it, localPath, ratio) }
-        }
-
-        override fun onPostExecute(bitmap: Bitmap?) {
-            // https://firebase.google.com/docs/storage/android/upload-files
+        if (localPath.startsWith("content")) {
+            Log.d(Constants.TAG, "content: ${localPath}")
+            val bitmap =
+                MediaStore.Images.Media.getBitmap(
+                    fragment.requireContext().contentResolver,
+                    Uri.parse(localPath)
+                )
+            storageAdd(localPath, bitmap)
+        } else if (localPath.startsWith("/storage")){
+            Log.d(Constants.TAG, "storage: ${localPath}")
+            val bitmap = BitmapFactory.decodeFile(localPath)
             storageAdd(localPath, bitmap)
         }
     }
 
     private fun storageAdd(localPath: String, bitmap: Bitmap?) {
+        Log.d(Constants.TAG, "Should get here")
         val baos = ByteArrayOutputStream()
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()

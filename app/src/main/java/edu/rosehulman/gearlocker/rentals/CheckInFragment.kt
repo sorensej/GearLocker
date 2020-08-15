@@ -45,11 +45,11 @@ class CheckInFragment: Fragment() {
         view.gear_name_text_view.text = item?.name
         view.upload_photo.setOnClickListener {
             imageProducer.launchChooseIntent()
-            addAndShowImage(view, imageProducer, item)
+            addAndShowImage(view, item)
         }
         view.take_photo.setOnClickListener {
             imageProducer.launchCameraIntent()
-            addAndShowImage(view, imageProducer, item)
+            addAndShowImage(view, item)
         }
         view.complete_check_in_button.setOnClickListener {
             var builder = AlertDialog.Builder(this.context)
@@ -72,7 +72,6 @@ class CheckInFragment: Fragment() {
 
     private fun addAndShowImage(
         view: View,
-        imageProducer: ImageProducer,
         item: Item?
     ) {
         imageProducer.add(imageProducer.currentPhotoPath)
@@ -90,6 +89,7 @@ class CheckInFragment: Fragment() {
                     imageProducer.sendGalleryPhotoToAdapter(data)
                 }
             }
+            view?.check_in_photo?.setImageURI(imageProducer.currentPhotoPath.toUri())
         }
     }
 }
