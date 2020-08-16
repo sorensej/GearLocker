@@ -34,8 +34,8 @@ class CheckInFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val args : CheckInFragmentArgs by navArgs()
-        var item = args.item
-        var rental = args.rental
+        val item = args.item
+        val rental = args.rental
         val view : RelativeLayout =
             inflater.inflate(R.layout.check_in, container, false) as RelativeLayout
         view.cancel_check_in_button.setOnClickListener {
@@ -52,7 +52,7 @@ class CheckInFragment: Fragment() {
             addAndShowImage(view, item)
         }
         view.complete_check_in_button.setOnClickListener {
-            var builder = AlertDialog.Builder(this.context)
+            val builder = AlertDialog.Builder(this.context)
             builder.setTitle("Check-In Complete")
             Log.d(Constants.TAG, "${item?.name} checked in")
             builder.setPositiveButton("Return to Rentals"){ _, _ ->

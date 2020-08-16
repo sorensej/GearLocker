@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -54,29 +55,52 @@ class AddItem : Fragment() {
             imageProducer.launchCameraIntent()
             addAndShowImage(view, imageProducer)
         }
+        if (!args.isAdd) {
+            val item = args.item
+            view.name_of_gear_edittext.setText(item!!.name)
+            view.price_textview.setText(item!!.estimatedCost.toString())
+            view.seekBar.progress = item!!.condition
+            view.description_edittext.setText(item!!.description)
+        }
         view.submit_button.setOnClickListener {
-            val item = Item(
-                view.name_of_gear_edittext.text.toString(),
-                view.price_textview.text.toString().toFloat(),
-                view.seekBar.progress,
-                view.description_edittext.text.toString(),
-                view.category_spinner.selectedItem.toString(),
-                imageProducer.currentPhotoPath
-            )
-            (args.inventoryFragment as InventoryAdapter.ItemInterface).onItemAdded(item)
-            val alertView =
-                LayoutInflater.from(activity).inflate(R.layout.add_item_confirmation, null)
-            val builderCreated = AlertDialog.Builder(activity).create()
-            alertView.view_inventory.setOnClickListener {
-                findNavController().navigate(R.id.navigation_management_inventory)
-                builderCreated.dismiss()
+            try {
+                val item = Item(
+                    view.name_of_gear_edittext.text.toString(),
+                    view.price_textview.text.toString().toFloat(),
+                    view.seekBar.progress,
+                    view.description_edittext.text.toString(),
+                    view.category_spinner.selectedItem.toString(),
+                    imageProducer.currentPhotoPath
+                )
+                args.itemInterface.onItemAdded(item)
+                val alertView =
+                    LayoutInflater.from(activity).inflate(R.layout.add_item_confirmation, null)
+                val builderCreated = AlertDialog.Builder(activity).create()
+                alertView.view_inventory.setOnClickListener {
+                    findNavController().navigate(R.id.navigation_management_inventory)
+                    builderCreated.dismiss()
+                }
+                if(args.isAdd) {
+                    alertView.add_additional_item.setOnClickListener {
+                        val bundle = Bundle()
+                        bundle.putParcelable("itemInterface", args.itemInterface)
+                        findNavController().navigate(R.id.addItem)
+                        builderCreated.dismiss()
+                    }
+                } else {
+                    alertView.add_additional_item.isVisible = false
+                }
+                builderCreated.setView(alertView)
+                builderCreated.show()
+            } catch (e: Exception) {
+                val builder = AlertDialog.Builder(activity)
+                builder.setTitle("Missing Input")
+                builder.setMessage("Please review your item change or addition.")
+                builder.setPositiveButton("OK") { dialog, which ->
+                    dialog.dismiss()
+                }
+                builder.create().show()
             }
-            alertView.add_additional_item.setOnClickListener {
-                findNavController().navigate(R.id.addItem)
-                builderCreated.dismiss()
-            }
-            builderCreated.setView(alertView)
-            builderCreated.show()
         }
 
         itemCategoriesRef.get().addOnSuccessListener { snapshot ->
@@ -88,9 +112,10 @@ class AddItem : Fragment() {
             )
         }
         return view
+
     }
 
-    private fun addAndShowImage(view: View, imageProducer: ImageProducer){
+    private fun addAndShowImage(view: View, imageProducer: ImageProducer) {
         Log.d(Constants.TAG, "Add image: ${imageProducer.currentPhotoPath}")
         imageProducer.add(imageProducer.currentPhotoPath)
         Log.d(Constants.TAG, "DownloadUri: ${imageProducer.downloadUri}")
@@ -100,7 +125,7 @@ class AddItem : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                RC_TAKE_PICTURE -> {
+                RC_TAKE_PICTURE   -> {
                     imageProducer.sendCameraPhotoToAdapter()
                 }
                 RC_CHOOSE_PICTURE -> {

@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.AuthProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.inventory.InventoryAdapter
 import edu.rosehulman.gearlocker.models.Cart
 import kotlinx.android.synthetic.main.gear_cart.view.*
 import java.util.*
@@ -31,7 +33,9 @@ class CartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val cart: Cart = arguments?.get("cart") as Cart
+        val safeArgs: CartFragmentArgs by navArgs()
+        val cart: Cart = safeArgs.cart
+        val itemInterface: InventoryAdapter.ItemInterface = safeArgs.itemInterface
         val constraintView : ConstraintLayout =
             inflater.inflate(R.layout.gear_cart, container, false) as ConstraintLayout
         adapter = CartAdapter(requireContext(), cart.arrayList)
@@ -82,6 +86,9 @@ class CartFragment : Fragment() {
         }
 
         constraintView.fab.setOnClickListener {
+            for (item in cart.arrayList){
+                itemInterface.onRentItem(item)
+            }
             rentalsRef.add(cart.toRental((requireContext() as AuthProvider).getUID(), cart.currentStartDate!!, cart.currentEndDate!!))
         }
 

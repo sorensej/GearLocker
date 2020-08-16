@@ -53,14 +53,14 @@ class InventoryViewHolder(
                     R.string.see_more
                 }
             )
-            addItems()
+            addItems(isManagment)
         }
 
-        addItems()
+        addItems(isManagment)
 
     }
 
-    fun addItems() {
+    fun addItems(isManagment: Boolean) {
         itemView.content_container.removeAllViews()
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -77,13 +77,27 @@ class InventoryViewHolder(
 
             itemsRef.document(items[i]).get().addOnSuccessListener { snapshot ->
                 val item = Item.fromSnapshot(snapshot)
-                child.sub_item_name.text = item.name
-                child.setOnClickListener {
-                    inventoryFragment.onItemSelected(item)
+                if (!item.currentlyRented) {
+                    child.sub_item_name.text = item.name
+                    child.setOnClickListener {
+                        inventoryFragment.onItemSelected(item)
+                    }
+                    if (isManagment){
+                        child.isRented.text = "Available"
+                    } else {
+                        child.isRented.isVisible = false
+                    }
+
+                itemView.content_container.addView(child)
+                } else if (isManagment) {
+                    child.isRented.text = "Rented"
+                    child.sub_item_name.text = item.name
+                    child.setOnClickListener {
+                        inventoryFragment.onItemSelected(item)
+                    }
+                    itemView.content_container.addView(child)
                 }
             }
-
-            itemView.content_container.addView(child)
         }
 
     }

@@ -51,6 +51,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
                     "cart",
                     (activity as SplashFragment.ApplicationNavigationListener).onGetCart()
                 )
+                bundle.putParcelable("itemInterface", this as InventoryAdapter.ItemInterface)
                 findNavController().navigate(R.id.cartFragment, bundle)
             }
             Log.d(Constants.TAG, "Not management activity.")
@@ -86,6 +87,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
     override fun onItemSelected(item: Item) {
         val bundle = Bundle()
         bundle.putParcelable("item", item)
+        bundle.putParcelable("itemInterface", this as InventoryAdapter.ItemInterface)
         findNavController().navigate(R.id.popUpInventory, bundle)
     }
 
@@ -101,7 +103,7 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         view.cancel_button.setOnClickListener { dialog.dismiss() }
         view.add_item_button.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("inventoryFragment", this as InventoryAdapter.ItemInterface)
+            bundle.putParcelable("itemInterface", this as InventoryAdapter.ItemInterface)
             findNavController().navigate(R.id.addItem, bundle)
             dialog.dismiss()
         }
@@ -122,6 +124,10 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
 
     override fun onGetAdapter(): InventoryAdapter {
         return _adapter
+    }
+
+    override fun onRentItem(item: Item){
+        _adapter.rentItem(item)
     }
 
 }

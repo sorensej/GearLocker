@@ -13,7 +13,8 @@ data class Item (
     var condition: Int = 0,
     var description: String = "",
     var category: String = "",
-    var curPhotoPath: String = ""
+    var curPhotoPath: String = "",
+    var currentlyRented: Boolean = false
 ) : Parcelable {
     @IgnoredOnParcel
     @get:Exclude var id: String = ""

@@ -66,6 +66,11 @@ class InventoryAdapter(
         }
     }
 
+    fun rentItem(item: Item){
+        itemsRef.document(item.id).update("currentlyRented", true)
+    }
+
+
     fun add(item: Item) {
         Log.d(Constants.TAG, "$item")
         itemsRef.add(item).addOnSuccessListener { documentRef ->
@@ -102,5 +107,6 @@ class InventoryAdapter(
         fun onItemAdded(item: Item)
         fun onNavControllerRequest(): NavController
         fun onGetAdapter(): InventoryAdapter
+        fun onRentItem(item: Item)
     }
 }

@@ -22,8 +22,8 @@ class PopUpInventory: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val item: Item = arguments?.get("item") as Item
         val safeArgs: PopUpInventoryArgs by navArgs()
+        val item: Item = safeArgs.item
         val layout = inflater.inflate(R.layout.gear_summary_popup, container, true)
         if (item.curPhotoPath!= ""){
             Picasso.get()
@@ -42,6 +42,7 @@ class PopUpInventory: DialogFragment() {
                 builder2.setPositiveButton("View Cart"){_,_ ->
                     val bundle = Bundle()
                     bundle.putParcelable("cart", listener?.onGetCart())
+                    bundle.putParcelable("itemInterface", safeArgs.itemInterface)
                     listener?.onGetNavController()?.navigate(R.id.cartFragment, bundle)
                     dialog?.dismiss()
                 }
@@ -58,7 +59,11 @@ class PopUpInventory: DialogFragment() {
         } else {
             layout.edit_item_button.text = getString(R.string.edit)
             layout.edit_item_button.setOnClickListener {
-                findNavController().navigate(R.id.addItem)
+                val bundle = Bundle()
+                bundle.putParcelable("item", item)
+                bundle.putParcelable("itemInterface", safeArgs.itemInterface)
+                bundle.putBoolean("isAdd", false)
+                findNavController().navigate(R.id.addItem, bundle)
                 dialog?.dismiss()
             }
             layout.cancel_button.setOnClickListener {

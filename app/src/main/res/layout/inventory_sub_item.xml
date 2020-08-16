@@ -10,4 +10,13 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/isRented"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:layout_gravity="right"
+        android:text="Available" />
 </androidx.cardview.widget.CardView>
