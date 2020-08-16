@@ -14,22 +14,16 @@ import edu.rosehulman.gearlocker.models.Item
 
 
 class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private var title: TextView? = null
-    private var condition: TextView? = null
-    private var cost: TextView? = null
-    private var delete: Button? = null
-    private var image: ImageView? = null
+    private var title: TextView? = itemView.findViewById(R.id.delete_item_title)
+    private var condition: TextView? = itemView.findViewById(R.id.condition_text)
+    private var cost: TextView? = itemView.findViewById(R.id.price_text)
+    private var delete: Button? = itemView.findViewById(R.id.delete_button)
+    private var image: ImageView? = itemView.findViewById(R.id.delete_image)
+    private var status: TextView? = itemView.findViewById(R.id.status_text)
 
     private val itemsRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_ITEMS)
-
-    init {
-        condition = itemView.findViewById(R.id.condition_text)
-        title = itemView.findViewById(R.id.delete_item_title)
-        cost = itemView.findViewById(R.id.price_text)
-        delete = itemView.findViewById(R.id.delete_button)
-    }
 
 
     @SuppressLint("ResourceAsColor")
@@ -43,6 +37,9 @@ class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             title?.text = item.name
             condition?.text = item.condition.toString()
             cost?.text = item.estimatedCost.toString()
+            status?.text = if (item.currentlyRented){
+                "Rented"
+            } else {"Available"}
             delete?.setOnClickListener {
                 deleteAdapter.removeAt(adapterPosition, item)
             }

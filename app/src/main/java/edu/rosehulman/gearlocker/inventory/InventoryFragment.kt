@@ -4,7 +4,9 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -12,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.rosehulman.gearlocker.Constants
-import edu.rosehulman.gearlocker.DemoData
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.SplashFragment
 import edu.rosehulman.gearlocker.models.Item
@@ -62,27 +63,27 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         )
         view?.inventory_recycler_view?.adapter = _adapter
         view?.inventory_recycler_view?.layoutManager = manager
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
         return view
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.app_bar_menu, menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.app_bar_menu, menu)
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.add_demo_data -> {
-                DemoData.createItemCategories()
-                true
-            }
-            R.id.add_club      -> {
-                findNavController().navigate(R.id.clubsFragment)
-                true
-            }
-            else               -> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.add_demo_data -> {
+//                DemoData.createItemCategories()
+//                true
+//            }
+//            R.id.add_club      -> {
+//                findNavController().navigate(R.id.clubsFragment)
+//                true
+//            }
+//            else               -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     override fun onItemSelected(item: Item) {
         val bundle = Bundle()
