@@ -79,7 +79,11 @@ class AddItem : Fragment() {
                     view.category_spinner.selectedItem.toString(),
                     imageUri!!
                 )
-                args.itemInterface.onItemAdded(item)
+                if (args.isAdd) {
+                    args.itemInterface.onItemAdded(item)
+                } else {
+                    args.itemInterface.onEditItem(item)
+                }
                 val alertView =
                     LayoutInflater.from(activity).inflate(R.layout.add_item_confirmation, null)
                 val builderCreated = AlertDialog.Builder(activity).create()
@@ -91,6 +95,7 @@ class AddItem : Fragment() {
                     alertView.add_additional_item.setOnClickListener {
                         val bundle = Bundle()
                         bundle.putParcelable("itemInterface", args.itemInterface)
+                        bundle.putBoolean("isAdd", args.isAdd)
                         findNavController().navigate(R.id.addItem)
                         builderCreated.dismiss()
                     }
@@ -102,7 +107,7 @@ class AddItem : Fragment() {
             } catch (e: Exception) {
                 val builder = AlertDialog.Builder(activity)
                 builder.setTitle("Missing Input")
-                builder.setMessage("Please review your item change or addition.")
+                builder.setMessage("Please review your item change or addition: $e")
                 builder.setPositiveButton("OK") { dialog, _ ->
                     dialog.dismiss()
                 }
