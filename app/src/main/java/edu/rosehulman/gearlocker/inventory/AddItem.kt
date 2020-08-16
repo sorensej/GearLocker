@@ -170,6 +170,11 @@ class AddItem : Fragment() {
             return@Continuation storageRef.child(id).downloadUrl
         }).addOnSuccessListener { uri: Uri? ->
             Picasso.get().load(uri).into(view?.gear_image)
+
+            if (this.imageUri != null) {
+                val ref = FirebaseStorage.getInstance().getReferenceFromUrl(this.imageUri!!)
+                ref.delete()
+            }
             this.imageUri = uri.toString()
         }
     }

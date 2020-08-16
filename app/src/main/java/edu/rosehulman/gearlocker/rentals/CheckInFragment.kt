@@ -3,7 +3,11 @@ package edu.rosehulman.gearlocker.rentals
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,20 +17,27 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.Constants
-import edu.rosehulman.gearlocker.ImageProducer
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.check_in.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
+import java.io.ByteArrayOutputStream
+import kotlin.math.abs
+import kotlin.random.Random
 
 class CheckInFragment: Fragment() {
 
     private val RC_TAKE_PICTURE = 1
     private val RC_CHOOSE_PICTURE = 2
 
-    private val imageProducer = ImageProducer(this)
+    private val storageRef = FirebaseStorage.getInstance().reference.child("images")
+    private var imageUri: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,14 +55,22 @@ class CheckInFragment: Fragment() {
         view.check_out_photo.setImageURI(item?.curPhotoPath?.toUri())
         view.gear_name_text_view.text = item?.name
         view.upload_photo.setOnClickListener {
-            imageProducer.launchChooseIntent()
-            addAndShowImage(view, item)
+            startPickActivity()
         }
         view.take_photo.setOnClickListener {
-            imageProducer.launchCameraIntent()
-            addAndShowImage(view, item)
+            startCameraActivity()
         }
         view.complete_check_in_button.setOnClickListener {
+            val ref = FirebaseStorage.getInstance().getReferenceFromUrl(item!!.curPhotoPath)
+            ref.delete()
+            item.curPhotoPath = imageUri!!
+
+            FirebaseFirestore
+                .getInstance()
+                .collection(Constants.FB_ITEMS)
+                .document(item.id)
+                .update("curPhotoPath", imageUri)
+
             val builder = AlertDialog.Builder(this.context)
             builder.setTitle("Check-In Complete")
             Log.d(Constants.TAG, "${item?.name} checked in")
@@ -70,26 +89,49 @@ class CheckInFragment: Fragment() {
         return view
     }
 
-    private fun addAndShowImage(
-        view: View,
-        item: Item?
-    ) {
-        imageProducer.add(imageProducer.currentPhotoPath)
-        item!!.curPhotoPath = imageProducer.downloadUri.toString()
-        Picasso.get().load(imageProducer.downloadUri).into(view.check_in_photo)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 RC_TAKE_PICTURE -> {
-                    imageProducer.sendCameraPhotoToAdapter()
+                    addToStorage(data?.extras?.get("data") as Bitmap)
                 }
                 RC_CHOOSE_PICTURE -> {
-                    imageProducer.sendGalleryPhotoToAdapter(data)
+                    val stream = context?.contentResolver?.openInputStream(data?.data!!)
+                    addToStorage(BitmapFactory.decodeStream(stream))
                 }
             }
-            view?.check_in_photo?.setImageURI(imageProducer.currentPhotoPath.toUri())
+        }
+    }
+
+    private fun startCameraActivity() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (cameraIntent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivityForResult(cameraIntent, RC_TAKE_PICTURE)
+        }
+    }
+
+    private fun startPickActivity() {
+        val pickIntent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        pickIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        pickIntent.type = "image/*"
+        if (pickIntent.resolveActivity(requireContext().packageManager) != null) {
+            startActivityForResult(pickIntent, RC_CHOOSE_PICTURE)
+        }
+    }
+
+    private fun addToStorage(bitmap: Bitmap?) {
+        val baos = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val id = abs(Random.nextLong()).toString()
+
+        val uploadTask = storageRef.child(id).putBytes(data)
+
+        uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> {
+            return@Continuation storageRef.child(id).downloadUrl
+        }).addOnSuccessListener { uri: Uri? ->
+            Picasso.get().load(uri).into(view?.check_in_photo)
+            this.imageUri = uri.toString()
         }
     }
 }
