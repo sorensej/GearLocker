@@ -1,10 +1,12 @@
 package edu.rosehulman.gearlocker.rentals
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,7 +17,10 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Form
 import kotlinx.android.synthetic.main.inventory_sub_item.view.*
 
-class CurrentRentalFormAdapter(val context: Context) : RecyclerView.Adapter<CurrentRentalFormAdapter.CurrentRentalFormViewHolder>() {
+class CurrentRentalFormAdapter(
+    val context: Context,
+    val findNavController: NavController
+) : RecyclerView.Adapter<CurrentRentalFormAdapter.CurrentRentalFormViewHolder>() {
 
     private val currentForms = arrayListOf<Form>()
 
@@ -66,14 +71,15 @@ class CurrentRentalFormAdapter(val context: Context) : RecyclerView.Adapter<Curr
 
     inner class CurrentRentalFormViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        init {
-            itemView.setOnClickListener {
-                //TODO: Show the form here
-            }
-        }
-
-        fun bind(form: Form) {
+        fun bind(
+            form: Form
+        ) {
             itemView.sub_item_name.text = "${form.startDate} to ${form.endDate} by ${form.uid}"
+            itemView.setOnClickListener {
+                var bundle = Bundle()
+                bundle.putParcelable("form", form)
+                this@CurrentRentalFormAdapter.findNavController.navigate(R.id.formDetail, bundle)
+            }
         }
     }
 

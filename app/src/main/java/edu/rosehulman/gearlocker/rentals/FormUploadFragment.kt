@@ -25,7 +25,7 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
     private val storageRef = FirebaseStorage.getInstance().reference.child("images")
     private var imageUri: String? = null
     private var imageIndex: Int = 0
-    var arrayList = arrayListOf<String>("","","")
+    var arrayList = arrayListOf<String>("", "", "")
 
     private val formsRef = FirebaseFirestore
         .getInstance()
@@ -125,11 +125,13 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
     override fun onAddedToStorage(uriString: String) {
         this.imageUri = uriString
         arrayList[imageIndex] = imageUri.toString()
-        Picasso.get().load(imageUri).into(when (imageIndex){
-            0->view?.check_out_photo
-            1->view?.check_in_photo
-            2->view?.photo3
-            else -> view?.check_out_photo
-        })
+        Picasso.get().load(imageUri).into(
+            when (imageIndex) {
+                0    -> view?.check_out_photo
+                1    -> view?.check_in_photo
+                2    -> view?.photo3
+                else -> view?.check_out_photo
+            }
+        )
     }
 }

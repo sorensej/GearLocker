@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="50dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/gear_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@color/colorGrey"
+                app:cardCornerRadius="8dp"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/rental_dates"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Rental Dates:"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:id="@+id/renter_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rental_dates"
+                        android:text="Renter Name:"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:id="@+id/dates"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/rental_dates"
+                        android:text="@string/check_out_condition"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/renter_name"
+                        android:layout_alignBaseline="@id/renter_name"
+                        android:text="@string/rent_duration"
+                        android:textSize="16sp"
+                        android:layout_margin="5dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:text="Page 1"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/page1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="250dp"
+                android:contentDescription="photo_from_check_out"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_gear"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:text="Page 2"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/page2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="250dp"
+                android:contentDescription="photo_from_check_out"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_gear"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:text="Page 3"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/page3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="250dp"
+                android:contentDescription="photo_from_check_out"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_gear" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
