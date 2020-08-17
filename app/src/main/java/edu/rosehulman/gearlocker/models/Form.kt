@@ -6,14 +6,14 @@ import com.google.firebase.firestore.Exclude
 import kotlinx.android.parcel.Parcelize
 import java.time.Instant
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Parcelize
 data class Form(
     var startDate: Date = Date.from(Instant.EPOCH),
     var endDate: Date = Date.from(Instant.EPOCH),
-    var itemList: ArrayList<String> = ArrayList(),
-    var uid: String = ""
+    var uid: String = "",
+    var images: ArrayList<String> = arrayListOf<String>(),
+    var isCurrent: Boolean = true
 ) : Parcelable {
     @get:Exclude
     var id: String = ""

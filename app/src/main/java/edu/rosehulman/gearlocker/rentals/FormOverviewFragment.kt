@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import edu.rosehulman.gearlocker.R
 import kotlinx.android.synthetic.main.fragment_form_overview.view.*
 
-class FormOverviewFragment : Fragment() {
+class FormOverviewFragment : Fragment(){
 
     private var currentAdapter: CurrentRentalFormAdapter? = null
     private var pastAdapter: PastRentalFormAdapter? = null
@@ -30,10 +27,6 @@ class FormOverviewFragment : Fragment() {
         pastAdapter = context?.let { PastRentalFormAdapter(it) }
         view.past_rental_recycler_view.adapter = pastAdapter
         view.past_rental_recycler_view.layoutManager = LinearLayoutManager(context)
-
-        view.findViewById<FloatingActionButton>(R.id.fab_forms).setOnClickListener {
-            findNavController().navigate(R.id.formUploadFragment)
-        }
 
         return view
     }

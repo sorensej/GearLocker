@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.CameraAndUploadUtils
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
@@ -38,7 +37,7 @@ class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener
         val rental = args.rental
         val view : RelativeLayout =
             inflater.inflate(R.layout.check_in, container, false) as RelativeLayout
-        Picasso.get().load(item?.curPhotoPath).into(view.check_out_photo)
+        //Picasso.get().load(item?.curPhotoPath).into(view.check_out_photo)
         view.gear_name_text_view.text = item?.name
         view.upload_photo.setOnClickListener {
             CameraAndUploadUtils.startPickActivity(this)
@@ -105,7 +104,7 @@ class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener
     }
 
     override fun onAddedToStorage(uriString: String) {
-        Picasso.get().load(uriString).into(view?.check_in_photo)
+       // Picasso.get().load(uriString).into(view?.check_in_photo)
         this.imageUri = uriString
     }
 }
