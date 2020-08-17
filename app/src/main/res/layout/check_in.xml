@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="@string/demo_check_in_title"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:layout_margin="5dp"/>
