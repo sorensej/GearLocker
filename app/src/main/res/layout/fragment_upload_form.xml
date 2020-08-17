@@ -1,133 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="50dp"
-    android:background="@color/colorBlue">
+    android:background="@color/colorBlue"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Please enter the name of the renter:" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@color/colorDarkBlue"
-        android:hint="Name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Please enter the start date of the rental" />
-
-    <DatePicker
-        style="@android:style/Widget.DatePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Please enter the end dat of the rental" />
-
-    <DatePicker
-        style="@android:style/Widget.DatePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:id="@+id/upload_from_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorDarkBlue">
-
-            <ImageView
-                android:id="@+id/upload_from_device_image_view"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="center"
-                android:scaleX="2.5"
-                android:scaleY="2.5"
-                android:src="@android:drawable/ic_menu_upload"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/upload_from_device_image_view"
-                android:layout_centerInParent="false"
-                android:layout_centerHorizontal="true"
-                android:text="Upload file"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="OR"
-            android:textSize="24sp" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Renter Name:" />
 
-        <RelativeLayout
-            android:id="@+id/upload_from_camera"
+        <TextView
+            android:id="@+id/renter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:background="@color/colorDarkBlue"
+            android:hint="Name" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorDarkBlue">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Start Date:" />
 
-            <ImageView
-                android:id="@+id/upload_from_camera_image_view"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="center"
-                android:scaleX="2.5"
-                android:scaleY="2.5"
-                android:src="@android:drawable/ic_menu_camera" />
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:layout_marginEnd="50dp"
+            android:background="@color/colorDarkBlue"
+            android:hint="Start Date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="End Date:" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:layout_marginEnd="50dp"
+            android:background="@color/colorDarkBlue"
+            android:hint="End Date" />
+
+        <!--            <DatePicker-->
+        <!--                style="@android:style/Widget.DatePicker"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_marginTop="10dp"-->
+        <!--                android:text="Please enter the end date of the rental" />-->
+
+        <!--            <DatePicker-->
+        <!--                style="@android:style/Widget.DatePicker"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content" />-->
+
+
+        <TableLayout
+            android:id="@+id/photo_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gear_summary"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:stretchColumns="0,1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/colorGrey"
+                    android:gravity="center"
+                    android:text="Page 1"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="0"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/colorGrey"
+                    android:gravity="center"
+                    android:text="Page 2"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/photo1"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="photo_from_check_out"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_gear" />
+
+                <ImageView
+                    android:id="@+id/photo2"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="photo_from_check_in"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_gear">
+
+                </ImageView>
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="4">
 
             <TextView
+                android:id="@+id/upload_photo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/upload_from_camera_image_view"
-                android:layout_centerInParent="false"
-                android:layout_centerHorizontal="true"
-                android:text="Take a photo"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/upload_photo"
+                android:textSize="12sp" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/take_photo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/take_photo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/upload_photo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/upload_photo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/take_photo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/take_photo"
+                android:textSize="12sp" />
+        </LinearLayout>
 
 
-    </LinearLayout>
+        <TableLayout
+            android:id="@+id/photo_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gear_summary"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:stretchColumns="0,1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/colorGrey"
+                    android:gravity="center"
+                    android:text="Page 3"
+                    android:textSize="18sp" />
+
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/photo3"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="photo_from_check_out"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_gear" />
+
+                <ImageView
+                    android:id="@+id/photo4"
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="photo_from_check_in"
+                    android:scaleType="fitCenter">
+
+                </ImageView>
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/upload_photo3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/upload_photo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/take_photo3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/take_photo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/upload_photo4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:gravity="center"
+                android:textColor="@color/fui_transparent"
+                android:padding="5dp"
+                android:text="@string/upload_photo"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/take_photo4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/fui_transparent"
+                android:background="@color/fui_transparent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/take_photo"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
 
     <Button
         android:id="@+id/submit_button"
@@ -135,18 +323,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Submit"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/colorPrimaryDark"
+        android:text="Submit" />
 
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Cancel"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorAccent"/>
-        </LinearLayout>
-    </ScrollView>
+        android:background="@color/colorAccent"
+        android:text="Cancel" />
+</LinearLayout></ScrollView>
 
-</LinearLayout>
+    </LinearLayout>

@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Form
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
 import kotlinx.android.parcel.IgnoredOnParcel
@@ -21,6 +23,10 @@ import kotlinx.android.synthetic.main.fragment_rental_overview.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
 @Parcelize
 class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandler, Parcelable {
+
+    private val formsRef = FirebaseFirestore
+        .getInstance()
+        .collection(Constants.FB_ITEMS)
 
     @IgnoredOnParcel
     var curRentalsAdapter: CurrentRentalsAdapter? = null
@@ -65,6 +71,16 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
             curRentalsAdapter!!.remove(rental)
             rentalRequestAdapter!!.remove(rental)
         }
+    }
+
+    override fun onGetNavController() : NavController {
+       return findNavController()
+    }
+
+    override fun addFormToRental(form: Form, rental: Rental) {
+        formsRef.add(form)
+        rental.forms = form.id
+        this.confirmRental(rental, 1, 1)
     }
 
 }

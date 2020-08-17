@@ -41,7 +41,7 @@ class CheckInFragment: Fragment() {
         view.cancel_check_in_button.setOnClickListener {
             findNavController().navigate(R.id.navigation_management_rentals)
         }
-        view.check_out_photo.setImageURI(item?.curPhotoPath?.toUri())
+        view.photo1.setImageURI(item?.curPhotoPath?.toUri())
         view.gear_name_text_view.text = item?.name
         view.upload_photo.setOnClickListener {
             imageProducer.launchChooseIntent()
@@ -76,7 +76,7 @@ class CheckInFragment: Fragment() {
     ) {
         imageProducer.add(imageProducer.currentPhotoPath)
         item!!.curPhotoPath = imageProducer.downloadUri.toString()
-        Picasso.get().load(imageProducer.downloadUri).into(view.check_in_photo)
+        Picasso.get().load(imageProducer.downloadUri).into(view.photo2)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -89,7 +89,7 @@ class CheckInFragment: Fragment() {
                     imageProducer.sendGalleryPhotoToAdapter(data)
                 }
             }
-            view?.check_in_photo?.setImageURI(imageProducer.currentPhotoPath.toUri())
+            view?.photo2?.setImageURI(imageProducer.currentPhotoPath.toUri())
         }
     }
 }

@@ -11,4 +11,5 @@ object Constants {
     const val FB_ITEM_CATEGORIES = "item_categories"
     const val FB_DELETED = "deleted"
     const val FB_MESSAGES = "messages"
+    const val FB_FORMS = "forms"
 }

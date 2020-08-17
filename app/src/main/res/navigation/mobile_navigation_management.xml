@@ -213,7 +213,14 @@
     <fragment
         android:id="@+id/formUploadFragment"
         android:name="edu.rosehulman.gearlocker.rentals.FormUploadFragment"
-        android:label="FormUploadFragment" />
+        android:label="FormUploadFragment" >
+        <argument
+            android:name="rentalHandler"
+            app:argType="edu.rosehulman.gearlocker.rentalsoverview.RentalRequestViewHolder$RentalHandler" />
+        <argument
+            android:name="rental"
+            app:argType="edu.rosehulman.gearlocker.models.Rental" />
+    </fragment>
     <fragment
         android:id="@+id/rentalView"
         android:name="edu.rosehulman.gearlocker.rentalsoverview.RentalView"
