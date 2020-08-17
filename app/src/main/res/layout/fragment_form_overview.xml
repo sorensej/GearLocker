@@ -5,8 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBlue"
     android:padding="25dp"
+    android:layout_marginBottom="50dp"
     android:isScrollContainer="true"
     android:id="@+id/form_overview">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/current_rentals"
@@ -24,7 +33,7 @@
         android:id="@+id/current_rental_recycler_view"
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/current_rentals"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/past_rentals"
@@ -43,7 +52,9 @@
         android:id="@+id/past_rental_recycler_view"
         app:layout_constraintTop_toBottomOf="@id/past_rentals"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,7 +105,7 @@ class CartFragment : Fragment() {
                 )
                 rentalsRef.add(rental)
                 var builder = AlertDialog.Builder(context)
-                builder.setTitle("${rental.startDate} to ${rental.endDate} for ${rental.uid}")
+                builder.setTitle("${rental.startDate} to ${rental.endDate}")
                 builder.setMessage("Rental request received. You should receive a message to pick up your rental in approximately 3 days.")
                 builder.setPositiveButton("Return to Dashboard") { dialogInterface: DialogInterface, i: Int ->
                     findNavController().navigate(R.id.navigation_dashboard)

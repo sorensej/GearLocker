@@ -113,7 +113,7 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                 val ref = FirebaseStorage.getInstance().getReferenceFromUrl(this.imageUri!!)
                 ref.delete()
             }
-            //findNavController().navigate(R.id.navigation_inventory) TODO: Find where we should navigate when canceling
+            findNavController().navigate(R.id.navigation_management_inventory)
         }
 
         itemCategoriesRef.get().addOnSuccessListener { snapshot ->

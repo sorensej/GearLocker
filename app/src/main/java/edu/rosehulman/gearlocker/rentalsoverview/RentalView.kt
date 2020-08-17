@@ -31,6 +31,8 @@ class RentalView : Fragment() {
             R.id.rentalView
         constraintView.items_recyclerview.adapter =
             RentalViewAdapter(args.rental!!, context, findNavController(), args.rentalHandler)
+        constraintView.rental_title.text =
+            "${args.rental!!.startDate} to ${args.rental!!.endDate}"
         constraintView.items_recyclerview.layoutManager = LinearLayoutManager(context)
         return constraintView
     }
