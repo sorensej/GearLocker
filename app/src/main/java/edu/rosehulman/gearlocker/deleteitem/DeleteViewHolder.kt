@@ -35,27 +35,24 @@ class DeleteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val item = Item.fromSnapshot(snapshot)
             Picasso.get().load(item.curPhotoPath).into(image)
             title?.text = item.name
-            condition?.text = item.condition.toString()
             cost?.text = item.estimatedCost.toString()
-            status?.text = if (item.currentlyRented){
+            status?.text = if (item.currentlyRented) {
                 "Rented"
-            } else {"Available"}
+            } else {
+                "Available"
+            }
             delete?.setOnClickListener {
                 deleteAdapter.removeAt(adapterPosition, item)
             }
 
-//            condition?.setBackgroundResource(when (item.condition){
-//                1 -> context.getColor(R.color.colorRed)
-//                2-> context.getColor(R.color.colorAccentTwo)
-//                3-> {
-//                    context.getColor(R.color.colorAccent)
-//                    Log.d(Constants.TAG, "Condition is 3")
-//                }
-//                4-> context.getColor(R.color.colorPrimary)
-//                5-> context.getColor(R.color.colorPrimaryDark)
-//                else -> android.R.color.white
-//            }
-//            )
+            condition?.text = when (item.condition) {
+                1    -> "Replace"
+                2    -> "Bad"
+                3    -> "Average"
+                4    -> "Good"
+                5    -> "New"
+                else -> "No Condition"
+            }
         }
     }
 

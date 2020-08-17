@@ -15,7 +15,8 @@ data class Rental(
     var itemList: ArrayList<String> = ArrayList(),
     var uid: String = "",
     var confirmed: Boolean = false,
-    var forms: String = ""
+    var forms: String = "",
+    var prevItemList: ArrayList<String> = ArrayList()
 ) : Parcelable {
     @get:Exclude
     var id: String = ""

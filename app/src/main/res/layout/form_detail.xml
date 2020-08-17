@@ -25,7 +25,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="10dp">
 
                     <TextView
@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
+                android:padding="10dp"
                 android:background="@color/colorGrey"
                 android:gravity="center"
                 android:text="Page 1"
@@ -85,6 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="250dp"
+                android:layout_margin="10dp"
                 android:contentDescription="photo_from_check_out"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_gear"
@@ -98,14 +100,16 @@
                 android:background="@color/colorGrey"
                 android:gravity="center"
                 android:text="Page 2"
+                android:padding="10dp"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/page2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="250dp"
+                android:layout_margin="10dp"
                 android:scaleType="fitCenter"
+                android:minHeight="250dp"
                 app:srcCompat="@drawable/ic_gear"
                 android:layout_marginBottom="15dp"/>
 
@@ -115,12 +119,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:background="@color/colorGrey"
+                android:padding="10dp"
                 android:gravity="center"
                 android:text="Page 3"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/page3"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="250dp"

@@ -19,6 +19,9 @@ class ClubsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//       val constraintLayout = inflater.inflate(R.layout.search, container, false)
+//        adapter = ClubsAdapter(requireContext())
+//        constraintLayout.listView.adapter = adapter
         val constraintLayout : ConstraintLayout =
             inflater.inflate(R.layout.add_club_home, container, false) as ConstraintLayout
         adapter = ClubsAdapter(requireContext())

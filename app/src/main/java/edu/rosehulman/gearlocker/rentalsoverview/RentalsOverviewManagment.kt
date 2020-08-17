@@ -31,6 +31,8 @@ class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandl
 
     private val rentalsRef = FirebaseFirestore.getInstance().collection(Constants.FB_RENTALS)
 
+    private val pastRentalsRef = FirebaseFirestore.getInstance().collection(Constants.FB_PAST_RENTALS)
+
 
     @IgnoredOnParcel
     var curRentalsAdapter: CurrentRentalsAdapter? = null
@@ -85,6 +87,7 @@ class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandl
         } else {
             Log.d(Constants.TAG, "remove entire rental")
             curRentalsAdapter!!.checkIn(item, rental)
+            pastRentalsRef.add(rental)
             curRentalsAdapter!!.remove(rental)
             Log.d(Constants.TAG, rental.forms)
             formsRef.document(rental.forms).update("current", false)

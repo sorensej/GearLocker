@@ -73,6 +73,7 @@ class CurrentRentalsAdapter(
     }
 
     fun checkIn(item: Item, rental: Rental) {
+        currentRentalsRef.document(rental.id).update("prevItemList", FieldValue.arrayUnion(item.id))
         currentRentalsRef.document(rental.id).update("itemList", FieldValue.arrayRemove(item.id))
     }
 
