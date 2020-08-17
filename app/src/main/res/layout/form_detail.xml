@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="50dp">
+    android:layout_marginBottom="50dp"
+    android:background="@color/colorBlue">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,7 +53,9 @@
                         android:layout_toRightOf="@id/rental_dates"
                         android:text="@string/check_out_condition"
                         android:textSize="16sp"
-                        android:layout_margin="5dp" />
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"/>
 
                     <TextView
                         android:id="@+id/name"
@@ -102,7 +105,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="250dp"
-                android:contentDescription="photo_from_check_out"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_gear"
                 android:layout_marginBottom="15dp"/>
@@ -122,7 +124,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="250dp"
-                android:contentDescription="photo_from_check_out"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_gear" />
 
