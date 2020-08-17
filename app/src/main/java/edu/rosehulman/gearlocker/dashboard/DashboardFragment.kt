@@ -23,31 +23,7 @@ class DashboardFragment : Fragment() {
         adapter = DashboardAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-//        setHasOptionsMenu(true)
 
         return recyclerView
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.app_bar_menu, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.add_demo_data -> {
-//                Log.d(Constants.TAG, "test2")
-//                //DemoData.createRentals()
-//                true
-//            }
-//            R.id.add_club->{
-//                findNavController().navigate(R.id.clubsFragment)
-//                true
-//            }
-//            R.id.log_out->{
-//
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 }

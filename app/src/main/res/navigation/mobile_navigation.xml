@@ -81,9 +81,8 @@
             app:argType="boolean"
             android:defaultValue="false"/>
         <argument
-            android:name="clubID"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:name="club"
+            app:argType="edu.rosehulman.gearlocker.models.Club"/>
     </activity>
 
     <dialog

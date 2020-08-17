@@ -10,11 +10,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import edu.rosehulman.gearlocker.models.Club
 
 class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private lateinit var clubUID: String
+    private lateinit var club: Club
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
         navView.setupWithNavController(navController)
 
         val args: ManagementMainActivityArgs by navArgs()
-        this.clubUID = args.clubID
+        this.club = args.club
 
         navController.addOnDestinationChangedListener { _, _, _ ->
             navView.isVisible = true
@@ -37,12 +38,10 @@ class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
     }
 
     override fun getUID(): String {
-        return clubUID
+        return club.id
     }
 
-    override fun getActiveClub(): String {
-        return clubUID
+    override fun getActiveClubID(): String {
+        return club.id
     }
-
-
 }

@@ -150,7 +150,9 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
 
                 for (doc in querySnapshot.documents) {
                     val club = Club.fromSnapshot(doc)
-                    clubMap[club.name] = club.id
+                    if (club.members.containsValue(auth.uid)) {
+                        clubMap[club.name] = club.id
+                    }
                 }
 
                 val clubs = clubMap.keys.toTypedArray()
@@ -183,8 +185,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
         return uid
     }
 
-    override fun getActiveClub(): String {
+    override fun getActiveClubID(): String {
         return activeClubID
     }
-
 }

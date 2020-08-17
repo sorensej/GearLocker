@@ -1,15 +1,18 @@
 package edu.rosehulman.gearlocker.models
 
+import android.os.Parcelable
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Exclude
+import kotlinx.android.parcel.Parcelize
 import kotlin.random.Random
 
+@Parcelize
 data class Club (
     var name: String = "",
     var admins: ArrayList<String> = arrayListOf(),
     var members: MutableMap<String, String> = mutableMapOf(),
     var accessCode: String = Random.nextInt(99999).toString()
-) {
+) : Parcelable {
     @get:Exclude var id: String = ""
 
     fun isAdmin(uid: String, passcode: String): Boolean {

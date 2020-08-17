@@ -44,7 +44,7 @@ class MessagesFragment : Fragment() {
         Log.d(Constants.TAG, "Fragment: Messages")
 
         val uid = (context as AuthProvider).getUID()
-        val clubID = (context as ClubProvider).getActiveClub()
+        val clubID = (context as ClubProvider).getActiveClubID()
 
         adapter = MessagesAdapter(requireContext(), uid, clubID)
         view.list_of_messages.adapter = adapter

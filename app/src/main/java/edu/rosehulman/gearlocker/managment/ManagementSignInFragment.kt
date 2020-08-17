@@ -45,7 +45,7 @@ class ManagementSignInFragment: Fragment() {
                     val club = Club.fromSnapshot(doc)
                     if (club.isAdmin(uid, view.passcode_edit_text.text.toString())) {
                         signedIn = true
-                        val bundle = bundleOf("clubID" to club.id)
+                        val bundle = bundleOf("club" to club)
                         findNavController().navigate(R.id.managementMainActivity, bundle)
                         return@addOnSuccessListener
                     }
