@@ -12,13 +12,13 @@ import edu.rosehulman.gearlocker.R
 import kotlinx.android.synthetic.main.management_activity_main.*
 
 
-class RentalHomeFragment : Fragment(){
+class RentalHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view : ConstraintLayout =
+        val view: ConstraintLayout =
             inflater.inflate(R.layout.rental_home_fragment, container, false) as ConstraintLayout
         view.getViewById(R.id.overview_button).setOnClickListener {
             findNavController().navigate(R.id.rentalsOverviewManagment)
@@ -26,7 +26,8 @@ class RentalHomeFragment : Fragment(){
         view.getViewById(R.id.forms_button).setOnClickListener {
             findNavController().navigate(R.id.formsOverviewFragment)
         }
-        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.navigation_management_rentals
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination =
+            R.id.navigation_management_rentals
 
         return view
     }

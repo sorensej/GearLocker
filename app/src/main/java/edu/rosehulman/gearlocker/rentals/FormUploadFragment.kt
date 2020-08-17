@@ -24,7 +24,7 @@ class FormUploadFragment : Fragment() {
         view.end_date.text = rental.endDate.toString()
         view.renter_name.text = rental.uid
         view.submit_button.setOnClickListener {
-
+            //TODO: add rental
         }
         return view
     }

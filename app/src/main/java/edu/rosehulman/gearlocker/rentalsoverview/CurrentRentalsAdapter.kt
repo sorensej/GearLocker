@@ -14,7 +14,6 @@ import edu.rosehulman.gearlocker.models.Rental
 import java.util.*
 
 
-
 class CurrentRentalsAdapter(
     val context: Context?,
     val findNavController: NavController,
@@ -68,12 +67,12 @@ class CurrentRentalsAdapter(
         }
     }
 
-    fun add(rental: Rental){
+    fun add(rental: Rental) {
         rental.confirmed = true
         currentRentalsRef.add(rental)
     }
 
-    fun checkIn(item: Item, rental: Rental){
+    fun checkIn(item: Item, rental: Rental) {
         currentRentalsRef.document(rental.id).update("itemList", FieldValue.arrayRemove(item.id))
     }
 

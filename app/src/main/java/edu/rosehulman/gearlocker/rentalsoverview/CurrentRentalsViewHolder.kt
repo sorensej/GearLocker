@@ -18,7 +18,7 @@ class CurrentRentalsViewHolder(
         rental: Rental,
         findNavController: NavController,
         rentalHandler: RentalRequestViewHolder.RentalHandler
-    ){
+    ) {
         rentalName.text = "${rental.uid}: ${rental.startDate} to ${rental.endDate}"
         rentalName.setOnClickListener {
             var bundle: Bundle = Bundle()

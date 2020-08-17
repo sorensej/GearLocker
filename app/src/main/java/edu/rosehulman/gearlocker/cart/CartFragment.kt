@@ -36,7 +36,7 @@ class CartFragment : Fragment() {
         val safeArgs: CartFragmentArgs by navArgs()
         val cart: Cart = safeArgs.cart
         val itemInterface: InventoryAdapter.ItemInterface = safeArgs.itemInterface
-        val constraintView : ConstraintLayout =
+        val constraintView: ConstraintLayout =
             inflater.inflate(R.layout.gear_cart, container, false) as ConstraintLayout
         adapter = CartAdapter(requireContext(), cart.arrayList)
         val recyclerView = constraintView.getViewById(R.id.rental_list) as RecyclerView
@@ -64,32 +64,43 @@ class CartFragment : Fragment() {
 
 
         constraintView.start_date_button.setOnClickListener {
-            DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                startCalendar.set(year, month, dayOfMonth, 0, 0, 0)
-                constraintView.start_date_button.text = "$month/$dayOfMonth/$year"
-                cart.currentStartDate = startCalendar.time
-            },
+            DatePickerDialog(
+                requireContext(), DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                    startCalendar.set(year, month, dayOfMonth, 0, 0, 0)
+                    constraintView.start_date_button.text = "$month/$dayOfMonth/$year"
+                    cart.currentStartDate = startCalendar.time
+                },
                 startCalendar.get(Calendar.YEAR),
                 startCalendar.get(Calendar.MONTH),
-                startCalendar.get(Calendar.DAY_OF_MONTH)).show()
+                startCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         constraintView.end_date_button.setOnClickListener {
-            DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                endCalendar.set(year, month, dayOfMonth, 0, 0, 0)
-                constraintView.end_date_button.text = "$month/$dayOfMonth/$year"
-                cart.currentEndDate = endCalendar.time
-            },
+            DatePickerDialog(
+                requireContext(),
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    endCalendar.set(year, month, dayOfMonth, 0, 0, 0)
+                    constraintView.end_date_button.text = "$month/$dayOfMonth/$year"
+                    cart.currentEndDate = endCalendar.time
+                },
                 endCalendar.get(Calendar.YEAR),
                 endCalendar.get(Calendar.MONTH),
-                endCalendar.get(Calendar.DAY_OF_MONTH)).show()
+                endCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         constraintView.fab.setOnClickListener {
-            for (item in cart.arrayList){
+            for (item in cart.arrayList) {
                 itemInterface.onRentItem(item)
             }
-            rentalsRef.add(cart.toRental((requireContext() as AuthProvider).getUID(), cart.currentStartDate!!, cart.currentEndDate!!))
+            rentalsRef.add(
+                cart.toRental(
+                    (requireContext() as AuthProvider).getUID(),
+                    cart.currentStartDate!!,
+                    cart.currentEndDate!!
+                )
+            )
         }
 
         Log.d(Constants.TAG, (requireContext() as AuthProvider).getUID())

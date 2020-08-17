@@ -30,7 +30,7 @@ class RentalViewAdapter(
         return RentalViewViewHolder(view)
     }
 
-    override fun getItemCount()=items.size
+    override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: RentalViewViewHolder, position: Int) {
         holder.bind(items[position], findNavController, rentalHandler, rental)

@@ -127,11 +127,11 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         return _adapter
     }
 
-    override fun onEditItem(item: Item){
+    override fun onEditItem(item: Item) {
         _adapter.editItem(item)
     }
 
-    override fun onRentItem(item: Item){
+    override fun onRentItem(item: Item) {
         _adapter.rentItem(item)
     }
 

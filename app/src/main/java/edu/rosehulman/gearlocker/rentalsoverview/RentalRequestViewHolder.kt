@@ -36,7 +36,7 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
 
             val stringBuilder = StringBuilder()
 
-            for (item: String in rental.itemList){
+            for (item: String in rental.itemList) {
                 itemsRef.document(item).get().addOnSuccessListener { snapshot ->
                     stringBuilder.append(snapshot.getString("name") + "\n")
                 }
@@ -65,7 +65,7 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
     interface RentalHandler : Parcelable {
         fun confirmRental(rental: Rental, position: Int, int: Int)
         fun removeItemFromRental(rental: Rental, item: Item)
-        fun onGetNavController() : NavController
+        fun onGetNavController(): NavController
         fun addFormToRental(form: Form, rental: Rental)
     }
 }

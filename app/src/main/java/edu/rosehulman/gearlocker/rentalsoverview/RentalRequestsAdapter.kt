@@ -67,7 +67,7 @@ class RentalRequestsAdapter(
         }
     }
 
-    fun remove(rental: Rental){
+    fun remove(rental: Rental) {
         currentRentalsRef.document(rental.id).delete()
     }
 

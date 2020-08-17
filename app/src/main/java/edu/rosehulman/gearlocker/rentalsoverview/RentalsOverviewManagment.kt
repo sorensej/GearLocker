@@ -21,8 +21,9 @@ import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_rental_overview.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
+
 @Parcelize
-class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandler, Parcelable {
+class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandler, Parcelable {
 
     private val formsRef = FirebaseFirestore
         .getInstance()
@@ -30,6 +31,7 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
 
     @IgnoredOnParcel
     var curRentalsAdapter: CurrentRentalsAdapter? = null
+
     @IgnoredOnParcel
     var rentalRequestAdapter: RentalRequestsAdapter? = null
 
@@ -43,9 +45,18 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
         savedInstanceState: Bundle?
     ): View? {
         val constraintView =
-            inflater.inflate(R.layout.fragment_rental_overview, container, false) as ConstraintLayout
-        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.rentalsOverviewManagment
-        curRentalsAdapter = CurrentRentalsAdapter(context, findNavController(), this as RentalRequestViewHolder.RentalHandler)
+            inflater.inflate(
+                R.layout.fragment_rental_overview,
+                container,
+                false
+            ) as ConstraintLayout
+        activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination =
+            R.id.rentalsOverviewManagment
+        curRentalsAdapter = CurrentRentalsAdapter(
+            context,
+            findNavController(),
+            this as RentalRequestViewHolder.RentalHandler
+        )
         rentalRequestAdapter =
             RentalRequestsAdapter(context, this as RentalRequestViewHolder.RentalHandler)
         constraintView.cur_rentals_recyclerview.adapter = curRentalsAdapter
@@ -66,15 +77,15 @@ class RentalsOverviewManagment: Fragment(), RentalRequestViewHolder.RentalHandle
         if (rental.itemList.size != 1) {
             Log.d(Constants.TAG, "size is 1")
             curRentalsAdapter!!.checkIn(item, rental)
-        }else{
+        } else {
             Log.d(Constants.TAG, "remove entire rental")
             curRentalsAdapter!!.remove(rental)
             rentalRequestAdapter!!.remove(rental)
         }
     }
 
-    override fun onGetNavController() : NavController {
-       return findNavController()
+    override fun onGetNavController(): NavController {
+        return findNavController()
     }
 
     override fun addFormToRental(form: Form, rental: Rental) {

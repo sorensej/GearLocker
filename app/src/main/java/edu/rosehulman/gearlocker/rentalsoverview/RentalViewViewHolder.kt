@@ -16,12 +16,12 @@ class RentalViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         .getInstance()
         .collection(Constants.FB_ITEMS)
 
-    fun bind (
+    fun bind(
         item: String,
         findNavController: NavController,
         rentalHandler: RentalRequestViewHolder.RentalHandler?,
         rental: Rental
-    ){
+    ) {
         itemsRef.document(item).get().addOnSuccessListener { snapshot ->
             val itemSnapshot = Item.fromSnapshot(snapshot)
             itemView.sub_item_name.text = itemSnapshot.name

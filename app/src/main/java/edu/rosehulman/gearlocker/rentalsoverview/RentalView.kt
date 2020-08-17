@@ -20,7 +20,7 @@ class RentalView : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args : RentalViewArgs by navArgs()
+        val args: RentalViewArgs by navArgs()
         val constraintView =
             inflater.inflate(
                 R.layout.rental_overview,
@@ -29,7 +29,8 @@ class RentalView : Fragment() {
             ) as ConstraintLayout
         activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination =
             R.id.rentalView
-        constraintView.items_recyclerview.adapter = RentalViewAdapter(args.rental!!, context, findNavController(), args.rentalHandler)
+        constraintView.items_recyclerview.adapter =
+            RentalViewAdapter(args.rental!!, context, findNavController(), args.rentalHandler)
         constraintView.items_recyclerview.layoutManager = LinearLayoutManager(context)
         return constraintView
     }

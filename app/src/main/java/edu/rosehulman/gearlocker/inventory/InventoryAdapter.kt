@@ -66,12 +66,27 @@ class InventoryAdapter(
         }
     }
 
-    fun rentItem(item: Item){
+    fun rentItem(item: Item) {
         itemsRef.document(item.id).update("currentlyRented", true)
     }
 
-    fun editItem(item: Item){
-        itemsRef.document(item.id).update("catagory", item.category, "condition", item.condition, "curPhotoPath", item.curPhotoPath, "currentlyRented", item.currentlyRented, "description", item.description, "estimatedCost", item.estimatedCost, "name", item.name)
+    fun editItem(item: Item) {
+        itemsRef.document(item.id).update(
+            "catagory",
+            item.category,
+            "condition",
+            item.condition,
+            "curPhotoPath",
+            item.curPhotoPath,
+            "currentlyRented",
+            item.currentlyRented,
+            "description",
+            item.description,
+            "estimatedCost",
+            item.estimatedCost,
+            "name",
+            item.name
+        )
     }
 
 

@@ -8,15 +8,17 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
 
 
-class CartAdapter(private val context: Context, private val cartItems: ArrayList<Item>) : RecyclerView.Adapter<CartViewHolder>() {
+class CartAdapter(private val context: Context, private val cartItems: ArrayList<Item>) :
+    RecyclerView.Adapter<CartViewHolder>() {
 
 
-    init{
+    init {
         this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.rental_item_cardview, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.rental_item_cardview, parent, false)
         return CartViewHolder(view)
     }
 
