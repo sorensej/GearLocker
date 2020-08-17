@@ -19,7 +19,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/gear_name_text_view"
@@ -28,11 +29,12 @@
                 android:layout_centerHorizontal="true"
                 android:textAlignment="center"
                 android:textSize="18sp"
+                android:text="Gear Name"
                 android:layout_margin="5dp"/>
 
             <TextView
                 android:id="@+id/check_out_condition_text_view"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gear_name_text_view"
                 android:text="@string/check_out_condition"
@@ -41,12 +43,32 @@
 
             <TextView
                 android:id="@+id/rent_duration_text_view"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/check_out_condition_text_view"
                 android:text="@string/rent_duration"
                 android:textSize="16sp"
                 android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/check_out_condition_text_view"
+                android:layout_below="@id/gear_name_text_view"
+                android:text="@string/check_out_condition"
+                android:textSize="16sp"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:id="@+id/dates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/check_out_condition_text_view"
+                android:layout_toRightOf="@+id/rent_duration_text_view"
+                android:text="@string/rent_duration"
+                android:textSize="16sp"
+                android:layout_margin="5dp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -109,6 +131,15 @@
             </ImageView>
         </TableRow>
     </TableLayout>
+
+    <Button
+        android:id="@+id/skip_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/photo_view"
+        android:text="Skip Photo"
+        android:textSize="12sp"
+        android:layout_toLeftOf="@id/upload_photo" />
 
     <Button
         android:id="@+id/upload_photo"

@@ -24,6 +24,8 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
 
     private val storageRef = FirebaseStorage.getInstance().reference.child("images")
     private var imageUri: String? = null
+    private var imageIndex: Int = 0
+    var arrayList = arrayListOf<String>("","","")
 
     private val formsRef = FirebaseFirestore
         .getInstance()
@@ -42,36 +44,33 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
         view.start_date.text = rental.startDate.toString()
         view.end_date.text = rental.endDate.toString()
         view.renter_name.text = rental.uid
-        val arrayList = arrayListOf<String>("", "", "")
         view.upload_photo1.setOnClickListener {
+            imageIndex = 0
             CameraAndUploadUtils.startPickActivity(this)
-            arrayList[0] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.check_out_photo)
         }
         view.upload_photo2.setOnClickListener {
+            imageIndex = 1
             CameraAndUploadUtils.startPickActivity(this)
-            arrayList[1] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.check_in_photo)
+
         }
         view.upload_photo3.setOnClickListener {
+            imageIndex = 2
             CameraAndUploadUtils.startPickActivity(this)
-            arrayList[2] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo3)
+
         }
         view.take_photo1.setOnClickListener {
+            imageIndex = 0
             CameraAndUploadUtils.startCameraActivity(this)
-            arrayList[0] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.check_out_photo)
+
         }
         view.take_photo2.setOnClickListener {
+            imageIndex = 1
             CameraAndUploadUtils.startCameraActivity(this)
-            arrayList[1] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.check_in_photo)
+
         }
         view.take_photo3.setOnClickListener {
+            imageIndex = 2
             CameraAndUploadUtils.startCameraActivity(this)
-            arrayList[2] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo3)
         }
         view.submit_button.setOnClickListener {
             try {
@@ -125,5 +124,12 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
 
     override fun onAddedToStorage(uriString: String) {
         this.imageUri = uriString
+        arrayList[imageIndex] = imageUri.toString()
+        Picasso.get().load(imageUri).into(when (imageIndex){
+            0->view?.check_out_photo
+            1->view?.check_in_photo
+            2->view?.photo3
+            else -> view?.check_out_photo
+        })
     }
 }

@@ -40,11 +40,17 @@ class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener
             inflater.inflate(R.layout.check_in, container, false) as RelativeLayout
         Picasso.get().load(item?.curPhotoPath).into(view.check_out_photo)
         view.gear_name_text_view.text = item?.name
+        view.condition.text = item?.condition.toString()
+        view.dates.text = "${rental?.startDate} to ${rental?.endDate}"
         view.upload_photo.setOnClickListener {
             CameraAndUploadUtils.startPickActivity(this)
         }
         view.take_photo.setOnClickListener {
             CameraAndUploadUtils.startCameraActivity(this)
+        }
+        view.skip_photo.setOnClickListener {
+            imageUri = item!!.curPhotoPath
+            Picasso.get().load(item.curPhotoPath).into(view.check_in_photo)
         }
         view.complete_check_in_button.setOnClickListener {
             val ref = FirebaseStorage.getInstance().getReferenceFromUrl(item!!.curPhotoPath)
@@ -106,6 +112,6 @@ class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener
 
     override fun onAddedToStorage(uriString: String) {
        Picasso.get().load(uriString).into(view?.check_in_photo)
-        this.imageUri = uriString
+       this.imageUri = uriString
     }
 }
