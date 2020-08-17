@@ -80,6 +80,10 @@
             android:name="isManagement"
             app:argType="boolean"
             android:defaultValue="false"/>
+        <argument
+            android:name="clubID"
+            app:argType="string"
+            android:defaultValue=""/>
     </activity>
 
     <dialog

@@ -1,9 +1,9 @@
 package edu.rosehulman.gearlocker
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +15,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.models.Cart
+import edu.rosehulman.gearlocker.models.Club
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.rosefire.Rosefire
 
 
-class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationListener, AuthProvider {
+class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationListener, AuthProvider, ClubProvider {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var cart: Cart = Cart()
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
     private val signIn = 1
     private var authListener: FirebaseAuth.AuthStateListener? = null
     private var uid: String = ""
+    private var activeClubID: String = ""
 
     private val RC_ROSEFIRE_LOGIN = 1
 
@@ -103,9 +106,8 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.add_demo_data -> {
-                Log.d(Constants.TAG, "test2")
-                //DemoData.createRentals()
+            R.id.switch_active_club -> {
+                showClubSwitcher()
                 true
             }
             R.id.add_club->{
@@ -138,6 +140,28 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
         )
     }
 
+    private fun showClubSwitcher() {
+        val builder = AlertDialog.Builder(this)
+        FirebaseFirestore
+            .getInstance()
+            .collection(Constants.FB_CLUBS)
+            .get().addOnSuccessListener { querySnapshot ->
+                val clubMap = HashMap<String, String>()
+
+                for (doc in querySnapshot.documents) {
+                    val club = Club.fromSnapshot(doc)
+                    clubMap[club.name] = club.id
+                }
+
+                val clubs = clubMap.keys.toTypedArray()
+
+                builder.setItems(clubs) { _, which ->
+                    activeClubID = clubMap[clubs[which]]!!
+                }
+                builder.create().show()
+            }
+    }
+
     override fun onRoseLoginPressed() {
         val signInIntent = Rosefire.getSignInIntent(this, getString(R.string.rosefire_token))
         startActivityForResult(signInIntent, RC_ROSEFIRE_LOGIN)
@@ -157,6 +181,10 @@ class MainActivity : AppCompatActivity(), SplashFragment.ApplicationNavigationLi
 
     override fun getUID(): String {
         return uid
+    }
+
+    override fun getActiveClub(): String {
+        return activeClubID
     }
 
 }

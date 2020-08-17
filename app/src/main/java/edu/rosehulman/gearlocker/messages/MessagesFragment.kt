@@ -1,5 +1,6 @@
 package edu.rosehulman.gearlocker.messages
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +13,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.AuthProvider
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
+import edu.rosehulman.gearlocker.models.Club
 import edu.rosehulman.gearlocker.models.Message
 import kotlinx.android.synthetic.main.fragment_messages.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
@@ -39,19 +42,40 @@ class MessagesFragment : Fragment() {
             activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination = R.id.navigation_messages
         }
         Log.d(Constants.TAG, "Fragment: Messages")
-        adapter = MessagesAdapter(requireContext())
+
+        val uid = (context as AuthProvider).getUID()
+        val clubID = (context as ClubProvider).getActiveClub()
+
+        adapter = MessagesAdapter(requireContext(), uid, clubID)
         view.list_of_messages.adapter = adapter
         view.list_of_messages.layoutManager = manager
         Log.d(Constants.TAG, "${safeArgs.isManagement}")
 
-        val uid = (context as AuthProvider).getUID()
-
         view.send_button.setOnClickListener {
-            val receiver = if (uid == "gotharbg") { "sorensej" } else { "gotharbg" }
-            messagesRef.add(Message(uid, view.input.text.toString(), receiver))
+            messagesRef.add(Message(uid, view.input.text.toString(), clubID))
             view.input.text.clear()
         }
 
+        if (safeArgs.isManagement) {
+            view.send_button.setOnLongClickListener {
+                val builder = AlertDialog.Builder(requireContext())
+                FirebaseFirestore
+                    .getInstance()
+                    .collection(Constants.FB_CLUBS)
+                    .document(clubID)
+                    .get().addOnSuccessListener { querySnapshot ->
+                        val club = Club.fromSnapshot(querySnapshot)
+
+                        builder.setItems(club.members.toTypedArray()) { _, which ->
+                            adapter =
+                                MessagesAdapter(requireContext(), clubID, club.members[which])
+                            view.list_of_messages.adapter = adapter
+                        }
+                        builder.create().show()
+                    }
+                true
+            }
+        }
         return view
     }
 }

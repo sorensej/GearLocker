@@ -46,12 +46,12 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
         view.upload_photo1.setOnClickListener {
             CameraAndUploadUtils.startPickActivity(this)
             arrayList[0] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo1)
+            Picasso.get().load(imageUri).into(view?.check_out_photo)
         }
         view.upload_photo2.setOnClickListener {
             CameraAndUploadUtils.startPickActivity(this)
             arrayList[1] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo2)
+            Picasso.get().load(imageUri).into(view?.check_in_photo)
         }
         view.upload_photo3.setOnClickListener {
             CameraAndUploadUtils.startPickActivity(this)
@@ -61,12 +61,12 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
         view.take_photo1.setOnClickListener {
             CameraAndUploadUtils.startCameraActivity(this)
             arrayList[0] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo1)
+            Picasso.get().load(imageUri).into(view?.check_out_photo)
         }
         view.take_photo2.setOnClickListener {
             CameraAndUploadUtils.startCameraActivity(this)
             arrayList[1] = imageUri.toString()
-            Picasso.get().load(imageUri).into(view?.photo2)
+            Picasso.get().load(imageUri).into(view?.check_in_photo)
         }
         view.take_photo3.setOnClickListener {
             CameraAndUploadUtils.startCameraActivity(this)

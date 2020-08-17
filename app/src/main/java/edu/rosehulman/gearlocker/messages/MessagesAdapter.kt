@@ -15,8 +15,7 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Message
 
 
-class MessagesAdapter(private val context: Context) : RecyclerView.Adapter<MessagesViewHolder>() {
-    //private var messages = arrayListOf(Message("Sender", "This is a message"), Message("Sender", "This is another message and it is a bit longer to see what it will look like."), Message("Renter", "This should be on the other side."))
+class MessagesAdapter(private val context: Context, private val sender: String, private val receiver: String) : RecyclerView.Adapter<MessagesViewHolder>() {
 
     private val messages = ArrayList<Message>()
 
@@ -38,12 +37,14 @@ class MessagesAdapter(private val context: Context) : RecyclerView.Adapter<Messa
             return
         }
 
-        val uid = (context as AuthProvider).getUID()
-
         for (change in snapshot!!.documentChanges) {
             val message = Message.fromSnapshot(change.document)
 
-            if (message.sender != uid && message.receiver != uid) {
+            if (message.sender != receiver && message.sender != sender) {
+                continue
+            }
+
+            if (message.receiver != sender && message.receiver != receiver) {
                 continue
             }
 

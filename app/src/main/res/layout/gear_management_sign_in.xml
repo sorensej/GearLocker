@@ -26,14 +26,28 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
         android:background="#9EA2A2"
-        android:padding="10dp"
-        android:hint="@string/passcode" />
+        android:hint="@string/passcode"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/login_error_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passcode_edit_text"
+        android:layout_alignStart="@id/passcode_edit_text"
+        android:layout_alignEnd="@id/passcode_edit_text"
+        android:text="Login Error: Incorrect passcode or you are not an admin of any clubs"
+        android:textAlignment="center"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/manage_gear_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/passcode_edit_text"
+        android:layout_below="@id/login_error_textview"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"

@@ -9,8 +9,8 @@
         android:orderInCategory="50"/>
 
     <item
-        android:id="@+id/add_demo_data"
-        android:title="@string/add_demo_data"
+        android:id="@+id/switch_active_club"
+        android:title="@string/switch_club"
         android:orderInCategory="80"/>
 
     <item
