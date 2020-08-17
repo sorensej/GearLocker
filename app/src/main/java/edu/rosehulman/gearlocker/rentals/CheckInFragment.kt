@@ -3,6 +3,8 @@ package edu.rosehulman.gearlocker.rentals
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,20 +15,19 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import edu.rosehulman.gearlocker.CameraAndUploadUtils
 import edu.rosehulman.gearlocker.Constants
-import edu.rosehulman.gearlocker.ImageProducer
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Item
 import kotlinx.android.synthetic.main.check_in.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
 
-class CheckInFragment: Fragment() {
+class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
 
-    private val RC_TAKE_PICTURE = 1
-    private val RC_CHOOSE_PICTURE = 2
-
-    private val imageProducer = ImageProducer(this)
+    private val storageRef = FirebaseStorage.getInstance().reference.child("images")
+    private var imageUri: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,20 +39,25 @@ class CheckInFragment: Fragment() {
         val rental = args.rental
         val view : RelativeLayout =
             inflater.inflate(R.layout.check_in, container, false) as RelativeLayout
-        view.cancel_check_in_button.setOnClickListener {
-            findNavController().navigate(R.id.navigation_management_rentals)
-        }
-        view.photo1.setImageURI(item?.curPhotoPath?.toUri())
+        Picasso.get().load(item?.curPhotoPath).into(view.check_out_photo)
         view.gear_name_text_view.text = item?.name
         view.upload_photo.setOnClickListener {
-            imageProducer.launchChooseIntent()
-            addAndShowImage(view, item)
+            CameraAndUploadUtils.startPickActivity(this)
         }
         view.take_photo.setOnClickListener {
-            imageProducer.launchCameraIntent()
-            addAndShowImage(view, item)
+            CameraAndUploadUtils.startCameraActivity(this)
         }
         view.complete_check_in_button.setOnClickListener {
+            val ref = FirebaseStorage.getInstance().getReferenceFromUrl(item!!.curPhotoPath)
+            ref.delete()
+            item.curPhotoPath = imageUri!!
+
+            FirebaseFirestore
+                .getInstance()
+                .collection(Constants.FB_ITEMS)
+                .document(item.id)
+                .update("curPhotoPath", imageUri)
+
             val builder = AlertDialog.Builder(this.context)
             builder.setTitle("Check-In Complete")
             Log.d(Constants.TAG, "${item?.name} checked in")
@@ -66,30 +72,41 @@ class CheckInFragment: Fragment() {
             }
             builder.create().show()
         }
+        view.cancel_check_in_button.setOnClickListener {
+            if (this.imageUri != null) {
+                val ref = FirebaseStorage.getInstance().getReferenceFromUrl(this.imageUri!!)
+                ref.delete()
+            }
+            findNavController().navigate(R.id.navigation_management_rentals)
+        }
         activity?.nav_host_fragment_management?.findNavController()?.graph?.startDestination = R.id.checkInFragment
         return view
-    }
-
-    private fun addAndShowImage(
-        view: View,
-        item: Item?
-    ) {
-        imageProducer.add(imageProducer.currentPhotoPath)
-        item!!.curPhotoPath = imageProducer.downloadUri.toString()
-        Picasso.get().load(imageProducer.downloadUri).into(view.photo2)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                RC_TAKE_PICTURE -> {
-                    imageProducer.sendCameraPhotoToAdapter()
+                CameraAndUploadUtils.RC_TAKE_PICTURE -> {
+                    CameraAndUploadUtils.addToStorage(
+                        storageRef,
+                        data?.extras?.get("data") as Bitmap,
+                        this.imageUri,
+                        this)
                 }
-                RC_CHOOSE_PICTURE -> {
-                    imageProducer.sendGalleryPhotoToAdapter(data)
+                CameraAndUploadUtils.RC_CHOOSE_PICTURE -> {
+                    val stream = context?.contentResolver?.openInputStream(data?.data!!)
+                    CameraAndUploadUtils.addToStorage(
+                        storageRef,
+                        BitmapFactory.decodeStream(stream),
+                        this.imageUri,
+                        this)
                 }
             }
-            view?.photo2?.setImageURI(imageProducer.currentPhotoPath.toUri())
         }
+    }
+
+    override fun onAddedToStorage(uriString: String) {
+        Picasso.get().load(uriString).into(view?.check_in_photo)
+        this.imageUri = uriString
     }
 }
