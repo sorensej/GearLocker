@@ -92,7 +92,7 @@
         <TableRow android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/photo1"
+                android:id="@+id/check_out_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="fitCenter"
@@ -100,7 +100,7 @@
                 android:contentDescription="photo_from_check_out" />
 
             <ImageView
-                android:id="@+id/photo2"
+                android:id="@+id/check_in_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="fitCenter"
