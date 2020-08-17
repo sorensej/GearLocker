@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,7 +43,7 @@ class PastRentalFormAdapter(val context: Context) : RecyclerView.Adapter<PastRen
         for (change in snapshot!!.documentChanges) {
             val form = Form.fromSnapshot(change.document)
 
-            if (!form.isCurrent) {
+            if (!form.current) {
 
                 when (change.type) {
                     DocumentChange.Type.ADDED    -> {
@@ -53,13 +52,17 @@ class PastRentalFormAdapter(val context: Context) : RecyclerView.Adapter<PastRen
                     }
                     DocumentChange.Type.REMOVED  -> {
                         val position = pastForms.indexOfFirst { it.id == form.id }
-                        pastForms.removeAt(position)
-                        notifyItemRemoved(position)
+                        if (position!=-1) {
+                            pastForms.removeAt(position)
+                            notifyItemRemoved(position)
+                        }
                     }
                     DocumentChange.Type.MODIFIED -> {
                         val position = pastForms.indexOfFirst { it.id == form.id }
-                        pastForms[position] = form
-                        notifyItemChanged(position)
+                        if (position!=-1) {
+                            pastForms[position] = form
+                            notifyItemChanged(position)
+                        }
                     }
                 }
             }
@@ -75,13 +78,12 @@ class PastRentalFormAdapter(val context: Context) : RecyclerView.Adapter<PastRen
         }
 
         fun bind(form: Form) {
-            itemView.isRented.isVisible = false
             itemView.sub_item_name.text = "${form.startDate} to ${form.endDate} by ${form.uid}"
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PastRentalFormAdapter.PastRentalFormViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.inventory_sub_item, parent, false)  // TODO: Replace the stand-in layout
+        val view = LayoutInflater.from(context).inflate(R.layout.inventory_sub_item_simple, parent, false)
         return PastRentalFormViewHolder(view)
     }
 

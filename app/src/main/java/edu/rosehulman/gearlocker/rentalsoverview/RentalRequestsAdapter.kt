@@ -67,13 +67,13 @@ class RentalRequestsAdapter(
         }
     }
 
-    fun remove(rental: Rental) {
+    fun confirmRental(rental: Rental) {
         currentRentalsRef.document(rental.id).delete()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RentalRequestViewHolder {
         val view = LayoutInflater.from(context).inflate(
-            R.layout.inventory_sub_item,
+            R.layout.inventory_sub_item_simple,
             parent,
             false
         )

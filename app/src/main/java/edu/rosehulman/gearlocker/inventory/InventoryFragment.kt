@@ -63,27 +63,8 @@ class InventoryFragment : Fragment(), InventoryAdapter.ItemInterface, Parcelable
         )
         view?.inventory_recycler_view?.adapter = _adapter
         view?.inventory_recycler_view?.layoutManager = manager
-//        setHasOptionsMenu(true)
         return view
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.app_bar_menu, menu)
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.add_demo_data -> {
-//                DemoData.createItemCategories()
-//                true
-//            }
-//            R.id.add_club      -> {
-//                findNavController().navigate(R.id.clubsFragment)
-//                true
-//            }
-//            else               -> super.onOptionsItemSelected(item)
-//        }
-//    }
 
     override fun onItemSelected(item: Item) {
         val bundle = Bundle()

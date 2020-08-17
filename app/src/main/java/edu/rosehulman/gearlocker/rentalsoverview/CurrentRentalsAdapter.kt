@@ -89,7 +89,7 @@ class CurrentRentalsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentRentalsViewHolder {
         val view = LayoutInflater.from(context).inflate(
-            R.layout.inventory_sub_item,
+            R.layout.inventory_sub_item_simple,
             parent,
             false
         )

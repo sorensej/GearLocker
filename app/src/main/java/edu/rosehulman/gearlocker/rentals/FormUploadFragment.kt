@@ -82,9 +82,15 @@ class FormUploadFragment : Fragment(), CameraAndUploadUtils.OnAddedToStorageList
                     arrayList,
                     true
                 )
-                formsRef.add(form)
-                rentalHandler.onGetNavController().navigate(R.id.rentalsOverviewManagment)
-                rentalHandler.confirmRental(rental, 0, 0)
+                formsRef.add(form).addOnSuccessListener {
+                    Log.d(Constants.TAG, "Form id: ${it.id}")
+                    rental.forms = it.id
+                    Log.d(Constants.TAG, "Rental right after: ${rental.forms}")
+                    rentalHandler.confirmRental(rental)
+                    rentalHandler.onGetNavController().navigate(R.id.rentalsOverviewManagment)
+                }.addOnFailureListener {
+                    Log.e(Constants.TAG, "Exception: $it")
+                }
             } catch (e: Exception) {
                 Log.e(Constants.TAG, "$e")
             }

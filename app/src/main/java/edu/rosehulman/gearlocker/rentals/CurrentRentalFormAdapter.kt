@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,7 +42,7 @@ class CurrentRentalFormAdapter(val context: Context) : RecyclerView.Adapter<Curr
         for (change in snapshot!!.documentChanges) {
             val form = Form.fromSnapshot(change.document)
 
-            if (form.isCurrent) {
+            if (form.current) {
 
                 when (change.type) {
                     DocumentChange.Type.ADDED   -> {
@@ -74,13 +73,12 @@ class CurrentRentalFormAdapter(val context: Context) : RecyclerView.Adapter<Curr
         }
 
         fun bind(form: Form) {
-            itemView.isRented.isVisible = false
             itemView.sub_item_name.text = "${form.startDate} to ${form.endDate} by ${form.uid}"
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentRentalFormViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.inventory_sub_item, parent, false) // TODO: Replace the stand-in layout
+        val view = LayoutInflater.from(context).inflate(R.layout.inventory_sub_item_simple, parent, false) // TODO: Replace the stand-in layout
         return CurrentRentalFormViewHolder(view)
     }
 

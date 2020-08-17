@@ -13,7 +13,7 @@ data class Form(
     var endDate: Date = Date.from(Instant.EPOCH),
     var uid: String = "",
     var images: ArrayList<String> = arrayListOf<String>(),
-    var isCurrent: Boolean = true
+    var current: Boolean = true
 ) : Parcelable {
     @get:Exclude
     var id: String = ""

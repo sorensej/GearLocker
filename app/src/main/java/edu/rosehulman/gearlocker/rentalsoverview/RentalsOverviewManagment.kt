@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Form
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
 import kotlinx.android.parcel.IgnoredOnParcel
@@ -25,9 +24,13 @@ import kotlinx.android.synthetic.main.management_activity_main.*
 @Parcelize
 class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandler, Parcelable {
 
+    @IgnoredOnParcel
     private val formsRef = FirebaseFirestore
         .getInstance()
-        .collection(Constants.FB_ITEMS)
+        .collection(Constants.FB_FORMS)
+
+    private val rentalsRef = FirebaseFirestore.getInstance().collection(Constants.FB_RENTALS)
+
 
     @IgnoredOnParcel
     var curRentalsAdapter: CurrentRentalsAdapter? = null
@@ -66,9 +69,11 @@ class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandl
         return constraintView
     }
 
-    override fun confirmRental(rental: Rental, position: Int, int: Int) {
+    override fun confirmRental(rental: Rental) {
+        Log.d(Constants.TAG, "Rental form: ${rental.forms}")
+        rentalsRef.document(rental.id).set(rental)
+        rentalRequestAdapter?.confirmRental(rental)
         curRentalsAdapter?.add(rental)
-        rentalRequestAdapter?.remove(rental)
     }
 
     override fun removeItemFromRental(rental: Rental, item: Item) {
@@ -79,19 +84,16 @@ class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandl
             curRentalsAdapter!!.checkIn(item, rental)
         } else {
             Log.d(Constants.TAG, "remove entire rental")
+            curRentalsAdapter!!.checkIn(item, rental)
             curRentalsAdapter!!.remove(rental)
-            rentalRequestAdapter!!.remove(rental)
+            Log.d(Constants.TAG, rental.forms)
+            formsRef.document(rental.forms).update("current", false)
+
         }
     }
 
     override fun onGetNavController(): NavController {
         return findNavController()
-    }
-
-    override fun addFormToRental(form: Form, rental: Rental) {
-        formsRef.add(form)
-        rental.forms = form.id
-        this.confirmRental(rental, 1, 1)
     }
 
 }

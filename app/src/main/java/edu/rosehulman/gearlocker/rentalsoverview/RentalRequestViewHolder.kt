@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
-import edu.rosehulman.gearlocker.models.Form
 import edu.rosehulman.gearlocker.models.Item
 import edu.rosehulman.gearlocker.models.Rental
 import kotlinx.android.synthetic.main.inventory_sub_item.view.*
@@ -34,25 +33,24 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
         rentalName.setOnClickListener {
             var builder = AlertDialog.Builder(context)
 
-            val stringBuilder = StringBuilder()
+            var array: String = ""
+
+            builder.setMessage(array.toString())
 
             for (item: String in rental.itemList) {
                 itemsRef.document(item).get().addOnSuccessListener { snapshot ->
-                    stringBuilder.append(snapshot.getString("name") + "\n")
+                    array += snapshot.getString("name").toString()
+                    Log.d(Constants.TAG, "Message2: ${array.toString()}")
                 }
             }
-
+            Log.d(Constants.TAG, "Message: ${array.toString()}")
             builder.setTitle("${rental.startDate} to ${rental.endDate} for ${rental.uid}")
-            Log.d(Constants.TAG, "StringBuilder: ${stringBuilder.toString()}")
-            builder.setMessage(stringBuilder.toString())
-
 
             builder.setPositiveButton("Upload Form") { dialogInterface: DialogInterface, i: Int ->
                 val bundle = Bundle()
                 bundle.putParcelable("rentalHandler", rentalHandler)
                 bundle.putParcelable("rental", rental)
                 rentalHandler.onGetNavController().navigate(R.id.formUploadFragment, bundle)
-                //rentalHandler.confirmRental(rental, adapterPosition, 1)
             }
 
             builder.setNegativeButton("Cancel") { dialog: DialogInterface?, _: Int ->
@@ -63,9 +61,8 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
     }
 
     interface RentalHandler : Parcelable {
-        fun confirmRental(rental: Rental, position: Int, int: Int)
+        fun confirmRental(rental: Rental)
         fun removeItemFromRental(rental: Rental, item: Item)
         fun onGetNavController(): NavController
-        fun addFormToRental(form: Form, rental: Rental)
     }
 }
