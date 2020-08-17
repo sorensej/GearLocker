@@ -65,10 +65,12 @@ class MessagesFragment : Fragment() {
                     .document(clubID)
                     .get().addOnSuccessListener { querySnapshot ->
                         val club = Club.fromSnapshot(querySnapshot)
+                        val clubMemberIDs = club.members.values.toTypedArray()
+                        val clubMemberNames = club.members.keys.toTypedArray()
 
-                        builder.setItems(club.members.toTypedArray()) { _, which ->
+                        builder.setItems(clubMemberNames) { _, which ->
                             adapter =
-                                MessagesAdapter(requireContext(), clubID, club.members[which])
+                                MessagesAdapter(requireContext(), clubID, clubMemberIDs[which])
                             view.list_of_messages.adapter = adapter
                         }
                         builder.create().show()

@@ -7,7 +7,7 @@ import kotlin.random.Random
 data class Club (
     var name: String = "",
     var admins: ArrayList<String> = arrayListOf(),
-    var members: ArrayList<String> = arrayListOf(),
+    var members: Map<String, String> = mapOf<String, String>(),
     var accessCode: String = Random.nextInt(99999).toString()
 ) {
     @get:Exclude var id: String = ""
