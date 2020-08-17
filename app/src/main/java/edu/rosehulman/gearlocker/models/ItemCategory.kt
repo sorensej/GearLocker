@@ -8,7 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ItemCategory (
     var name: String = "",
-    var items: ArrayList<String> = arrayListOf<String>()
+    var items: ArrayList<String> = arrayListOf<String>(),
+    var owningClub: String = ""
 ) : Parcelable {
     @get:Exclude var id: String = ""
 

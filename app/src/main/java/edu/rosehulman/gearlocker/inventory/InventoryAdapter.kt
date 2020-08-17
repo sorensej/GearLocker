@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.*
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
@@ -29,7 +30,7 @@ class InventoryAdapter(
         .collection(Constants.FB_ITEMS)
 
     init {
-        itemCategoriesRef.addSnapshotListener { snapshot, exception ->
+        itemCategoriesRef.whereEqualTo("owningClub", (context as ClubProvider).getActiveClubID()).addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
         notifyDataSetChanged()

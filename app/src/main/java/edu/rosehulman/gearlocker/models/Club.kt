@@ -6,13 +6,12 @@ import com.google.firebase.firestore.Exclude
 import kotlinx.android.parcel.Parcelize
 import kotlin.random.Random
 
-@Parcelize
 data class Club (
     var name: String = "",
     var admins: ArrayList<String> = arrayListOf(),
     var members: MutableMap<String, String> = mutableMapOf(),
     var accessCode: String = Random.nextInt(99999).toString()
-) : Parcelable {
+) {
     @get:Exclude var id: String = ""
 
     fun isAdmin(uid: String, passcode: String): Boolean {

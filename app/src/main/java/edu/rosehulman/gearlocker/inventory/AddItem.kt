@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.CameraAndUploadUtils
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
@@ -69,7 +70,8 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                     view.seekBar.progress,
                     view.description_edittext.text.toString(),
                     view.category_spinner.selectedItem.toString(),
-                    imageUri!!
+                    imageUri!!,
+                    owningClub = (requireContext() as ClubProvider).getActiveClubID()
                 )
                 if (args.isAdd) {
                     args.itemInterface.onItemAdded(item)

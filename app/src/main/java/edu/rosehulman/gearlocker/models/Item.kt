@@ -13,7 +13,8 @@ data class Item (
     var description: String = "",
     var category: String = "",
     var curPhotoPath: String = "",
-    var currentlyRented: Boolean = false
+    var currentlyRented: Boolean = false,
+    var owningClub: String = ""
 ) : Parcelable {
 
     @get:Exclude var id: String = ""

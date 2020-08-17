@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Rental
@@ -26,7 +27,8 @@ class RentalRequestsAdapter(
         .collection(Constants.FB_RENTALS)
 
     init {
-        currentRentalsRef.addSnapshotListener { snapshot, exception ->
+        Log.d(Constants.TAG, "ClubID: ${(context as ClubProvider).getActiveClubID()}")
+        currentRentalsRef.whereEqualTo("rentedFrom", (context as ClubProvider).getActiveClubID()).addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
         notifyDataSetChanged()

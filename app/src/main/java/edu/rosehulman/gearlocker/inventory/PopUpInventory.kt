@@ -40,7 +40,7 @@ class PopUpInventory: DialogFragment() {
                 val builder2 = AlertDialog.Builder(context)
                 builder2.setTitle("${item.name} added to cart.")
                 builder2.setPositiveButton("View Cart"){_,_ ->
-                    safeArgs.itemInterface.onRentItem(item)
+                    safeArgs.itemInterface?.onRentItem(item)
                     val bundle = Bundle()
                     bundle.putParcelable("cart", listener?.onGetCart())
                     bundle.putParcelable("itemInterface", safeArgs.itemInterface)
@@ -48,14 +48,14 @@ class PopUpInventory: DialogFragment() {
                     dialog?.dismiss()
                 }
                 builder2.setNegativeButton("Return to Inventory"){_, _ ->
-                    safeArgs.itemInterface.onRentItem(item)
-                    safeArgs.itemInterface.onNavControllerRequest().navigate(R.id.navigation_inventory)
+                    safeArgs.itemInterface?.onRentItem(item)
+                    safeArgs.itemInterface?.onNavControllerRequest()?.navigate(R.id.navigation_inventory)
                     dialog?.dismiss()
                 }
                 builder2.create().show()
             }
             layout.cancel_button.setOnClickListener {
-                safeArgs.itemInterface.onNavControllerRequest().navigate(R.id.navigation_inventory)
+                safeArgs.itemInterface?.onNavControllerRequest()?.navigate(R.id.navigation_inventory)
                 dialog?.dismiss()
             }
         } else {

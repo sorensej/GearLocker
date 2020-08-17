@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.*
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Item
@@ -27,7 +28,7 @@ class CurrentRentalsAdapter(
         .collection(Constants.FB_RENTALS)
 
     init {
-        currentRentalsRef.addSnapshotListener { snapshot, exception ->
+        currentRentalsRef.whereEqualTo("rentedFrom", (context as ClubProvider).getActiveClubID()).addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
         notifyDataSetChanged()

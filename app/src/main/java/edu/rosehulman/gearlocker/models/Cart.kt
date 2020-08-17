@@ -24,8 +24,8 @@ class Cart(var arrayList: ArrayList<Item> = ArrayList(),
         }
     }
 
-    fun toRental(uid: String, startDate: Date, endDate: Date): Rental {
+    fun toRental(uid: String, startDate: Date, endDate: Date, rentingFrom: String): Rental {
         val itemIds = ArrayList(arrayList.map { it.id })
-        return Rental(startDate, endDate, itemIds, uid)
+        return Rental(startDate, endDate, itemIds, uid, rentedFrom = rentingFrom)
     }
 }

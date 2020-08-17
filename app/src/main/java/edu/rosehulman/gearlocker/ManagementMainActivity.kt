@@ -15,7 +15,7 @@ import edu.rosehulman.gearlocker.models.Club
 class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private lateinit var club: Club
+    private lateinit var clubID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
         navView.setupWithNavController(navController)
 
         val args: ManagementMainActivityArgs by navArgs()
-        this.club = args.club
+        this.clubID = args.clubID
 
         navController.addOnDestinationChangedListener { _, _, _ ->
             navView.isVisible = true
@@ -38,10 +38,10 @@ class ManagementMainActivity: AppCompatActivity(), AuthProvider, ClubProvider {
     }
 
     override fun getUID(): String {
-        return club.id
+        return clubID
     }
 
     override fun getActiveClubID(): String {
-        return club.id
+        return clubID
     }
 }

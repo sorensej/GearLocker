@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import edu.rosehulman.gearlocker.AuthProvider
+import edu.rosehulman.gearlocker.ClubProvider
 import edu.rosehulman.gearlocker.Constants
 import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.inventory.InventoryAdapter
@@ -101,7 +102,8 @@ class CartFragment : Fragment() {
                 val rental = cart.toRental(
                     (requireContext() as AuthProvider).getUID(),
                     cart.currentStartDate!!,
-                    cart.currentEndDate!!
+                    cart.currentEndDate!!,
+                    (requireContext() as ClubProvider).getActiveClubID()
                 )
                 rentalsRef.add(rental)
                 var builder = AlertDialog.Builder(context)
