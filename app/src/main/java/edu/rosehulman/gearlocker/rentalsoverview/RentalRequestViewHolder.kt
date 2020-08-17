@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.navigation.NavController
@@ -24,26 +23,25 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
         .getInstance()
         .collection(Constants.FB_ITEMS)
 
+    private var itemList = arrayListOf<String>()
+
     fun bind(
         rental: Rental,
         rentalHandler: RentalHandler
     ) {
         val rentalName: TextView = itemView.sub_item_name
         rentalName.text = "${rental.uid}: ${rental.startDate} to ${rental.endDate}"
-        rentalName.setOnClickListener {
-            var builder = AlertDialog.Builder(context)
 
-            var array: String = ""
-
-            builder.setMessage(array.toString())
-
-            for (item: String in rental.itemList) {
-                itemsRef.document(item).get().addOnSuccessListener { snapshot ->
-                    array += snapshot.getString("name").toString()
-                    Log.d(Constants.TAG, "Message2: ${array.toString()}")
-                }
+        itemList.clear()
+        for (item: String in rental.itemList) {
+            itemsRef.document(item).get().addOnSuccessListener { snapshot ->
+                itemList.add(snapshot.getString("name").toString())
             }
-            Log.d(Constants.TAG, "Message: ${array.toString()}")
+        }
+
+        rentalName.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+
             builder.setTitle("${rental.startDate} to ${rental.endDate} for ${rental.uid}")
 
             builder.setPositiveButton("Upload Form") { dialogInterface: DialogInterface, i: Int ->
@@ -56,6 +54,9 @@ class RentalRequestViewHolder(itemView: View, val context: Context?) :
             builder.setNegativeButton("Cancel") { dialog: DialogInterface?, _: Int ->
                 dialog?.dismiss()
             }
+
+            builder.setMessage(itemList.joinToString("\n"))
+
             builder.create().show()
         }
     }

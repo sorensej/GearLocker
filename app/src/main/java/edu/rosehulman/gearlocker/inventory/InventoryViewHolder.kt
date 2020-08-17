@@ -20,6 +20,8 @@ class InventoryViewHolder(
     val inventoryFragment: InventoryAdapter.ItemInterface
 ) : RecyclerView.ViewHolder(itemView) {
 
+    private val COLLAPSED_ITEM_COUNT = 3
+
     private var items = arrayListOf<String>()
 
     private val itemsRef = FirebaseFirestore
@@ -65,12 +67,8 @@ class InventoryViewHolder(
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        for (i in 0 until if (expanded) {
-            items.size
-        } else {
-            3
-        }) {
-            if (i >= items.size) {
+        for (i in 0 until items.size) {
+            if (!expanded && itemView.content_container.childCount >= COLLAPSED_ITEM_COUNT) {
                 break
             }
             val child = inflater.inflate(R.layout.inventory_sub_item, null, false)
@@ -87,15 +85,18 @@ class InventoryViewHolder(
                     } else {
                         child.isRented.isVisible = false
                     }
-
-                itemView.content_container.addView(child)
+                    if (expanded || itemView.content_container.childCount <= COLLAPSED_ITEM_COUNT) {
+                        itemView.content_container.addView(child)
+                    }
                 } else if (isManagment) {
                     child.isRented.text = "Rented"
                     child.sub_item_name.text = item.name
                     child.setOnClickListener {
                         inventoryFragment.onItemSelected(item)
                     }
-                    itemView.content_container.addView(child)
+                    if (expanded || itemView.content_container.childCount <= COLLAPSED_ITEM_COUNT) {
+                        itemView.content_container.addView(child)
+                    }
                 }
             }
         }
