@@ -71,22 +71,7 @@ class InventoryAdapter(
     }
 
     fun editItem(item: Item) {
-        itemsRef.document(item.id).update(
-            "catagory",
-            item.category,
-            "condition",
-            item.condition,
-            "curPhotoPath",
-            item.curPhotoPath,
-            "currentlyRented",
-            item.currentlyRented,
-            "description",
-            item.description,
-            "estimatedCost",
-            item.estimatedCost,
-            "name",
-            item.name
-        )
+        itemsRef.document(item.id).set(item)
     }
 
 

@@ -55,9 +55,11 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
         if (!args.isAdd) {
             val item = args.item
             view.name_of_gear_edittext.setText(item!!.name)
-            view.price_textview.setText(item.estimatedCost.toString())
+            view.price_textview.setText(String.format("%.2f", item.estimatedCost))
             view.seekBar.progress = item.condition
             view.description_edittext.setText(item.description)
+            Picasso.get().load(item.curPhotoPath).into(view.gear_image)
+            imageUri = item.curPhotoPath
         }
         view.submit_button.setOnClickListener {
             try {
@@ -72,6 +74,7 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                 if (args.isAdd) {
                     args.itemInterface.onItemAdded(item)
                 } else {
+                    item.id = args.item!!.id
                     args.itemInterface.onEditItem(item)
                 }
                 val alertView =
@@ -102,10 +105,11 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                     dialog.dismiss()
                 }
                 builder.create().show()
+                e.printStackTrace()
             }
         }
         view.cancel_button.setOnClickListener {
-            if (this.imageUri != null) {
+            if (this.imageUri != null && args.isAdd) {
                 val ref = FirebaseStorage.getInstance().getReferenceFromUrl(this.imageUri!!)
                 ref.delete()
             }
