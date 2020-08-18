@@ -25,6 +25,8 @@ import edu.rosehulman.gearlocker.R
 import edu.rosehulman.gearlocker.models.Club
 import kotlinx.android.synthetic.main.search.view.*
 
+//SearchView information from: https://spin.atomicobject.com/2019/11/11/how-to-create-a-searchview-with-suggestions-in-kotlin/
+
 class ClubsFragment : Fragment() {
 
     var clubs: ArrayList<Club> = ArrayList<Club>()
