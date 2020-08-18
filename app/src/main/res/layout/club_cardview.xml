@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorGrey"
+        android:id="@+id/linear_layout"
         android:orientation="horizontal"
         android:weightSum="8">
 
