@@ -62,6 +62,9 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
             Picasso.get().load(item.curPhotoPath).into(view.gear_image)
             imageUri = item.curPhotoPath
         }
+
+        val owningClubID = (requireContext() as ClubProvider).getActiveClubID()
+
         view.submit_button.setOnClickListener {
             try {
                 val item = Item(
@@ -71,7 +74,7 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                     view.description_edittext.text.toString(),
                     view.category_spinner.selectedItem.toString(),
                     imageUri!!,
-                    owningClub = (requireContext() as ClubProvider).getActiveClubID()
+                    owningClub = owningClubID
                 )
                 if (args.isAdd) {
                     args.itemInterface.onItemAdded(item)
@@ -119,7 +122,7 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
             findNavController().navigate(R.id.navigation_management_inventory)
         }
 
-        itemCategoriesRef.get().addOnSuccessListener { snapshot ->
+        itemCategoriesRef.whereEqualTo("owningClub", owningClubID).get().addOnSuccessListener { snapshot ->
             val categories = snapshot.documents.map { it.get("name") as String }.sorted()
             view.category_spinner.adapter = ArrayAdapter<String>(
                 requireContext(),
