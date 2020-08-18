@@ -20,14 +20,16 @@ class DashboardDeletedAdapter(private val context: Context
 
     private val rentals = ArrayList<Rental>()
 
-    private val currentRentalsRef = FirebaseFirestore
+    private val pastRentalsRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_PAST_RENTALS)
 
     init {
-        currentRentalsRef.addSnapshotListener { snapshot, exception ->
+        rentals.clear()
+        pastRentalsRef.addSnapshotListener { snapshot, exception ->
             handleSnapshotEvent(snapshot, exception)
         }
+        notifyDataSetChanged()
     }
 
     private fun handleSnapshotEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {

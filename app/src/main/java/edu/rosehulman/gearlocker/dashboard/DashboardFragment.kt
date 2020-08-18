@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_rental_overview.view.*
 
 class DashboardFragment : Fragment() {
 
-    //private var adapter: DashboardAdapter? =null
     private var curAdapter: DashboardAdapter? = null
     private var pastAdapter: DashboardDeletedAdapter? = null
 
@@ -22,11 +21,6 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val constraintView: ConstraintLayout = inflater.inflate(R.layout.new_dash, container, false) as ConstraintLayout
-//        val recyclerView : RecyclerView =
-//            inflater.inflate(R.layout.fragment_dashboard, container, false) as RecyclerView
-//        adapter = DashboardAdapter(requireContext())
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(context)
         curAdapter = DashboardAdapter(requireContext())
         pastAdapter =
             DashboardDeletedAdapter(requireContext())
@@ -34,7 +28,6 @@ class DashboardFragment : Fragment() {
         constraintView.rental_requests_recyclerview.adapter = pastAdapter
         constraintView.cur_rentals_recyclerview.layoutManager = LinearLayoutManager(context)
         constraintView.rental_requests_recyclerview.layoutManager = LinearLayoutManager(context)
-
         return constraintView
     }
 }
