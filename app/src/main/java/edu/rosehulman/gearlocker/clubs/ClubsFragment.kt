@@ -1,6 +1,8 @@
 package edu.rosehulman.gearlocker.clubs
 
+import android.app.AlertDialog
 import android.app.SearchManager
+import android.content.DialogInterface
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.BaseColumns
@@ -12,6 +14,7 @@ import android.widget.CursorAdapter
 import android.widget.SearchView
 import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
@@ -72,40 +75,16 @@ class ClubsFragment : Fragment() {
     ): View? {
        val constraintLayout = inflater.inflate(R.layout.search, container, false)
         val from = arrayOf(SearchManager.SUGGEST_COLUMN_TEXT_1)
-        val to = intArrayOf(R.id.club_textview)
+        val to = intArrayOf(R.id.sub_item_name)
 
         val cursorAdapter = SimpleCursorAdapter(
             context,
-            R.layout.club_cardview,
+            R.layout.inventory_sub_item_simple,
             null,
             from,
             to,
             CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
         )
-        //cursorAdapter.setViewResource(R.id.add_club)
-//        cursorAdapter.setViewBinder { view, cursor, columnIndex ->
-//            view.add_club_textbutton.setOnClickListener {
-//                val button: TextView = view.add_club_textbutton
-//                val club: Club = clubs[cursor.position]
-//
-//
-//                val auth = FirebaseAuth.getInstance().currentUser
-//                if (club.members.containsValue(auth?.uid)) {
-//                    button.text = requireContext().getString(R.string.leave_club)
-//                    button.setBackgroundResource(R.drawable.round_button_red)
-//                    button.setOnClickListener {
-//                        removeFromClub(club, auth)
-//                    }
-//                } else {
-//                    button.text = requireContext().getString(R.string.add_club)
-//                    button.setBackgroundResource(R.drawable.round_button)
-//                    button.setOnClickListener {
-//                        addToClub(club, auth)
-//                    }
-//                }
-//            }
-//            return@setViewBinder true
-//        }
         cursorAdapter.notifyDataSetChanged()
         constraintLayout.searchView.suggestionsAdapter = cursorAdapter
         constraintLayout.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -133,22 +112,33 @@ class ClubsFragment : Fragment() {
             }
 
             override fun onSuggestionClick(position: Int): Boolean {
-//                val cursor = constraintLayout.searchView.suggestionsAdapter.getItem(position) as Cursor
-//                val selection =
-//                    cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
-//                constraintLayout.searchView.setQuery(selection, false)
-//
-//                // Do something with selection
+                val club = clubs[position]
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle(club.name)
+                val auth = FirebaseAuth.getInstance().currentUser
+                if (club.members.containsValue(auth?.uid)) {
+                    builder.setMessage("Do you want to leave the ${club.name}?")
+                    builder.setPositiveButton("Yes"){ dialogInterface: DialogInterface, i: Int ->
+                        removeFromClub(club, auth)
+                    }
+                    builder.setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                        dialogInterface.dismiss()
+                    }
+
+                } else {
+                    builder.setMessage(requireContext().getString(R.string.add_club))
+                    builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
+                        addToClub(club, auth)
+                    }
+                    builder.setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                        dialogInterface.dismiss()
+                    }
+                }
+                builder.create().show()
                 return true
             }
 
         })
-
-//        val constraintLayout : ConstraintLayout =
-//            inflater.inflate(R.layout.add_club_home, container, false) as ConstraintLayout
-//        adapter = ClubsAdapter(requireContext())
-//        constraintLayout.findViewById<RecyclerView>(R.id.listView).adapter = adapter
-//        constraintLayout.findViewById<RecyclerView>(R.id.listView).layoutManager = LinearLayoutManager(context)
         return constraintLayout
     }
 
