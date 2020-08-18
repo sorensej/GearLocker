@@ -90,7 +90,6 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                     builderCreated.dismiss()
                 }
                 if(args.isAdd) {
-                    alertView.add_confirmation_text_view.text = "Changes Saved"
                     alertView.add_additional_item.setOnClickListener {
                         val bundle = Bundle()
                         bundle.putParcelable("itemInterface", args.itemInterface)
@@ -99,6 +98,7 @@ class AddItem : Fragment(), CameraAndUploadUtils.OnAddedToStorageListener {
                         builderCreated.dismiss()
                     }
                 } else {
+                    alertView.add_confirmation_text_view.text = "Changes Saved"
                     alertView.add_additional_item.isVisible = false
                 }
                 builderCreated.setView(alertView)
