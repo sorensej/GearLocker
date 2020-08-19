@@ -76,7 +76,14 @@ class PopUpInventory: DialogFragment() {
         layout.title_text_view.text = item.name
         layout.description_text_view.text = item.description
         layout.cost_text_view.text = String.format("Est. Value: $%.2f", item.estimatedCost)
-
+       layout.current_condition_text_view.text = when (item.condition) {
+            1    -> "Replace"
+            2    -> "Bad"
+            3    -> "Average"
+            4    -> "Good"
+            5    -> "New"
+            else -> "No Condition"
+        }
         return layout
     }
 }

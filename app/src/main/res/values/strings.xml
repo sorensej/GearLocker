@@ -60,4 +60,9 @@
     <string name="take_photo">Take Photo</string>
     <string name="switch_club">Switch Club</string>
     <string name="leave_club">Leave Club</string>
+    <string name="leave">Leave</string>
+    <string name="cancel">Cancel</string>
+    <string name="join">Join</string>
+    <string name="return_to_home">Return to Management Home</string>
+    <string name="check_in_complete">Check-In Complete</string>
 </resources>

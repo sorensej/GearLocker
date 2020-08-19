@@ -62,16 +62,15 @@ class CheckInFragment: Fragment(), CameraAndUploadUtils.OnAddedToStorageListener
                 .collection(Constants.FB_ITEMS)
                 .document(item.id)
                 .update("curPhotoPath", imageUri)
-
+            args.rentalHandler?.removeItemFromRental(rental!!, item)
             val builder = AlertDialog.Builder(this.context)
-            builder.setTitle("Check-In Complete")
+            builder.setTitle(getString(R.string.check_in_complete))
             Log.d(Constants.TAG, "${item?.name} checked in")
             builder.setPositiveButton("Return to Rentals"){ _, _ ->
                 Log.d(Constants.TAG, "Checkin complete")
-                args.rentalHandler?.removeItemFromRental(rental!!, item)
                 findNavController().navigate(R.id.navigation_management_rentals)
             }
-            builder.setNeutralButton("Return to Managment Home"){ _, _ ->
+            builder.setNeutralButton(getString(R.string.return_to_home)){ _, _ ->
                 Log.d(Constants.TAG, "Checkin complete")
                 findNavController().navigate(R.id.navigation_management_home)
             }

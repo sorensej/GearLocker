@@ -20,6 +20,7 @@ import edu.rosehulman.gearlocker.models.Club
 import edu.rosehulman.gearlocker.models.Message
 import kotlinx.android.synthetic.main.fragment_messages.view.*
 import kotlinx.android.synthetic.main.management_activity_main.*
+import java.text.SimpleDateFormat
 
 class MessagesFragment : Fragment() {
     private lateinit var adapter: MessagesAdapter
@@ -27,6 +28,8 @@ class MessagesFragment : Fragment() {
     private val messagesRef = FirebaseFirestore
         .getInstance()
         .collection(Constants.FB_MESSAGES)
+
+    private val dateFormat = SimpleDateFormat("MM/dd/yyy hh:mm a")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +55,9 @@ class MessagesFragment : Fragment() {
         Log.d(Constants.TAG, "${safeArgs.isManagement}")
 
         view.send_button.setOnClickListener {
-            messagesRef.add(Message(uid, view.input.text.toString(), clubID))
+            var message = Message(uid, view.input.text.toString(), clubID)
+            message.sentTimestamp = com.google.firebase.Timestamp.now()
+            messagesRef.add(message)
             view.input.text.clear()
         }
 

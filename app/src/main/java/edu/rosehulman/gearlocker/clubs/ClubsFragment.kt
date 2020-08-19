@@ -120,19 +120,19 @@ class ClubsFragment : Fragment() {
                 val auth = FirebaseAuth.getInstance().currentUser
                 if (club.members.containsValue(auth?.uid)) {
                     builder.setMessage("Do you want to leave the ${club.name}?")
-                    builder.setPositiveButton("Yes"){ dialogInterface: DialogInterface, i: Int ->
+                    builder.setPositiveButton(getString(R.string.leave)){ dialogInterface: DialogInterface, i: Int ->
                         removeFromClub(club, auth)
                     }
-                    builder.setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                    builder.setNegativeButton(getString(R.string.cancel)) { dialogInterface: DialogInterface, i: Int ->
                         dialogInterface.dismiss()
                     }
 
                 } else {
-                    builder.setMessage(requireContext().getString(R.string.add_club))
-                    builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
+                    builder.setMessage("Do you want to join the ${club.name}")
+                    builder.setPositiveButton(getString(R.string.join)) { dialogInterface: DialogInterface, i: Int ->
                         addToClub(club, auth)
                     }
-                    builder.setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
+                    builder.setNegativeButton(getString(R.string.cancel)) { dialogInterface: DialogInterface, i: Int ->
                         dialogInterface.dismiss()
                     }
                 }

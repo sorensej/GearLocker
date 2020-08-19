@@ -19,6 +19,7 @@ class MessagesViewHolder(itemView: View, private val authProvider: AuthProvider)
 
     @SuppressLint("ResourceType")
     fun bind(message: Message){
+        Log.d(Constants.TAG, "${message.toString()}")
         itemView.timestamp_textview.text = dateFormat.format(message.sentTimestamp!!.toDate())
         itemView.message_textview.text = message.message
 

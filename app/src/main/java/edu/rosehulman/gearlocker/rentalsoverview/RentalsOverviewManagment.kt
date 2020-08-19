@@ -87,8 +87,8 @@ class RentalsOverviewManagment : Fragment(), RentalRequestViewHolder.RentalHandl
         } else {
             Log.d(Constants.TAG, "remove entire rental")
             curRentalsAdapter!!.checkIn(item, rental)
-            pastRentalsRef.add(rental)
             curRentalsAdapter!!.remove(rental)
+            pastRentalsRef.add(rental)
             Log.d(Constants.TAG, rental.forms)
             formsRef.document(rental.forms).update("current", false)
 
