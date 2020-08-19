@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import edu.rosehulman.gearlocker.Constants
@@ -19,6 +20,8 @@ class FormDetail : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.findNavController(R.id.nav_host_fragment)?.graph?.startDestination =
+            R.id.formDetail
         val safeArgs: FormDetailArgs by navArgs()
         val form = safeArgs.form
         val view = inflater.inflate(R.layout.form_detail, container, false)
